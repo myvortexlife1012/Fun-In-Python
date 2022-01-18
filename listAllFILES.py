@@ -1,10 +1,11 @@
-print("Going to list all files!")
-
+#v1
 """
 lists all files
 - relative to (from WITHIN) the python project folder
 """
 def listAllFILES(folder_name):
+    #print("Going to list all files!")
+
     import os, sys
     project_path = os.path.abspath(os.path.dirname(sys.argv[0]))
     #print("Hello, here is the project_path: " + project_path)
