@@ -1,9 +1,4 @@
 #v6
-# import imageSAVER as Save
-"""
-renames everything from spaces to underscores - for compatibility
-saves the images with the query name with underscores
-"""
 """
 import ImageSAVER as is1
 is1.imageSaver("premium wallpapers great snowy mountains",30)
@@ -13,16 +8,11 @@ is1.imageSaver("premium wallpapers epic countrysides",30)
 is1.imageSaver("premium wallpapers white clean apartment",30)
 is1.imageSaver("premium wallpapers modern smart house",30)
 """
+
 def imageSaver(q="beautiful wallpapers...", save_num_images=30):
-
-  #q = "beautiful wallpapers hills green sunset"
-  #save_num_images = 30 #set to 30 by default #1
-
-
   import os
   import requests, lxml, re, json, urllib.request, datetime
   from bs4 import BeautifulSoup
-
 
   headers = {
       "User-Agent":
