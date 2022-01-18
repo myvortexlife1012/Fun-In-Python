@@ -2,6 +2,15 @@
 #import ClipboardChangesREAD as clipread
 #clipread.ClipboardChangesREAD()
 
+# Required:
+# pip install pyperclip, pyttsx3
+
+# Required for Linux - 1 of:
+# sudo apt-get install xsel
+# sudo apt-get install xclip
+# pip install gtk
+# pip install PyQt4
+
 def ClipboardChangesREAD():
   import time
   import sys
