@@ -1,12 +1,9 @@
 #v1
-
 #repeat every 5 minutes, or other timeframe
-
 #put what you want it to do in - the - repeating_function()
 
 # import RepeatSoOFTEN as repeat
 # repeat.RepeatSoOFTEN() #runs what is in the module file
-
 
 def RepeatSoOFTEN(): # 60*5 #60x#=#minutes ... #2 #60
     import sched, time
@@ -18,15 +15,15 @@ def RepeatSoOFTEN(): # 60*5 #60x#=#minutes ... #2 #60
     def timestamp():
         import time # using time module
         ts = time.time() # ts stores the time in seconds
-        print("Current Timestamp:") # print the current timestamp
-        print(ts)
+        #print() # print the current timestamp
+        print(f"Current Timestamp: {ts}")
 
     #SET THE SECONDS TO REPEAT IT - **HERE** (2 of 2):
     def repeating_function(schedule,every_so_many_seconds=5):  #set this above as well - 2 places
         # registers or schedules - this function as the function
         schedule.enter(every_so_many_seconds, 1, repeating_function, (schedule,))
-        print("\nStarting the Repeating Function")
-        print(f"\nScheduling it to Repeat Every -{every_so_many_seconds}- second(s):")
+        #print("\nStarting the Repeating Function")
+        #print(f"\nScheduling it to Repeat Every -{every_so_many_seconds}- second(s):")
         timestamp()
 
         # Change the background automatically
