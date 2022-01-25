@@ -10,6 +10,14 @@
 # guiApps.guiDateShow()
 # guiApps.guiDateShow()
 # guiApps.guiPhotoGalleryShow() # "z-IMAGES_1\0.cool\"
+# guiApps.HTMLlikeDesignShow()
+# guiApps.GuiMACLauncherShow()
+# guiApps.GuiSplashSCREENshow()
+# guiApps.GuiTIMERshow()
+# guiApps.GuiWEATHERshow()
+# import GuiAPPs as guiApps
+# GuiWindowLAYOUTSshow() #cycles thru them as you close them
+# guiApps.GuiWithImageBUTTONSshow()
 
 
 
@@ -983,5 +991,1170 @@ def guiPhotoGalleryShow(folder_name="last_folder_thing_name"):
     #if __name__ == '__main__':
     main()
 
+
+
+# v1
+
+# import GuiAPPs as guiApps
+# guiApps.HTMLlikeDesignShow()
+
+# it's not hooked up to real data - it's just a layout
+# cool green style
+
+def HTMLlikeDesignShow():
+    import PySimpleGUI as sg
+
+    """
+        Demo - Resizable Dashboard using Frames
+
+        This Demo Program looks similar to the one based on the Column Element.
+        This version has a big difference in how it was implemented and the fact that it can be resized.
+
+        It's a good example of how PySimpleGUI evolves, continuously.  When the original Column-based demo
+            was written, none of these techniques such as expansion, were easily programmed.
+
+        Dashboard using blocks of information.
+
+        Copyright 2021 PySimpleGUI.org
+    """
+
+    theme_dict = {'BACKGROUND': '#2B475D',
+                  'TEXT': '#FFFFFF',
+                  'INPUT': '#F2EFE8',
+                  'TEXT_INPUT': '#000000',
+                  'SCROLL': '#F2EFE8',
+                  'BUTTON': ('#000000', '#C2D4D8'),
+                  'PROGRESS': ('#FFFFFF', '#C7D5E0'),
+                  'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0}
+
+    sg.theme_add_new('Dashboard', theme_dict)
+    sg.theme('Dashboard')
+
+    BORDER_COLOR = '#C7D5E0'
+    DARK_HEADER_COLOR = '#1B2838'
+    BPAD_TOP = ((20, 20), (20, 10))
+    BPAD_LEFT = ((20, 10), (0, 0))
+    BPAD_LEFT_INSIDE = (0, (10, 0))
+    BPAD_RIGHT = ((10, 20), (10, 0))
+
+    top_banner = [
+        [sg.Text('Dashboard', font='Any 20', background_color=DARK_HEADER_COLOR, enable_events=True, grab=False),
+         sg.Push(background_color=DARK_HEADER_COLOR),
+         sg.Text('Wednesday 27 Oct 2021', font='Any 20', background_color=DARK_HEADER_COLOR)],
+    ]
+
+    top = [[sg.Push(), sg.Text('Weather Could Go Here', font='Any 20'), sg.Push()],
+           [sg.T('This Frame has a relief while the others do not')],
+           [sg.T('This window is resizable (see that sizegrip in the bottom right?)')]]
+
+    block_3 = [[sg.Text('Block 3', font='Any 20')],
+               [sg.Input(), sg.Text('Some Text')],
+               [sg.T('This frame has element_justification="c"')],
+               [sg.Button('Go'), sg.Button('Exit')]]
+
+    block_2 = [[sg.Text('Block 2', font='Any 20')],
+               [sg.T('This is some random text')],
+               [sg.Image(data=sg.DEFAULT_BASE64_ICON, enable_events=True)]]
+
+    block_4 = [[sg.Text('Block 4', font='Any 20')],
+               [sg.T('You can move the window by grabbing this block (and the top banner)')],
+               [sg.T('This block is a Column Element')],
+               [sg.T('The others are all frames')],
+               [sg.T('The Frame Element, with a border_width=0\n    and no title is just like a Column')],
+               [sg.T('Frames that have a fixed size \n    handle element_justification better than Columns')]]
+
+    layout = [
+        [sg.Frame('', top_banner, pad=(0, 0), background_color=DARK_HEADER_COLOR, expand_x=True, border_width=0,
+                  grab=True)],
+        [sg.Frame('', top, size=(920, 100), pad=BPAD_TOP, expand_x=True, relief=sg.RELIEF_GROOVE, border_width=3)],
+        [sg.Frame('', [[sg.Frame('', block_2, size=(450, 150), pad=BPAD_LEFT_INSIDE, border_width=0, expand_x=True,
+                                 expand_y=True, )],
+                       [sg.Frame('', block_3, size=(450, 150), pad=BPAD_LEFT_INSIDE, border_width=0, expand_x=True,
+                                 expand_y=True, element_justification='c')]],
+                  pad=BPAD_LEFT, background_color=BORDER_COLOR, border_width=0, expand_x=True, expand_y=True),
+         sg.Column(block_4, size=(450, 320), pad=BPAD_RIGHT, expand_x=True, expand_y=True, grab=True), ],
+        [sg.Sizegrip(background_color=BORDER_COLOR)]]
+
+    window = sg.Window('Dashboard PySimpleGUI-Style', layout, margins=(0, 0), background_color=BORDER_COLOR,
+                       no_titlebar=True, resizable=True, right_click_menu=sg.MENU_RIGHT_CLICK_EDITME_VER_LOC_EXIT)
+
+    while True:  # Event Loop
+        event, values = window.read()
+        print(event, values)
+        if event == sg.WIN_CLOSED or event == 'Exit':
+            break
+        elif event == 'Edit Me':
+            sg.execute_editor(__file__)
+        elif event == 'Version':
+            sg.popup_scrolled(sg.get_versions(), keep_on_top=True)
+        elif event == 'File Location':
+            sg.popup_scrolled('This Python file is:', __file__)
+    window.close()
+
+
+# v1
+
+# import GuiAPPs as guiApps
+# guiApps.GuiMACLauncherShow()
+
+def GuiMACLauncherShow():
+    import PySimpleGUI as sg
+
+    """
+        Demo Launcher Bar
+
+        A 2021 version of a PySimpleGUI based launcher.
+        Once making the GUI leap, it's hard to go back.... at least for some people.
+        This tool will perhaps help make for a more GUI-like environment for your Python activities
+
+
+        Copyright 2021 PySimpleGUI
+    """
+
+    excel_icon = b'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAACXBIWXMAAAsSAAALEgHS3X78AAAFB0lEQVRIx51We0xTZxQ/X3t5lZY+QLwgLYgg4MSJOAQCOgED23SgMjedr2mY2UQhwblHNpK5xCxTM+Nkf+Dc2NTMZJCpEF3YsqU6y5ZsGpextSD0AcKlBeVR+rrt/fbHhcv1tlTGSdN8j3O/33mfgxiGAR4hhDDG7D/MTgghAGA5+efcCbdAAgA+jGDLYDzuspuGByZck7JwSZYmw/9dARgAEEHE9Hhp08iAftBooEx6ytg1ZB4YtblpDwCsVKe11ZzlC8sJxNmA3c4A0D7vg0fWbqtZP2gyUCYDZTIO97tozyw2mhGce4t9mv86QggxDNOobW69p+219U+4HQEt5k8xMsXGFWv9zzEGDBghFCImSjJyC1KzCISQrufeXYse/g+FikNTYjVBGMac9vorDb8cPU8Ej5ZZNZAqXiuo4Ftf4I/BMds3utYnODkIDYxa6680AEBRek5GfHLDz5fxtGvyU1aWPpUPABgwxnieAMP20fO3vgcAZaSclMd8+esVzhKEWMwCIEDz10ASGp5GJgEAGRUdERqWpU7HMAWwSBE7HUKAECL8U0ytIqVhEqOt30m7AWBLdkmiitR2/XnH/C/HlhKraT38Gbe9dviMf54DIIwxIchABKhxd31mQurbzacvdrQlL0g4ta3O46MvdLTx2fSUMf/4LkBQtbZyXVr2rnPvcRrsWPP8oeIdAAgBIIREgihiMNOobcYYb88pA4CdeRtDiZCLHW3D9lFBklseUpYRasw5QXu97Jr9PXKMY4wBMCAI7OTWv7R1pXsyE5ZmJy17afUGu8vRqG0R8JDy6N15LwJA7pIVMTLlW2V7AYDVYVViOj+TAwDQXu8Xt1o+qqj+eGuNUhJ17mbL0PiIgCcqQlq6PJ9NaVmYhA0bllSRcn49CRxFzX/8VFuyMyMu2eFxNd5s9mfooszFJ6sA4EjpnucyC0pOvc6Z+sC6yg82HeAKqmiWcg8+zCCExCJROBH2xMYgqIOPmSgAB8Ce/PKFUdF3zP9kaTLeWL/t6HefChiWkomf73wfAC+QKmXhkT/WNcKUE5AqMoorfQAQQAN5hLRq7ZZJt7P28gmnx7U1uyQxOk7AM+6cbO/UtXd29Nj67W5He6eO3bZ36rqGzFOKYAjsg32Fm6Oliku/Xe+x9l27p335mdKDRa8IlKDGhj+58RUAHCnbK5dIT/zQNOODZysLU1cBYBzQBwqJbH/BZi/j+1p3FQCabl/1MUzl6g1qFflYuSZC1CpSrSLlEZEhIkKtWshu1SpSESHjcwo1cNGe8rM1YpGoe8gCAH8/uP9Oy+lFytikmPi+hxTHlk4uvl7bwG11716YLQT8Adw91j5+4/729xv+X963WjadOQQAr+a9kL/k6epLx7mCsHlV0f7CLTMazK/hODwutgkWL8t10u67FgP3Ts7i5Xz5AofpXDpaedZ6AMjSpCklUfsKKrirNcmZ/Flmnv0gXhH7YfmbXKIdqzjoNx1NddB5AozYR5tuXw3e9OUS6VQURYSEiUUi39wGFpbcPrrH1j+TsXhqUoLp1kyIiGPlBxE7AdA+78CotXvIwk5wBsrUa+t3etxBAASTnWCg4wcOgTEOERMaVZxGFVeyLJe9o31e88iggTLqB416ytQ1ZH7wyOqi3YLJzn9uFIBhjINN0ZxEDGYmnJPGkQH9YK+BMjs8TrWSrC7ePhdjBgYPuAgyu8/I63f1H5J3l/PVeWn1AAAAAElFTkSuQmCC'
+
+    # This is your master table.... keys are what will be shown on the bar.  The item is what you want to happen.
+    launcher_buttons1 = {sg.SYMBOL_DOWN_ARROWHEAD: None,
+                         'PSG Main': sg.main,
+                         'Word': r"C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE",
+                         excel_icon: r"C:\Program Files\Microsoft Office\root\Office16\excel.EXE",
+                         'Notepad++': r"C:\Program Files\NotePad++\notepad++.exe",
+                         sg.EMOJI_BASE64_PONDER: sg.main_sdk_help,
+                         sg.EMOJI_BASE64_HAPPY_IDEA: r'C:\Python\PycharmProjects\PSG\DemoPrograms\Demo_Desktop_Widget_Postit.py',
+                         'All Elements': r'C:\Python\PycharmProjects\PSG\DemoPrograms\Demo_All_Elements.py',
+                         'Exit': None}
+
+    launcher_buttons2 = {sg.SYMBOL_DOWN_ARROWHEAD: None,
+                         'PSG Main': sg.main,
+                         'Exit': None}
+
+    panel_rows = (launcher_buttons1, launcher_buttons2)
+    col_panel_list = []
+    num_panels = len(panel_rows)
+    MINIMIZED_IMAGE = sg.EMOJI_BASE64_HAPPY_THUMBS_UP
+
+    DEFAULT_SCREEN_BACKGROUND_COLOR = 'black'
+    DEFAULT_BUTTON_SIZE = (None, None)
+
+    def settings(window: sg.Window):
+        layout = [[sg.T(f'Screen size = {sg.Window.get_screen_size()}')],
+                  [sg.T(f'Your launcher is currently located at {window.current_location()}')],
+                  [sg.T('Enable autosave and position your window where you want it to appear next time you run.')],
+                  [sg.T('Your Screen Background Color'),
+                   sg.In(sg.user_settings_get_entry('-screen color-', DEFAULT_SCREEN_BACKGROUND_COLOR), s=15,
+                         k='-SCREEN COLOR-')],
+                  [sg.CBox('Autosave Location on Exit',
+                           default=sg.user_settings_get_entry('-auto save location-', True), k='-AUTO SAVE LOCATION-')],
+                  [sg.CBox('Keep launcher on top', default=sg.user_settings_get_entry('-keep on top-', True),
+                           k='-KEEP ON TOP-')],
+                  [sg.CBox('Reroute STDOUT to Debug Window',
+                           default=sg.user_settings_get_entry('-reroute stdout-', True), k='-REROUTE STDOUT-')],
+                  [sg.OK(), sg.Cancel()]]
+        event, values = sg.Window('Settings', layout).read(close=True)
+        if event == 'OK':
+            sg.user_settings_set_entry('-auto save location-', values['-AUTO SAVE LOCATION-'])
+            sg.user_settings_set_entry('-keep on top-', values['-KEEP ON TOP-'])
+            sg.user_settings_set_entry('-screen color-', values['-SCREEN COLOR-'])
+            sg.user_settings_set_entry('-reroute stdout-', values['-REROUTE STDOUT-'])
+            if values['-KEEP ON TOP-']:
+                window.keep_on_top_set()
+            else:
+                window.keep_on_top_clear()
+
+    def ToolButton(item, background, tip):
+        if isinstance(item, bytes):
+            button = sg.Button(image_data=item, key=item, metadata=launcher_buttons1[item], button_color=background,
+                               tooltip=tip, border_width=0,
+                               pad=1)
+        else:
+            button = sg.Button(item, key=item, metadata=launcher_buttons1[item], tooltip=tip, border_width=0, pad=1)
+        return button
+
+    def make_window():
+        global col_panel_list
+        screen_background_color = sg.user_settings_get_entry('-screen color-', None)
+        old_bg = sg.theme_background_color()
+        sg.set_options(border_width=0, background_color=screen_background_color)
+        sg.theme_background_color(screen_background_color)
+        col_panel_list = []
+        for count, launcher_buttons in enumerate(panel_rows):
+            button_row = []
+            for item in launcher_buttons.keys():
+                tip = 'Grab anywhere to move the launcher\nClick an item to launch something\nRight Click to get to settings'
+                button = ToolButton(item, screen_background_color, tip)
+                button_row.append(button)
+            col_panel_list.append(button_row)
+
+        col_up_down = sg.Col([[sg.B(sg.SYMBOL_UP, button_color=screen_background_color)],
+                              [sg.B(sg.SYMBOL_DOWN, button_color=screen_background_color)]], p=0, k='-COL UP DOWN-')
+        col_buttons = sg.Column([col_panel_list[0], ], p=0, k='-BUTTON COL-', visible=True)
+        col_buttons2 = sg.Column([col_panel_list[1], ], p=0, k='-BUTTON COL2-', visible=False, )
+        col_minimized = sg.Column([[sg.Button(image_data=MINIMIZED_IMAGE, k='-MINIMIZED IMAGE-',
+                                              button_color=screen_background_color, border_width=0)]], visible=False,
+                                  k='-MINIMIZED COL-')
+        col_panel_list = [col_buttons, col_buttons2, col_up_down]
+        layout = [[sg.pin(col_minimized), sg.pin(col_up_down), sg.pin(col_buttons), sg.pin(col_buttons2), ]]
+
+        screen_size = sg.Window.get_screen_size()
+        location = screen_size[0] // 2, screen_size[
+            1] - 200  # set a default location centered and near the bottom of the screen
+        location = sg.user_settings_get_entry('-window location-', location)
+        keep_on_top = sg.user_settings_get_entry('-keep on top-', True)
+
+        window = sg.Window('Window Title', layout, location=location,
+                           keep_on_top=keep_on_top, no_titlebar=True, grab_anywhere=True,
+                           background_color=screen_background_color,
+                           auto_size_buttons=True, default_button_element_size=DEFAULT_BUTTON_SIZE,
+                           right_click_menu=sg.MENU_RIGHT_CLICK_EDITME_VER_SETTINGS_EXIT,
+                           enable_close_attempted_event=True, use_default_focus=False,
+                           transparent_color=screen_background_color)
+        sg.theme_background_color(old_bg)
+
+        return window, col_panel_list
+
+    def main():
+        if sg.user_settings_get_entry('-reroute stdout-', False):
+            mprint = sg.Print
+        else:
+            mprint = print
+        window, col_panel_list = make_window()
+        cur_panel = col_panel_list[0]
+        count = 0
+        while True:
+            event, values = window.read(timeout=1000)  # Not needed but handy while debugging
+            if event != sg.TIMEOUT_EVENT:
+                mprint(event, values)
+            else:
+                continue
+            if event in (sg.WIN_CLOSE_ATTEMPTED_EVENT, 'Exit', sg.WIN_CLOSED) or str(event).startswith('Exit'):
+                if event != sg.WIN_CLOSED:
+                    if sg.user_settings_get_entry('-auto save location-', True):
+                        mprint('saving location', window.current_location())
+                        sg.user_settings_set_entry('-window location-', window.current_location())
+                break
+            try:
+                elem = window.find_element(event, silent_on_error=True)
+                if elem:
+                    action = elem.metadata
+            except:
+                action = None
+            if action is not None:
+                if isinstance(action, str):
+                    if action.endswith(('.py', '.pyw')):
+                        sg.execute_py_file(action)
+                    else:
+                        sg.execute_command_subprocess(action)
+                elif callable(action):
+                    action()
+            event = str(event)
+            if event == 'Edit Me':
+                sg.execute_editor(__file__)
+            elif event == 'Version':
+                sg.popup_scrolled(sg.get_versions())
+            elif event == 'Settings':
+                settings(window)
+                window.close()
+                window, col_panel_list = make_window()
+                if sg.user_settings_get_entry('-reroute stdout-', False):
+                    mprint = sg.Print
+                else:
+                    mprint = print
+            elif event.startswith(sg.SYMBOL_DOWN_ARROWHEAD):
+                window['-BUTTON COL-'].update(visible=False)
+                window['-BUTTON COL2-'].update(visible=False)
+                window['-BUTTON COL2-'].update(visible=False)
+                window['-COL UP DOWN-'].update(visible=False)
+                window['-MINIMIZED COL-'].update(visible=True)
+                cur_panel = col_panel_list[count]
+            elif event == '-MINIMIZED IMAGE-':
+                cur_panel.update(visible=True)
+                window['-MINIMIZED COL-'].update(visible=False)
+                window['-COL UP DOWN-'].update(visible=True)
+            elif event.startswith(sg.SYMBOL_UP):
+                cur_panel = col_panel_list[count]
+                cur_panel.update(visible=False)
+                count = (count + (num_panels - 1)) % num_panels  # Decrement - roll over to MAX from 0
+                cur_panel = col_panel_list[count]
+                cur_panel.update(visible=True)
+            elif event == sg.SYMBOL_DOWN:
+                cur_panel = col_panel_list[count]
+                cur_panel.update(visible=False)
+                count = (count + 1) % num_panels  # Increment to MAX then roll over to 0
+                cur_panel = col_panel_list[count]
+                cur_panel.update(visible=True)
+        window.close()
+
+    #if __name__ == '__main__':
+    main()
+
+
+
+
+# v1
+
+# import GuiAPPs as guiApps
+# guiApps.GuiSplashSCREENshow()
+
+# you can change settings - with the right click menu
+# you can save the location for next time you open it
+
+def GuiSplashSCREENshow():
+    import PySimpleGUI as sg
+
+    """
+        Demo - Splash Screen
+
+        Displays a PNG image with transparent areas as see-through on the center
+        of the screen for a set amount of time.
+
+        Copyright 2020 PySimpleGUI.org
+    """
+
+    image = b'iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAYAAAA10dzkAAAACXBIWXMAABcRAAAXEQHKJvM/AAAgAElEQVR4nOzdd3gUVdsG8Hu2pfdCCJCA0qQIiIj0pqJ0EBRUioq919eGouBnQ8XepQsCoih2SkBa6L0TQgrpvW+Z+f6gZZOd3dnsbtrcP6693peZs+c8s8hy58ycGUGSJBARERGRemjqugAiIiIiql0MgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDIMgEREREQqwwBIREREpDK6ui6AiOjUudzA5KyCdhsPJnUC0PnI2azmJ1Nz/C/slnq2b5YbFRpwMjYy6EC3K6P2XRUTnuSl14l1WbOsirO+sBTGwJjUBKUHIi5sNSJoaDoEfQYMzVOhCzHXaY1EpHqCJEl1XQMRqVBuUZnvr9uO9/5r16lJZzMLBpUbzc0AGJS8tVlYwL6+nWK+v++Wa34NC/Qt8nStDlmKdchbfR0KN05GxZnBEMuiAfgBECq3AlAAXVg6dKGbEHTDXwgeGgdtSCEELb+IiahWMQASUa3KyCv2Wxp3aNrK/448VFJu6uhKX77e+hPj+3Z4a9KgTgujQvzrZkYwa35v5Cx/CZbCW+D8ZTXn4NvlZwT2+w4hY/ZB480vZCKqFQyARFQryipMhs/X7Bq1avPR2aUVprawnh1zhdgiIvC3h0f2eOLma1ufdVOfjplzfHH2uZdQfvIpQPJ1sbdy6MLXIWLqXAQNiYM2kKeIicijGACJyOOOJWc3eWne+o/OpOfdCg9de6zTao7PuKP/baN6tTvgif6tlO4PQdrc71B+cqybezZB33QNQse+hvBJB92XkYmIrDEAEpFHffxL/PB5/+z7HEBMLQyX8+pdA0aN7d1+q8dGKNwYieRX/gCk7h4bAzDDt+sXiLz7Lfh1T/PgOESkUgyAROQROYVlPv/77t+n95xKe1mS4FNb4+p12nMv3N7ntnF9rtri9s4LNzRF6uwVECv6uL1vWwTtGYSMeRVNHlgOja+xVsYk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IAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqAwCIAAAAIDKIAACAAAAqMz/B7LJu0uHjbFxAAAAAElFTkSuQmCC'
+
+    FILENAME = r'yourfile.png'  # if you want to use a file instead of data, then use this in Image Element
+    DISPLAY_TIME_MILLISECONDS = 4000
+
+    sg.Window('Window Title', [[sg.Image(data=image)]], transparent_color=sg.theme_background_color(), no_titlebar=True,
+              keep_on_top=True).read(timeout=DISPLAY_TIME_MILLISECONDS, close=True)
+
+
+
+# v1
+
+# import GuiAPPs as guiApps
+# guiApps.GuiTIMERshow()
+
+def GuiTIMERshow():
+    import PySimpleGUI as sg
+    # ----------- Window's Layout -----------
+    layout = [[sg.Column([[sg.Text(size=(4, 1), justification='center', font='Courier 20', key='-OUT-')],
+                          [sg.Input(size=(4, 1), key='-IN-')],
+                          [sg.Button('Set')],
+                          [sg.Button('Start')]], element_justification='center')]]
+    # ----------- Create Window -----------
+    window = sg.Window('Countdown Timer', layout, auto_size_buttons=False)
+    # ----------- Event Loop -----------
+    amount = 0
+    while True:
+        event, values = window.read(timeout=1000 if amount else None)
+        if event is None:
+            break
+        elif event == 'Set':
+            window['-OUT-'].update(values['-IN-'])
+        elif event == 'Start':
+            amount = int(values['-IN-'])
+        if amount:
+            amount -= 1
+            window['-OUT-'].update(amount)
+    # ----------- Exiting - close window -----------
+    window.close()
+
+
+
+# v1
+
+# import GuiAPPs as guiApps
+# guiApps.GuiWEATHERshow()
+
+# it's not hooked up to real data - it's just a layout
+# cool green style
+
+def GuiWEATHERshow():
+    import PySimpleGUI as sg
+    import datetime
+    import base64
+    from urllib import request
+    import json
+    import sys
+    import webbrowser
+
+    """
+        A Current Weather Widget
+        Adapted from the weather widget originally created and published by Israel Dryer that you'll find here:
+        https://github.com/israel-dryer/Weather-App
+        BIG THANKS goes out for creating a good starting point for other widgets to be build from.
+        A true "Template" is being developed that is a little more abstracted to make creating your own
+        widgets easy.  Things like the settings window is being standardized, the settings file format too.
+        You will need a key (APPID) from OpenWeathermap.org in order to run this widget. It's free, it's easy:
+        https://home.openweathermap.org/
+        Your initial location is determined using your IP address and will be used if no settings file is found
+        This widget is an early version of a PSG Widget so it may not share the same names / constructs as the templates. 
+        Copyright 2020 PySimpleGUI - www.PySimpleGUI.com
+    """
+
+    SETTINGS_PATH = None  # use the default settings path (OS settings foloder)
+
+    API_KEY = '95fbd4757a377fbc9b245a0edfd502cd'  # Set using the "Settings" window and saved in your config file
+
+    sg.theme('Light Green 6')
+    ALPHA = 0.8
+
+    BG_COLOR = sg.theme_text_color()
+    TXT_COLOR = sg.theme_background_color()
+
+    APP_DATA = {
+        'City': 'New York',
+        'Country': 'US',
+        'Postal': 10001,
+        'Description': 'clear skys',
+        'Temp': 101.0,
+        'Feels Like': 72.0,
+        'Wind': 0.0,
+        'Humidity': 0,
+        'Precip 1hr': 0.0,
+        'Pressure': 0,
+        'Updated': 'Not yet updated',
+        'Icon': None,
+        'Units': 'Imperial'
+    }
+
+    def load_settings():
+        global API_KEY
+        settings = sg.UserSettings(path=SETTINGS_PATH)
+        API_KEY = settings['-api key-']
+        if not API_KEY:
+            sg.popup_quick_message('No valid API key found... opening setup window...', keep_on_top=True,
+                                   background_color='red', text_color='white', auto_close_duration=3,
+                                   non_blocking=False, location=win_location)
+            change_settings(settings)
+        return settings
+
+    def change_settings(settings, window_location=(None, None)):
+        global APP_DATA, API_KEY
+
+        try:
+            nearest_postal = json.loads(request.urlopen('http://ipapi.co/json').read())['postal']
+        except Exception as e:
+            print('Error getting nearest postal', e)
+            nearest_postal = ''
+
+        layout = [[sg.T('Enter Zipcode or City for your location')],
+                  [sg.I(settings.get('-location-', nearest_postal), size=(15, 1), key='-LOCATION-')],
+                  [sg.I(settings.get('-api key-', ''), size=(32, 1), key='-API KEY-')],
+                  [sg.B('Ok', border_width=0, bind_return_key=True),
+                   sg.B('Register For a Key', border_width=0, k='-REGISTER-'), sg.B('Cancel', border_width=0)], ]
+
+        window = sg.Window('Settings', layout, location=window_location, no_titlebar=True, keep_on_top=True,
+                           border_depth=0)
+        event, values = window.read()
+        window.close()
+
+        if event == '-REGISTER-':
+            sg.popup(
+                'Launching browser so you can signup for the "Current Weather" service from OpenWeatherMap.org to get a Free API Key',
+                'Click OK and your browser will open', r'Visit https://home.openweathermap.org/ for more information',
+                location=window_location)
+            # Register to get a free key
+            webbrowser.open(r'https://home.openweathermap.org/users/sign_up')
+
+        if event == 'Ok':
+            user_location = settings['-location-'] = values['-LOCATION-']
+            API_KEY = settings['-api key-'] = values['-API KEY-']
+        else:
+            API_KEY = settings['-api key-']
+            user_location = settings['-location-']
+
+        if user_location is not None:
+            if user_location.isnumeric() and len(user_location) == 5 and user_location is not None:
+                APP_DATA['Postal'] = user_location
+                APP_DATA['City'] = ''
+            else:
+                APP_DATA['City'] = user_location
+                APP_DATA['Postal'] = ''
+
+        return settings
+
+    def update_weather():
+        if APP_DATA['City']:
+            request_weather_data(create_endpoint(2))
+        elif APP_DATA['Postal']:
+            request_weather_data(create_endpoint(1))
+
+    def create_endpoint(endpoint_type=0):
+        """ Create the api request endpoint
+        {0: default, 1: zipcode, 2: city_name}"""
+        if endpoint_type == 1:
+            try:
+                endpoint = f"http://api.openweathermap.org/data/2.5/weather?zip={APP_DATA['Postal']},us&appid={API_KEY}&units={APP_DATA['Units']}"
+                return endpoint
+            except ConnectionError:
+                return
+        elif endpoint_type == 2:
+            try:
+                endpoint = f"http://api.openweathermap.org/data/2.5/weather?q={APP_DATA['City'].replace(' ', '%20')},us&APPID={API_KEY}&units={APP_DATA['Units']}"
+                return endpoint
+            except ConnectionError:
+                return
+        else:
+            return
+
+    def request_weather_data(endpoint):
+        """ Send request for updated weather data """
+        global APP_DATA
+
+        if endpoint is None:
+            sg.popup_error('Could not connect to api.  endpoint is None', keep_on_top=True, location=win_location)
+            return
+        else:
+            try:
+                response = request.urlopen(endpoint)
+            except request.HTTPError:
+                sg.popup_error('ERROR Obtaining Weather Data',
+                               'Is your API Key set correctly?',
+                               API_KEY, keep_on_top=True, location=win_location)
+                return
+
+        if response.reason == 'OK':
+            weather = json.loads(response.read())
+            APP_DATA['City'] = weather['name'].title()
+            APP_DATA['Description'] = weather['weather'][0]['description']
+            APP_DATA['Temp'] = "{:,.0f}°F".format(weather['main']['temp'])
+            APP_DATA['Humidity'] = "{:,d}%".format(weather['main']['humidity'])
+            APP_DATA['Pressure'] = "{:,d} hPa".format(weather['main']['pressure'])
+            APP_DATA['Feels Like'] = "{:,.0f}°F".format(weather['main']['feels_like'])
+            APP_DATA['Wind'] = "{:,.1f} m/h".format(weather['wind']['speed'])
+            APP_DATA['Precip 1hr'] = None if not weather.get('rain') else "{:2} mm".format(weather['rain']['1h'])
+            APP_DATA['Updated'] = 'Updated: ' + datetime.datetime.now().strftime("%B %d %I:%M:%S %p")
+            APP_DATA['Lon'] = weather['coord']['lon']
+            APP_DATA['Lat'] = weather['coord']['lat']
+
+            icon_url = "http://openweathermap.org/img/wn/{}@2x.png".format(weather['weather'][0]['icon'])
+            APP_DATA['Icon'] = base64.b64encode(request.urlopen(icon_url).read())
+
+    def metric_row(metric):
+        """ Return a pair of labels for each metric """
+        return [sg.Text(metric, font=('Arial', 10), pad=(15, 0), size=(9, 1)),
+                sg.Text(APP_DATA[metric], font=('Arial', 10, 'bold'), pad=(0, 0), size=(9, 1), key=metric)]
+
+    def create_window(win_location):
+        """ Create the application window """
+        col1 = sg.Column(
+            [[sg.Text(APP_DATA['City'], font=('Arial Rounded MT Bold', 18), pad=((10, 0), (50, 0)), size=(18, 1),
+                      background_color=BG_COLOR, text_color=TXT_COLOR, key='City')],
+             [sg.Text(APP_DATA['Description'], font=('Arial', 12), pad=(10, 0), background_color=BG_COLOR,
+                      text_color=TXT_COLOR, key='Description')]],
+            background_color=BG_COLOR, key='COL1')
+
+        col2 = sg.Column(
+            [[sg.Text('×', font=('Arial Black', 16), pad=(0, 0), justification='right', background_color=BG_COLOR,
+                      text_color=TXT_COLOR, enable_events=True, key='-QUIT-')],
+             [sg.Image(data=APP_DATA['Icon'], pad=((5, 10), (0, 0)), size=(100, 100), background_color=BG_COLOR,
+                       key='Icon')]],
+            element_justification='center', background_color=BG_COLOR, key='COL2')
+
+        col3 = sg.Column(
+            [[sg.Text(APP_DATA['Updated'], font=('Arial', 8), background_color=BG_COLOR, text_color=TXT_COLOR,
+                      key='Updated')]],
+            pad=(10, 5), element_justification='left', background_color=BG_COLOR, key='COL3')
+
+        col4 = sg.Column(
+            [[sg.Text('Settings', font=('Arial', 8, 'italic'), background_color=BG_COLOR, text_color=TXT_COLOR,
+                      enable_events=True, key='-CHANGE-'),
+              sg.Text('Refresh', font=('Arial', 8, 'italic'), background_color=BG_COLOR, text_color=TXT_COLOR,
+                      enable_events=True, key='-REFRESH-')]],
+            pad=(10, 5), element_justification='right', background_color=BG_COLOR, key='COL4')
+
+        top_col = sg.Column([[col1, col2]], pad=(0, 0), background_color=BG_COLOR, key='TopCOL')
+
+        bot_col = sg.Column([[col3, col4]], pad=(0, 0), background_color=BG_COLOR, key='BotCOL')
+
+        lf_col = sg.Column(
+            [[sg.Text(APP_DATA['Temp'], font=('Haettenschweiler', 90), pad=((10, 0), (0, 0)), justification='center',
+                      key='Temp')]],
+            pad=(10, 0), element_justification='center', key='LfCOL')
+
+        rt_col = sg.Column(
+            [metric_row('Feels Like'), metric_row('Wind'), metric_row('Humidity'), metric_row('Precip 1hr'),
+             metric_row('Pressure')],
+            pad=((15, 0), (25, 5)), key='RtCOL')
+
+        layout = [[top_col],
+                  [lf_col, rt_col],
+                  [bot_col]]
+
+        window = sg.Window(layout=layout, title='Weather Widget', margins=(0, 0), finalize=True, location=win_location,
+                           element_justification='center', keep_on_top=True, no_titlebar=True, grab_anywhere=True,
+                           alpha_channel=ALPHA,
+                           right_click_menu=[[''], 'Exit'])
+
+        for col in ['COL1', 'COL2', 'TopCOL', 'BotCOL', '-QUIT-']:
+            window[col].expand(expand_y=True, expand_x=True)
+
+        for col in ['COL3', 'COL4', 'LfCOL', 'RtCOL']:
+            window[col].expand(expand_x=True)
+
+        window['-CHANGE-'].set_cursor('hand2')
+        window['-QUIT-'].set_cursor('hand2')
+        window['-REFRESH-'].set_cursor('hand2')
+
+        return window
+
+    def update_metrics(window):
+        """ Adjust the GUI to reflect the current weather metrics """
+        metrics = ['City', 'Temp', 'Feels Like', 'Wind', 'Humidity', 'Precip 1hr',
+                   'Description', 'Icon', 'Pressure', 'Updated']
+        for metric in metrics:
+            if metric == 'Icon':
+                window[metric].update(data=APP_DATA[metric])
+            else:
+                window[metric].update(APP_DATA[metric])
+
+    def main(refresh_rate, win_location):
+        """ The main program routine """
+        refresh_in_milliseconds = refresh_rate * 60 * 1000
+
+        # Load settings from config file. If none found will create one
+        settings = load_settings()
+        location = settings['-location-']
+        if location is not None:
+            if location.isnumeric() and len(location) == 5 and location is not None:
+                APP_DATA['Postal'] = location
+                APP_DATA['City'] = ''
+            else:
+                APP_DATA['City'] = location
+                APP_DATA['Postal'] = ''
+            update_weather()
+        else:
+            sg.popup_error('Having trouble with location.  Your location: ', location)
+            exit()
+
+        window = create_window(win_location)
+
+        while True:  # Event Loop
+            event, values = window.read(timeout=refresh_in_milliseconds)
+            if event in (None, '-QUIT-', 'Exit'):
+                break
+            if event == '-CHANGE-':
+                x, y = window.current_location()
+                settings = change_settings(settings, (x + 200, y + 50))
+            elif event == '-REFRESH-':
+                sg.popup_quick_message('Refreshing...', keep_on_top=True, background_color='red', text_color='white',
+                                       auto_close_duration=3, non_blocking=False,
+                                       location=(win_location[0] + 170, win_location[1] + 150))
+            elif event != sg.TIMEOUT_KEY:
+                sg.Print('Unknown event received\nEvent & values:\n', event, values, location=win_location)
+
+            update_weather()
+            update_metrics(window)
+        window.close()
+
+    #if __name__ == '__main__':
+    if len(sys.argv) > 1:
+        win_location = sys.argv[1].split(',')
+        win_location = (int(win_location[0]), int(win_location[1]))
+    else:
+        win_location = (None, None)
+    main(refresh_rate=1, win_location=win_location)
+
+
+
+# v1
+
+# import GuiAPPs as guiApps
+# GuiWindowLAYOUTSshow() #cycles thru them as you close them
+
+def GuiWindowLAYOUTSshow():
+    import PySimpleGUI as sg
+
+    """
+        PySimpleGUI is designed & authored in Python to take full advantage the awesome Python constructs & capabilities.
+        Layouts are represented as lists to PySimpleGUI. Lists are fundamental in Python and have a number of powerful
+        capabilities that PySimpleGUI exploits.
+
+        Many times PySimpleGUI programs can benefit from using CODE to GENERATE your layouts.  This Demo illustrates
+        a number of ways of "building" a layout. Some work on 3.5 and up.  Some are basic and show concatenation of rows
+        to build up a layout.  Some utilize generators.
+
+        These 8 "Constructs" or Design Patterns demonstrate numerous ways of "generating" or building your layouts
+        0 - A simple list comprehension to build a row of buttons
+        1 - A simple list comprehension to build a column of buttons
+        2 - Concatenation of rows within a layout
+        3 - Concatenation of 2 complete layouts [[ ]] + [[ ]] = [[ ]]
+        4 - Concatenation of elements to form a single row [ [] + [] + [] ] = [[ ]]
+        5 - Questionnaire - Using a double list comprehension to build both rows and columns in a single line of code
+        6 - Questionnaire - Unwinding the comprehensions into 2 for loops instead
+        7 - Using the * operator to unpack generated items onto a single row 
+        8 - Multiple Choice Test - a practical use showing list comprehension and concatenated layout
+    """
+
+    """
+        Construct #0 - List comprehension to generate a row of Buttons
+
+        Comprehensions are super-powers of Python.  In this example we're using a comprehension to create 4 buttons that
+        are all on the same row.
+    """
+
+    def layout0():
+        layout = [[sg.Button(i) for i in range(4)]]  # A list of buttons is created
+
+        window = sg.Window('Generated Layouts', layout)
+
+        event, values = window.read()
+
+        print(event, values)
+        window.close()
+
+    """
+        Construct #1 - List comprehension to generate a Column of Buttons
+
+        More list super-power, this time used to build a series of buttons doing DOWN the window instead of across
+
+    """
+
+    def layout1():
+        # a List of lists of buttons.  Notice the ] after Button
+        layout = [[sg.Button(i)] for i in range(4)]
+
+        window = sg.Window('Generated Layouts', layout)
+
+        event, values = window.read()
+
+        print(event, values)
+        window.close()
+
+    """
+        Construct #2 - List comprehension to generate a row of Buttons and concatenation of more lines of elements
+
+        Comprehensions are super-powers of Python.  In this example we're using a comprehension to create 4 buttons that
+        are all on the same row, just like the previous example.
+        However, here, we want to not just have a row of buttons, we want have an OK button at the bottom.
+        To do this, you "add" the rest of the GUI layout onto the end of the generated part.
+
+        Note - you can't end the layout line after the +. If you wanted to put the OK button on the next line, you need
+        to add a \ at the end of the first line.
+        See next Construct on how to not use a \ that also results in a VISUALLY similar to a norma layout
+    """
+
+    def layout2():
+        # if want to split, can't add newline after + to do it
+        layout = [[sg.Button(i) for i in range(4)]] + [[sg.OK()]]
+
+        window = sg.Window('Generated Layouts', layout)
+
+        event, values = window.read()
+
+        print(event, values)
+        window.close()
+
+    """
+        Construct # 3 - Adding together what appears to be 2 layouts
+
+        Same as layout2, except that the OK button is put on another line without using a \ so that the layout appears to
+        look like a normal, multiline layout without a \ at the end
+
+        Also shown is the OLD tried and true way, using layout.append.  You will see the append technique in many of the
+        Demo programs and probably elsewhere.  Hoping to remove these and instead use this more explicit method of +=.
+
+        Using the + operator, as you've already seen, can be used in the middle of the layout.  A call to append you cannot
+        use this way because it modifies the layout list directly.
+    """
+
+    def layout3():
+        # in terms of formatting, the layout to the RIGHT of the = sign looks like a 2-line GUI (ignore the layout +=
+        layout = [[sg.Button(i) for i in range(4)]]
+        # this row is better than, but is the same as
+        layout += [[sg.OK()]]
+        # .. this row in that they both add a new ROW with a button on it
+        layout.append([sg.Cancel()])
+
+        window = sg.Window('Generated Layouts', layout)
+
+        event, values = window.read()
+
+        print(event, values)
+        window.close()
+
+    """
+        Construct 4 - Using + to place Elements on the same row
+
+        If you want to put elements on the same row, you can simply add them together.  All that is happening is that the
+        items in one list are added to the items in another.  That's true for all these contructs using +
+    """
+
+    def layout4():
+        layout = [[sg.Text('Enter some info')] + [sg.Input()] + [sg.Exit()]]
+
+        window = sg.Window('Generated Layouts', layout)
+
+        event, values = window.read()
+
+        print(event, values)
+        window.close()
+
+    """
+        Construct #5 - Simple "concatenation" of layouts
+        Layouts are lists of lists.  Some of the examples and demo programs use a .append method to add rows to layouts.
+        These will soono be replaced with this new technique.  It's so simple that I don't know why it took so long to
+        find it.
+        This layout uses list comprehensions heavily, and even uses 2 of them. So, if you find them confusing, skip down
+        to the next Construct and you'll see the same layout built except for loops are used rather than comprehensions
+
+        The next 3 examples all use this same window that is layed out like this:
+            Each row is:
+        Text1, Text2, Radio1, Radio2, Radio3, Radio4, Radio5
+        Text1, Text2, Radio1, Radio2, Radio3, Radio4, Radio5
+        ...
+
+        It shows, in particular, this handy bit of layout building, a += to add on additional rows.
+        layout =  [[stuff on row 1], [stuff on row 2]]
+        layout += [[stuff on row 3]]
+
+        Works as long as the things you are adding together look like this [[ ]]  (the famous double bracket layouts of PSG)
+    """
+
+    def layout5():
+        questions = ('Managing your day-to-day life', 'Coping with problems in your life?', 'Concentrating?',
+                     'Get along with people in your family?', 'Get along with people outside your family?',
+                     'Get along well in social situations?', 'Feel close to another person',
+                     'Feel like you had someone to turn to if you needed help?', 'Felt confident in yourself?')
+
+        layout = [[sg.Text(qnum + 1, size=(2, 2)), sg.Text(q, size=(30, 2))] +
+                  [sg.Radio('', group_id=qnum, size=(7, 2),
+                            key=(qnum, col)) for col in range(5)]
+                  for qnum, q in enumerate(questions)]
+        layout += [[sg.OK()]]
+
+        window = sg.Window('Computed Layout Questionnaire', layout)
+        event, values = window.read()
+
+        print(event, values)
+        window.close()
+
+    """
+        Construct #6 - Computed layout without using list comprehensions
+        This layout is identical to Contruct #5.  The difference is that rather than use list comprehensions, this code
+        uses for loops.  Perhaps if you're a beginner this version makes more sense?
+
+        In this example we start with a "blank layout" [[ ]] and add onto it.
+
+        Works as long as the things you are adding together look like this [[ ]]  (the famous double bracket layouts of PSG)
+    """
+
+    def layout6():
+        questions = ('Managing your day-to-day life', 'Coping with problems in your life?', 'Concentrating?',
+                     'Get along with people in your family?', 'Get along with people outside your family?',
+                     'Get along well in social situations?', 'Feel close to another person',
+                     'Feel like you had someone to turn to if you needed help?', 'Felt confident in yourself?')
+
+        layout = [[]]
+        for qnum, question in enumerate(questions):
+            # rows start with # and question
+            row_layout = [sg.Text(qnum + 1, size=(2, 2)),
+                          sg.Text(question, size=(30, 2))]
+
+            # loop through 5 radio buttons and add to row
+            for radio_num in range(5):
+                row_layout += [sg.Radio('', group_id=qnum,
+                                        size=(7, 2), key=(qnum, radio_num))]
+            # after row is completed layout, tack it onto the end of final layout
+            layout += [row_layout]
+
+        # and finally, add a row to the bottom that has an OK button
+        layout += [[sg.OK()]]
+
+        window = sg.Window('Computed Layout Questionnaire', layout)
+        event, values = window.read()
+
+        print(event, values)
+        window.close()
+
+    """
+        Construct #7 - * operator and list comprehensions 
+            Using the * operator from inside the layout
+            List comprehension inside the layout
+            Addition of rows to layouts
+            All in a single variable assignment
+
+        NOTE - this particular code, using the * operator, will not work on Python 2 and think it was added in Python 3.5
+
+        This code shows a bunch of questions with Radio Button choices
+
+        There is a double-loop comprehension used.  One that loops through the questions (rows) and the other loops through
+        the Radio Button choices.
+        Thus each row is:
+        Text1, Text2, Radio1, Radio2, Radio3, Radio4, Radio5
+        Text1, Text2, Radio1, Radio2, Radio3, Radio4, Radio5
+        Text1, Text2, Radio1, Radio2, Radio3, Radio4, Radio5
+
+        What the * operator is doing in these cases is expanding the list they are in front of into a SERIES of items
+        from the list... one after another, as if they are separated with comma.  It's a way of "unpacking" from within
+        a statement.
+
+        The result is a beautifully compact way to make a layout, still using a layout variable, that consists of a
+        variable number of rows and a variable number of columns in each row.
+    """
+
+    def layout7():
+        questions = ('Managing your day-to-day life', 'Coping with problems in your life?', 'Concentrating?',
+                     'Get along with people in your family?', 'Get along with people outside your family?',
+                     'Get along well in social situations?', 'Feel close to another person',
+                     'Feel like you had someone to turn to if you needed help?', 'Felt confident in yourself?')
+
+        # These are the question # and the question text
+        layout = [[*[sg.Text(qnum + 1, size=(2, 2)), sg.Text(q, size=(30, 2))],
+                   # finally add an OK button at the very bottom by using the '+' operator
+                   *[sg.Radio('', group_id=qnum, size=(7, 2), key=(qnum, col)) for col in range(5)]] for qnum, q in
+                  enumerate(questions)] + [[sg.OK()]]
+
+        window = sg.Window('Questionnaire', layout)
+
+        event, values = window.read()
+
+        print(event, values)
+        window.close()
+
+    """
+        Construct #8 - Computed layout using list comprehension and concatenation
+        This layout shows one practical use, a multiple choice test.  It's been left parse as to focus on the generation
+        part of the program.  For example, default keys are used on the Radio elements.  In reality you would likely
+        use a tuple of the question number and the answer number.
+
+        In this example we start with a "Header" Text element and build from there.
+    """
+
+    def layout8():
+        # The questions and answers
+        q_and_a = [
+            ['1. What is the thing that makes light in our solar system',
+             ['A. The Moon', 'B. Jupiter', 'C. I dunno']],
+            ['2. What is Pluto', ['A. The 9th planet', 'B. A dwarf-planet',
+                                  'C. The 8th planet', 'D. Goofies pet dog']],
+            ['3. When did man step foot on the moon', ['A. 1969', 'B. 1960', 'C. 1970', 'D. 1869']], ]
+
+        # make Header larger
+        layout = [[sg.Text('Astronomy Quiz #1', font='ANY 15', size=(30, 2))]]
+
+        # "generate" the layout for the window based on the Question and Answer information
+        for qa in q_and_a:
+            q = qa[0]
+            a_list = qa[1]
+            layout += [[sg.Text(q)]] + [[sg.Radio(a, group_id=q)]
+                                        for a in a_list] + [[sg.Text('_' * 50)]]
+
+        layout += [[sg.Button('Submit Answers', key='SUBMIT')]]
+
+        window = sg.Window('Multiple Choice Test', layout)
+
+        while True:  # Event Loop
+            event, values = window.read()
+            if event in (sg.WIN_CLOSED, 'SUBMIT'):
+                break
+        sg.popup('The answers submitted were', values)
+        window.close()
+
+    # ------------------------- Call each of the Constructs -------------------------
+
+    """
+    A bunch of window layouts
+    even you can give quizzes
+    big questionaires as well
+    """
+    layout0()
+    layout1()
+    layout2()
+    layout3()
+    layout4()
+    layout5()
+    layout6()
+    layout7()
+    layout8()
+
+
+#v1
+
+# import GuiAPPs as guiApps
+# guiApps.GuiWithImageBUTTONSshow()
+
+def GuiWithImageBUTTONSshow():
+    import PySimpleGUI as sg
+    import io
+    from PIL import Image
+    import base64
+
+    """
+    Shows some fancy button graphics with the help of PIL
+    Usually when you create Base64 buttons to embed in your PySimpleGUI code, you make the exactly the correct size.  Resizing isn't an option when
+        using the tkinter version of PySimpleGUI (except for crude "Scaling")
+    The PIL code resizes the button images prior to creating the sg.B
+    """
+
+
+    DEF_BUTTON_COLOR = ('white', 'black')
+
+
+    def resize_base64_image(image64, size):
+        '''
+        May not be the original purpose, but this code is being used to resize an image for use with PySimpleGUI (tkinter) button graphics
+        :param image64: (str) The Base64 image
+        :param size: Tuple[int, int] Size to make the image in pixels (width, height)
+        :return: (str) A new Base64 image
+        '''
+        image_file = io.BytesIO(base64.b64decode(image64))
+        img = Image.open(image_file)
+        img.thumbnail(size, Image.ANTIALIAS)
+        bio = io.BytesIO()
+        img.save(bio, format='PNG')
+        imgbytes = bio.getvalue()
+        return imgbytes
+
+
+    def GraphicButton(text, key, image_data, color=DEF_BUTTON_COLOR, size=(100, 50)):
+        '''
+        A user defined element.  Use this function inside of your layouts as if it were a Button element (it IS a Button Element)
+        Only 3 parameters are required.
+        :param text: (str) Text you want to display on the button
+        :param key:  (Any) The key for the button
+        :param image_data: (str) The Base64 image to use on the button
+        :param color: Tuple[str, str] Button color
+        :param size: Tuple[int, int] Size of the button to display in pixels (width, height)
+        :return: (PySimpleGUI.Button) A button with a resized Base64 image applied to it
+        '''
+        return sg.Button(text, image_data=resize_base64_image(image_data, size), button_color=color, font='Any 15', pad=(0, 0), key=key, border_width=0)
+
+
+    def ShowMeTheButtons():
+
+        sg.theme('Black')
+
+        frame_layout = [[sg.Text('Who says Windows have to be ugly when using tkinter?', size=(45, 3))],
+                        [sg.Text(
+                            'All of these buttons are part of the code itself', size=(45, 2))],
+                        [GraphicButton('Next', '-NEXT-', button64),
+                            GraphicButton('Submit', '-SUBMIT-', red_pill64),
+                            GraphicButton('OK', '-OK-', green_pill64),
+                            GraphicButton('Exit', '-EXIT-', orange64)], ]
+
+        layout = [[sg.Frame('Nice Buttons', frame_layout, font=(
+            'any 18'), background_color='black')]]
+
+        window = sg.Window('Demo of Nice Looking Buttons', layout,
+                           grab_anywhere=True,
+                           keep_on_top=True,
+                           no_titlebar=True,
+                           use_default_focus=False,
+                           font='any 15',
+                           background_color='black')
+
+        # ---===--- The event loop --- #
+        while True:
+            event, values = window.read()
+            print(event)
+            if event in ('-EXIT-', None):   # Exit button or X
+                break
+
+
+    #if __name__ == '__main__':
+
+    # To convert your images, use the PySimpleGUI program - Demo_Base64_Image_Encoder.py located on the GitHub (http://www.PySimpleGUI.com)
+
+    orange64 = 'iVBORw0KGgoAAAANSUhEUgAAAiIAAADLCAMAAABkvgh7AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURQAAANtvJ99sId5tIt5uI91tJNxuJNxuJttvKN90NN91Ntt3PN52ONx3Otx3PNt4Pdp4Ptx4PepfD+pfEOtgD+piD+tkD+ttD+dnFOdoE+doFOVoFuNqG+JrHOFrHuFsHuRpGORpGuRqGORqGupgEOpiEOpkEOlmEOhnEupoEOpoEupqFettEetsF+tuFOxqFetrGOtsGetvHOxrGOxsGOxtGuxuG+xuHexxFutwH+xxGOxyGOxyGuxxHuBsIOJvJ+NvKORvKONwKeNwKuJxLONyLeJyLuRwKeRwKuRxLOtxIexyIexzJOx0JOx1Ju11KOx2KOx2Kux5Iux4Kux5Le1/LeFyMOFzMuB0NOB1Nux7MOx8MOx8Mu19NO1+NO1+Ntd7RdV8RtN+S9J/TdF/TtV9SNR9Stl5QNl6Qdh6Qth7RK+Tfa+Tfq6Ufr+JZb+JZr+KZ7uMbr6KaL6LaryMbLyNb7yOb7WPdLuNcLqOcLmOcrmPdLOQd7SQdrKReLKRerGSerCTfLCTfrmQde2AN+2AOO2BOu2COu6DPO6EPe6EPsWDV8OFXcOFXsOGXcOGXsaDWMSEWsqCVs+AUM2AUs6CU82CVMqDWMmEWtCAT9CAUMKHYMCIYsCIZMCKZu6FQO6GQe6GQu6HRO6IRe6JRu6KR+6KSO+LSu+MS++MTO+OTe+OTu+OUO+RUu+TVfCNTvCOTvCPUPCQUfCQUvCSU/CRVPCSVPCSVvCUV/CUWPCVWvGWWvGXXPGYXvCWYPGaYfGcYvGcZPKdZvKeZ/GdavKeaPKebfKebvKgavKhbPKibfGibvKjcPGkcfKmdPKiePOod/OpePSpePSqevSrfPSsfPSsfvSqg/SugfWwgvWwhPWyhfWyhvWxi/Wyj/W0ifW2jfa4j/a1kPW2kva2lfW2lvW4kPa6kfa7kva5lvW7lPa8lPW8lve+l/a4mva5nPa6nPa7nva+mPa+mva/nPa8oPa9ovbAm/bAnfXAnvbCofbEo/XGp/bGqPbIqQAAAC/NnaUAAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wBT9wclAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4xLjFjKpxLAAAJXElEQVR4Xu3de3zVdR3H8Xb9/sJh60LlOTtubdIZEyckSdedMzkdZyRGIePmZdqki8s0KllJmtGCTAXRlUAyrireUeZga2JRkooYRWR0JbXMLsIqZ5fT7/L5nRvj9/md0/fhw/Px/fyHP+D33fb4vPj+LvsxXpMA8IREgIFEgIFEgIFEgIFEgIFEgIFEgIFEgIFEgIFEgIFEgIFEgIFEgIFEgIFEgIFEgIFEgIFEgIFEgIFEgIFEgIFEgJF7Ih1Xf3bVsuu/AYXu+mUrL+u8iqbqIcdErvhme0V8SjQCIpwWe+0nli+k2R5NTolc0jYzqpQBcigV+UDltZ57SQ6JfLqyRRXRyiCIis7u7qAhj8B3Ip1tLdg/pFLR0Z+hOR/JbyIrWxGIZCp289E2Ep+J3HzEFqLKy0qhUJUfeUkZnf8lGnYWX4l0tDfTOg5VEqoJNNTXh6EgmaMLBKuaymmcJFLRSfPO5CuRtgitYisPBehDQUFrqC3O2EtUxRdo4Bn8JHJhlNawlNZh85Aj2JQeiRp9JY08nY9Euk+nFUwq1ECLgww1ZTRaS+R8mnk6PpEF8dTDkNIgLQxiHFdNw7U0d9PU07CJdLw+tRUVpy5Cxo19+bz9lYI+n5cNfdhcjWGZf2jsCTTJcDiUmnBR/HKaewqbSHfqQqSJrkLGvuuctZu3jOgBD1u99B7Fg6a+Vwrrk8kNfRX+0XE2+qg527adsc38M723d01yK3lbqhH1SZp7CpfIolnJw4udQk44ddPOn/3q6b+M6K8+/c2vF+jXVw29X/ALI7N+Z3jome+f/QZ7pOG6VCMtl9Dkk7hElifvd0uPs1cb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'
+    green_pill64 = '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'
+    red_pill64 = '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'
+    button64 = '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'
+    ShowMeTheButtons()
+
+
+#Demo programs on github:
+#https://github.com/PySimpleGUI/PySimpleGUI/tree/master/DemoPrograms
+#
+#https://github.com/PySimpleGUI/PySimpleGUI/blob/master/DemoPrograms/Demo_Buttons_Nice_Graphics.py
+
+
+#----------------
+
+"""
+from PIL import Image, ImageTk
+from urllib import request
+import PySimpleGUI as sg
+
+# Get one PNG file from website and save to file
+url = (
+    "https://raw.githubusercontent.com/PySimpleGUI/PySimpleGUI/master/"
+    "images/for_readme/Logo%20with%20text%20for%20GitHub%20Top.png")
+headers = {
+    'User-Agent': (
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+        '(KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36')}
+req = request.Request(url, headers=headers)
+response = request.urlopen(req)
+if response.status != 200:
+    print("Failed to load image from website !")
+    exit()
+data = response.read()
+
+filename = "example.png"
+with open(filename, "wb") as f:
+    f.write(data)
+
+# Resize PNG file to size (300, 300)
+size = (300, 300)
+im = Image.open(filename)
+im = im.resize(size, resample=Image.BICUBIC)
+
+sg.theme('DarkGreen3')
+
+layout = [
+    [sg.Image(size=(300, 300), key='-IMAGE-')],
+]
+window = sg.Window('Window Title', layout, margins=(0, 0), finalize=True)
+
+# Convert im to ImageTk.PhotoImage after window finalized
+image = ImageTk.PhotoImage(image=im)
+
+# update image in sg.Image
+window['-IMAGE-'].update(data=image)
+
+while True:
+
+    event, values = window.read()
+    if event == sg.WIN_CLOSED:
+        break
+
+window.close()
+"""
+
+
+
+#----------------
+
+"""
+# Required:
+# pip install PySimpleGUI Pillow
+
+# image_viewer.py
+import io
+import os
+import PySimpleGUI as sg
+from PIL import Image
+file_types = [("JPEG (*.jpg)", "*.jpg"),
+              ("All files (*.*)", "*.*")]
+def main():
+    layout = [
+        [sg.Image(key="-IMAGE-")],
+        [
+            sg.Text("Image File"),
+            sg.Input(size=(25, 1), key="-FILE-"),
+            sg.FileBrowse(file_types=file_types),
+            sg.Button("Load Image"),
+        ],
+    ]
+    window = sg.Window("Image Viewer", layout)
+    while True:
+        event, values = window.read()
+        if event == "Exit" or event == sg.WIN_CLOSED:
+            break
+        if event == "Load Image":
+            filename = values["-FILE-"]
+            if os.path.exists(filename):
+                image = Image.open(values["-FILE-"])
+                image.thumbnail((400, 400))
+                bio = io.BytesIO()
+                image.save(bio, format="PNG")
+                window["-IMAGE-"].update(data=bio.getvalue())
+    window.close()
+if __name__ == "__main__":
+    main()
+"""
 
 
