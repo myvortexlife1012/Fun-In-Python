@@ -1,8 +1,9 @@
 #v1
-"""
-import htmlThumbnails as thumbnails
-thumbnails.makeHTMLforImages(folder_name="premium_wallpapers_great_mountains")
-"""
+
+# import htmlThumbnails as thumbnails
+# folder_name = "premium_wallpapers_green_lush_hills"
+# thumbnails.makeHTMLforImages( folder_name )
+
 #it makes the html file - in the current directory - as absolute file links
 #2nd version will make it relative links
 
