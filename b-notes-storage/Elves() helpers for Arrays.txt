@@ -1,0 +1,37 @@
+Elves() helpers for Arrays.txt
+
+{
+'trade_id': 167191468,
+'price': '3865.23',
+'size': '0.0123591',
+'time': '2021-10-16T19:03:03.767635Z',
+'bid': '3864.78',
+'ask': '3865.23',
+'volume': '142974.15036568'
+}
+
+how will Elves() help? with moving these values?
+
+
+what am I going to do with this data?
+
+how can i generalize the uses i will have for this data - into one flexible function
+
+what will i use elves() for - with that type of data
+
+----
+
+outline how it will be stored
+
+
+
+type up how i will store a new array from this data
+
+
+
+
+
+
+
+
+

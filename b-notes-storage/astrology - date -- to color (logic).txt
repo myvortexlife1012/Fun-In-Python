@@ -1,0 +1,49 @@
+astrology - date -- to color (logic).txt
+
+-
+I could do it in mycosmicdna - everyone would have a color - we could determine the color in 10 ways - so there would be 10 colors - you could choose from - 
+
+it's cool because it is based on such a small string
+and you get something cool from it
+-it converts it into - 1perspective-weird, from a geek about functions
+
+-- based on your a days (datetime place-lat-long) you are in - always psychologically arriving at simple choices for the color to be
+
+somehow we make the color cool - no matter what is - maybe we make it look like gold bars in their color - something cool
+
+-----
+
+
+create - date - to color - converter
+
+logic and pyschology - chooses the color
+based on the birthchart planets in the chart
+
+every sign gets a certain color - and a color value
+
+you add them up and then choose the color
+
+---
+
+but it outputs just 1 color
+from one full birth date - including your location
+
+
+---
+astrology - date -- to color - using simple but good logic to select the color
+
+it would be cool to have this
+
+--
+maybe it could make other random things easier
+
+have some easy data - to a logically selected color
+
+so weird
+
+----
+
+it could be really helpful
+
+----
+

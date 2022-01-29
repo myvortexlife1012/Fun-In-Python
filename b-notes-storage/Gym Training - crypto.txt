@@ -1,0 +1,75 @@
+Gym Training - crypto.txt
+
+
+
+10/8/2021 ... 9:28a
+
+
+they will put green pixels on the part of the black during the time the will hold it
+
+
+that will be how they get points
+
+the more money they make - the more points they get
+
+
+POINTS
+
+Rewards
+
+
+10 points for a successful trade - of losing nothing
+
++
+
+1 point for every dollar made
+
+over $29 - gets a bonus of 100 points - $30 is the standard profit goal
+
+over $999 - gets a bonus of 1000
+
+over $9.999k - gets a bonus of 10k
+
+--------
+
+POINTS:
+
+Punishment
+
+
+
+10 points for a successful trade - of losing nothing
+
++
+
+1 point for every dollar made
+
+lose over $29 - gets a minus bonus of -100 points
+
+lose over $999 - gets a minus bonus of -1000
+
+lose over $9.999k - gets a minus bonus of -10k
+
+
+
+
+
+---
+
+TRAINING GYM
+-
+first it gets good at choosing the trades - in green
+--on all 1 crypto data
+
+it has to choose the trade - without having the other info
+of what is coming next
+
+and then get out - at the right time
+
+
+TRAINING GYM
+-finding the right exit
+----
+as soon as the exit - meets their requirements - (based on how the crypto is moving, going up-down slow--or fast - and other factors)
+
+

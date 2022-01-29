@@ -1,0 +1,6 @@
+Create an opencog - smart house integration but - without the house. Instead I want the integration on my ubuntu laptop - or windows laptop.
+
+Can you do it?
+
+Please only respond if you can and have done something similar already.
+

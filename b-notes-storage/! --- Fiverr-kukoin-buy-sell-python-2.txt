@@ -1,0 +1,90 @@
+I need a trading bot for KuCoin ... in python
+
+
+it is the kucoin API:
+https://docs.kucoin.com/
+
+
+... I need it to buy and sell SHIB-to-USDT and ELON-to-USDT
+
+Who can help me write that?
+I would like it in python preferably
+
+------------------------
+
+
+# import pyKuCoin as kucoin # pip install pyKuCoin
+(you can set up this - or you can just do functions on one page as well - whatever is easier)
+
+
+The functions will look something like
+- kucoin.BUY("SHIB", "$10.00")
+
+It's just 3 functions - really - in this project:
+
+- kucoin.SELL("SHIB", "$10.00")
+num_coins = kucoin.coin_conversion( {'dollars'=1, 'from': "USDT"}, { 'to': "ELON" }, ) ... this example gets the amount of coins of ELON for 1 US Dollar (USDT)
+
+------------
+
+
+My short buy and sell crypto list: ELON, SHIB, ETH, ADA, BTC
+
+It will buy and sell them - to USDT (1 way, keeps it simple)
+
+
+ELON-USDT (pair)
+SHIB-USDT (pair)
+ETH-USDT (pair)
+BTC-USDT (pair)
+
+
+it will sell it back to USDT, since it's in a pair. It can only be sold back to USDT (in my simple example) ... I want to keep it simple.
+
+------
+
+
+As soon as you can get it done ... 1-3 days is normal ... but remember only do it if it's easy for you...
+
+-------
+
+All you need to do is get the functions to work.
+
+... To buy and sell from kucoin - on the trading account
+
+Just 2 things: a buy function, and a sell function
+
+you would pass the variable name of the crypto, and the US Dollar amount to buy or sell
+
+It will calculate the conversion - from $1 USDT to that crypto ... use that to by how many dollars is specified in the function.
+
+#
+#------------------------------------
+#
+#python code:
+crypto_str = "ELON"
+
+coins_for_one_dollar = kucoin.USDT_1dollar_conv_rate_to(crypto_str)
+
+num_coins_for_10_dollars = coins_for_one_dollar * 10 #10 dollars of that coin is calculated for the purchase function:
+
+#sometimes the num_coins looks very small - like 0.0000012
+
+kucoin.buy(crypto_str='ELON',num_coins_for_10_dollars) 
+
+#
+#------------------------------------
+#
+
+
+It will be able to buy and sell all of my 4-10 different ones ... but it always will be CRYPTO-USDT ... that will be the pair ... it will be simple - just 1 way
+
+From USDT to a crypto ... and then back ... that is what it is
+
+Just those functions.
+
+
+
+
+
+

@@ -1,0 +1,9 @@
+I'm looking for a SMART Python code (.py) PROJECT MANAGER
+
+We will write some small, flexible python libraries together.
+
+I want to make normal python coding easier for people like myself - to do more interesting python projects.
+
+So we will be building a foundation of extremely simple functions - but that are 100% understandable (human-readable). When you put that code down - you will know exactly what it's going to do. That is the vision.
+
+Let me know if you are interested.

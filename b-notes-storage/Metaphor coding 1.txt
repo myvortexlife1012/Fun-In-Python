@@ -1,0 +1,14 @@
+pip install pyelves
+
+In python:
+import elves
+a = [1, 2, 3]
+a = elves.execute("add to end of array", a, 4)
+print(a) # [1, 2, 3, 4]
+
+
+https://www.fiverr.com/v4/users/truthseeker1012/orders/FO82300A45708/delivery
+
+his profile:
+
+https://www.fiverr.com/macaquedev/automate-data-processing-for-you-in-python?source=order_page_summary_gig_link_title&funnel=bf44cfd52ff7374e61d67a96b3cb453f

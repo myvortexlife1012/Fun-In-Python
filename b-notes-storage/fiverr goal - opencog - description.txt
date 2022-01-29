@@ -1,0 +1,10 @@
+goal - so they know I want to talk to it
+---
+Setup full-featured chatBot-eva to Talk - on an already running OpenCog server - on Ubuntu
+
+------
+
+I can give you a copy of the virtual drive
+
+
+

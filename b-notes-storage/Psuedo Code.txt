@@ -1,0 +1,8 @@
+Psuedo Code.txt
+#type it up
+
+if user is new:
+  cbank = 500
+  get_current_prices()
+  
+  

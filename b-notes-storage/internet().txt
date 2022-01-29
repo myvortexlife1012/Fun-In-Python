@@ -1,0 +1,116 @@
+internet()
+
+the one stop function
+
+to experience the knowledge on this planet
+
+-------
+
+Make it simple: "It's just a downloads folder"
+
+-------
+
+Description:
+it syncs parts of the internet to your computer
+
+We choose logical downloads folder - and call it 'internet()' ... we use the function markers '()' to tell you that you can do a lot with this folder
+
+----
+It's a DOWNLOADS FOLDER
+----
+
+#like: downloads()/docs
+
+#this folder will contain all of the files saved:
+
+#it's called "the internet function folder"
+#or "the root folder" for "the internet function"
+#---
+Categories for Folders:
+-Documents
+-Videos
+-Audio
+-Pictures
+-Data
+-Other
+-.Downloads Temp Folder - if there is an error with path- it passes in this folder - for the output
+-(z-)Binary
+-(z-)Logs
+-Documentation
+
+
+#--------
+internet()/cache/ #all cache, html cache - from requests
+internet()/.downloads-temp/ ... # for testing #scraping
+~----
+in - /.downloads-temp/
+ - /.downloads-temp/website or api name/ ... scrape {n00+}/ ... # type: data.txt or data.csv #text-data
+-----
+
+#--------
+internet()/data/documentation/ # quick start, quick reference, cheat sheets ... #media format could be images, text, html, html + images folder
+~----
+in - /documentation/
+ - /documentation/quick start/
+ - /documentation/quick reference/
+ - /documentation/cheat sheets/
+-----
+internet()/data/crypto/ ... # text market data
+internet()/data/db/
+internet()/data/text data small/ ... # text files, csv
+internet()/data/text data big/ ... # huge text files
+#note: scrapes go into the temp folder - remember, they are raw
+#-----
+internet()/data/organized/ ... # text only
+#-----
+internet()/video/ #720p - if possible #movies,tv shows, trailers, clips, movie-tv clips, other
+internet()/audio/ ... #32kbps mp3s if possible (you can hear it fine) ... #music{songs, sound collections}, sounds{sound collections}
+~----
+in - /audio/
+-/music/
+  --/songs/, /music clips/, /remixes/
+-/general sounds/ ... # (colllections)
+  --/sound groups/
+-----
+internet()/other/ # catch all
+#ALL DOWNLOADS GO HERE FIRST
+internet()/z-binary/ # binary-based stuff
+internet()/z-log/ # log of all commands entered into internet()
+
+
+------
+
+we use spaces
+haha
+FUCK CODE lol
+
+
+you could do this 2 ways
+-----
+#you need something
+something = 10 pics for my movie Land of the Lost 2009
+
+(1)
+get images(something)
+(2)
+sync(something)
+(3)
+internet(something)
+(3)
+internet(get images(something)) #it uses this method anyway
+
+
+---------
+you never need to worry where it will save - because it is all defined - before the program can even run
+---------
+all saving is automatic
+-it is more like a sync function
+---------
+
+
+
+-----
+sync(10 pics for my movie Land of the Lost 2009)
+get images(10 pics for my movie Land of the Lost 2009)
+internet(10 pics for my movie Land of the Lost 2009)
+

@@ -1,0 +1,172 @@
+Looking for a SMART .py code PROJECT MANAGER - FROM RUSSIA OR CHINA
+
+
+for writing some small useful, flexible python module libraries.
+
+
+---
+
+I'm looking for a smart project manager for helping me write some basic, cool, easy to use, python libraries for me.
+
+I need you to either write it or be able to have it written - easily, and smoothly, in minutes.
+
+It has to be be very simple and easy for you.
+
+QUALIFICATIONS:
+ - Have you already written a couple python libraries? or at least thought about doing it?
+ - Are you very smart?
+ - Have you at least used python in a variety of ways?
+ - Have you project managed people writing python code before?
+ - Can you write python code easily, very easily, in minutes - given the necessary basic logic, function names, and variable names?
+
+---
+
+I want a simple easy system to get my python libraries written.
+
+---
+
+CONFIDENCE IN YOU:
+
+I want the confidence to know that you are smart - and that this is easy for you.
+
+This needs to be relatively 'easy' for you.
+
+-
+
+YOU NEED TO BE 1 of 2 TYPES OF SMART:
+
+* 'very-logic-smart' or 
+* 'code-writing-smart'
+
+If that is you... what I want will be very very easy for you to do.
+
+---
+
+ENJOY Python PROGRAMMING
+
+I would prefer if you actually - kinda like programming in python. It is a cool language that connects to so much. If you actually appreciate it, then you will enjoy it as you do it.
+
+If you enjoy it, then I want to work with you.
+
+----
+
+
+EASE
+
+
+My goal is to choose someone
+THIS WILL BE EASY FOR.
+
+Then, anytime I have a new request for more functions in my .py library - it will be extremely simple and easy for you, and you will kinda like it.
+
+That is the type of person I would like to work with on these python library projects I have.
+
+
+---
+
+
+AS TIME GOES ON...
+
+
+I will let you know what additional functions I need, to do the next phase of testing.
+
+And then you will be able to write it or have it written - that day (in an easy way).
+
+The things I will be giving you will not be that complicated. I promise. I will always give you the basic logic. I will make it easy for you.
+
+I am looking for someone to make this easy for me also.
+
+Together, it will be easy.
+
+Does that sound good?
+
+------
+
+
+
+
+-- SO WHAT DO I NEED DONE? --
+
+---
+Here is what I'm doing:
+---
+Some small useful, flexible python module libraries.
+
+I need them to do simple things.
+
+SUMMARY:
+I will give you a set of operations that need to be included as functions. I will give you the names for variables & functions - and I want you to put it all together.
+
+
+-----
+
+
+RUSSIA OR CHINA ONLY:
+---
+IF YOU ARE FROM RUSSIA OR CHINA, you may respond to this job request.
+---
+
+I want to find one or two Smart people ... from Russia or China.
+
+FYI - I have many such small cool, inter-related, coding projects to do.
+
+I want someone very smart on my team. :)
+
+-----
+
+CURRENT LIBRARIES to code:
+
+(1) I will be writing a function library called "Click()" ... to make moving the mouse easy on the OS. It will automate 90% of what we do on the computer. The code library will be very simple and flexible, so people can use it to build a series of click()'s ... building what I call a "click series" - in .py python code.
+
+(2) Another function library called "Crypto()" will an get an array of tick data from 20 cryptos (on coinbase) - and develop a few comparisons functions  - on the price. The code library will be very simple and flexible.
+
+(3) Create a library called 'Elves()' - that does array functions - just as I would like - in a way that makes more sense to me
+
+---
+
+
+OVERALL IDEA OF WHAT I WANT
+---
+To create libraries of - code that is in the category of 'HUMAN UNDERSTANDABLE CODE'
+
+You look at it - and it's basically all in english.
+
+A quick and dirty example is:
+
+ Do.PickUp("Chair").moveTo("Room Corner 1").putDown('softly')
+
+ Do.FilloutForm('auto').prompt("if there is unknown fields").with_A('popup message')
+
+
+Do you see how you can kinda see what it is doing? just by looking at it?
+
+That's what I want - but for much simpler things. I want to build on a simple easy foundation. And keep building.
+
+-
+
+When we are done, it will be simple for someone else to write using this library.
+
+They can easily write simple automation tasks - for a computer or phone ... but in a human understandable code libary
+
+That's what I want.
+
+And, I'll guide you and give you all the details you need to help me.
+
+
+---
+
+
+-QUICK RECAP-
+
+Basically I want easier to understand functions to use - as I code in python (so it is easier for me to think and write it).
+
+I'm smart. I'm just not as smart as you. So I want to make some functions that will make coding - more like talking in English.
+
+I will give you the vision. I will give you the logic. I will give you examples if you need them.
+
+
+
+
+
+
+

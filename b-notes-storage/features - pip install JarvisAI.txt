@@ -1,0 +1,23 @@
+pip install JarvisAI
+
+
+
+does 11 things
+
+The functionality is cleared by the methods name. You can check the code for example.
+
+mic_input
+text2speech
+shutdown
+website_opener
+send_mail
+tell_me_date
+tell_me_time
+launch_any_app
+weather
+news
+tell_me
+
+
+
+https://www.analyticsvidhya.com/blog/2020/09/ai-virtual-assistant-using-python/

@@ -1,0 +1,66 @@
+Install and setup an app on Ubuntu Linux - OpenCog
+
+https://wiki.opencog.org/w/Building_OpenCog
+
+-------
+
+Here is the url:
+https://wiki.opencog.org/w/Building_OpenCog
+
+-- I just don't know how to turn it on, and start talking to it.
+
+------------
+
+(1) Set this up on your machine
+
+- Get it running - Talk to it a little - make sure it works - update it with what you talked about so far - talk to it a little - make sure it works ...
+
+Use this link:
+https://wiki.opencog.org/w/Building_OpenCog
+
+
+
+(2) THEN - walk me through the process
+
+(a) Walk me through it over the phone or (b) in a simple text file - or (c) give me a script to run - with simple/good comments on what to do to get to the talking part
+
+
+---------------
+
+APPLICATION INFO:
+
+It's called OpenCog. It's just for Ubuntu Linux.
+It's a talking - 'General AI' computer - so you can have conversations with it. He built a Robot that uses this software to speak and understand if you're happy or sad, and then it responds back to you - based on what it has learned so far. It learns and gets better as time goes on.
+
+------------
+
+NOTE: Last thing:
+
+Please make sure to comment in the linux script - how to run the process that updates what it has learned so far - since you ran the update last.
+I want to know how to do that easily as well.
+
+
+-----------
+
+Thank you. :)
+
+--------
+
+The budget:
+My goal is to pay a max budget of $100.
+
+Let me know if you need more - talking max more of $100 ... and if you still need more ... the very max I am willing to go is $1000, only if it is complicated for you to set it up.
+
+So ... if it's easy and you can do it in a few hours - we can keep it at $100.
+
+----------
+
+What do you think about the project?
+
+Do you like it enough to do it? And if so, how much would you charge me?
+
+----------
+
+Let me know...
+
+:)

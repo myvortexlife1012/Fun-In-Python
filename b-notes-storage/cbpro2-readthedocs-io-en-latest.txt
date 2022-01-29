@@ -1,0 +1,1268 @@
+cbpro2 - Documentation 
+Release 1.0.4 
+
+
+Daniel Paquin, yiwensong 
+
+
+May26,2020 
+
+
+Contents 
+
+1Documentation	3 
+1.1PublicClient...............................................	3 
+1.2AuthenticatedClient...........................................	6 
+1.3Authentication..............................................18 
+1.4OrderBook................................................19 
+1.5WebsocketClient.............................................19
+
+PythonModuleIndex	21
+
+Index	23
+
+
+
+ii
+
+cbpro2isapythonclientlibrarytointeractwithcoinbasepro. 
+
+cbpro2Documentation,Release1.0.4 
+
+Contents	1 
+
+cbpro2Documentation,Release1.0.4 
+
+
+2	Contents 
+
+
+
+1.1PublicClient 
+
+CHAPTER 1 
+
+Documentation 
+
+Contents 
+–PublicClient 
+
+
+
+
+1.1.1 Public Client
+
+classcbpro.public_client.PublicClient(api_url=’https://api.pro.coinbase.com’,	timeout=30)
+
+cbpropublicclientAPI. 
+Allrequestsdefaulttotheproduct_idspecifiedatobjectcreationifnototherwisespecified.url 
+APIURL.DefaultstocbproAPI.TypeOptional[str] 
+get_currencies() 
+List known currencies.
+
+Returns 
+List of currencies.
+Example:
+[ {“id”:“BTC”,“name”:“Bitcoin”,“min_size”:“0.00000001”},
+{“id”:“USD”,“name”:“UnitedStatesDollar”,“min_size”:“0.01000000”} ]
+
+
+------------
+import cbpro
+public_client = cbpro.PublicClient()
+o = public_client.get_currencies()
+print(o)
+------------
+
+
+
+
+
+
+----------------
+
+Return type list
+
+get_product_24hr_stats(product_id) 
+
+Get 24 hr stats for the product
+
+
+------------
+import cbpro
+public_client = cbpro.PublicClient()
+#not public - need to be logged in
+o = public_client.get_product_24hr_stats("ETH")
+print(o)
+------------
+
+
+
+Parametersproduct_id(str)–Product 
+
+Returns 
+
+24 hour stats.
+
+Volume is in base currency units.
+ 
+Open, high, low - are in quote currency units
+
+Example:: 
+{“open”:“34.19000000”,“high”:“95.70000000”,“low”:“7.06000000”,“volume”: “2.41000000” } 
+Return type dict
+
+
+
+--------------------------------
+
+
+
+get_product_historic_rates(product_id,start=None,end=None,granularity=None)
+
+Historic rates for a product
+
+Ratesarereturnedingroupedbucketsbasedonrequestedgranularity.Ifstart,end,andgranularityaren’t 
+provided,theexchangewillassumesome(currentlyunknown)defaultvalues. 
+Historicalratedatamaybeincomplete.Nodataispublishedforintervalswheretherearenoticks. 
+Caution:Historicalratesshouldnotbepolledfrequently.Ifyouneedreal-timeinformation,usethetrade 
+andbookendpointsalongwiththewebsocketfeed. 
+Themaximumnumberofdatapointsforasinglerequestis200candles.Ifyourselectionofstart/end 
+timeandgranularitywillresultinmorethan200datapoints,yourrequestwillberejected.Ifyouwishto 
+retrievefinegranularitydataoveralargertimerange,youwillneedtomakemultiplerequestswithnew 
+start/endranges. 
+Parameters 
+•product_id(str)–Product 
+•start(Optional[str])–StarttimeinISO8601 
+•end(Optional[str])–EndtimeinISO8601 
+•granularity(Optional[int])–Desiredtimesliceinseconds 
+Returns 
+
+
+
+
+--------------------------------
+
+
+
+Historiccandledata.Example: 
+[[time,low,high,open,close,volume],[1415398768,0.32,4.2,0.35,4.2,12.3], 
+... 
+                ] 
+         Returntypelist 
+
+
+
+
+
+--------------------------------
+
+
+get_product_order_book(product_id,level=1) 
+Getalistofopenordersforaproduct. 
+Theamountofdetailshowncanbecustomizedwiththelevelparameter:*1:Onlythebestbidandask* 
+2:Top50bidsandasks(aggregated)*3:Fullorderbook(nonaggregated) 
+Level1andLevel2arerecommendedforpolling.Forthemostup-to-datedata,considerusingthe 
+websocketstream. 
+
+
+
+
+
+--------------------------------
+
+
+
+
+Caution: Level 3 is only recommended for users wishing to maintain a full real-time order book using the web socket stream. Abuse of Level 3 via polling willcause your access to be limited or blocked.
+
+Parameters 
+•product_id(str)–Product 
+               •level(Optional[int])–Orderbooklevel(1,2,or3).Defaultis1. 
+
+Returns 
+
+Orderbook.Exampleforlevel1:: 
+
+{“sequence”:“3”,“bids”:[ 
+[price,size,num-orders], 
+],“asks”:[ 
+[price,size,num-orders], 
+                  ] 
+                } 
+
+         Returntypedict 
+
+
+
+
+--------------------------------
+
+
+
+get_product_ticker(product_id) 
+
+Snap shot about the last trade(tick),bestbid/askand24hvolume. 
+
+Caution: Polling is discouraged in favor of connecting via the web socket stream and listening for match messages.
+
+
+Parameters
+product_id(str)–Product 
+
+Returns 
+Tickerinfo.
+
+Example:: 
+
+{“trade_id”:4729088,“price”:“333.99”,“size”:“0.193”,“bid”:“333.98”,“ask”: 
+                  “333.99”,“volume”:“5957.11914015”,“time”:“2015-11-14T20:46:03.511254Z” 
+                } 
+         Returntypedict 
+
+
+
+
+--------------------------------
+
+
+get_product_trades(product_id,before=”,after=”,limit=None,result=None) 
+
+Listthelatesttradesforaproduct. 
+
+ThismethodreturnsageneratorwhichmaymakemultipleHTTPrequestswhileiteratingthroughit. 
+
+
+Parameters 
+•product_id(str)–Product 
+•before(Optional[str])–starttimeinISO8601 
+•after(Optional[str])–endtimeinISO8601 
+•limit(Optional[int])–thedesirednumberoftrades(canbemorethan100, 
+  automaticallypaginated) 
+•results(Optional[list])–listofresultsthatisusedforthepagination 
+
+
+Returns 
+Latesttrades.
+
+Example:: 
+
+[{“time”:	“2014-11-07T22:19:28.578544Z”,“trade_id”:	74,“price”: 
+“10.00000000”,“size”:“0.01000000”,“side”:“buy” 
+},{“time”:	“2014-11-07T01:08:43.642366Z”,“trade_id”:	73,“price”: 
+“100.00000000”,“size”:“0.01000000”,“side”:“sell” 
+
+Returntype 
+list 
+             }] 
+
+
+
+
+--------------------------------
+
+
+get_products() 
+Getalistofavailablecurrencypairsfortrading. 
+Returns 
+Infoaboutallcurrencypairs.Example:: 
+                [ 
+{“id”:“BTC-USD”,“display_name”:“BTC/USD”,“base_currency”:“BTC”, 
+“quote_currency”:“USD”,“base_min_size”:“0.01”,“base_max_size”: 
+“10000.00”,“quote_increment”:“0.01” 
+                  } 
+                ] 
+         Returntypelist 
+
+
+
+
+--------------------------------
+
+
+get_time()
+
+GettheAPIservertime.
+
+Returns
+
+Server time in ISO and epoch format(decimal seconds since Unix epoch).
+
+Example:
+{“iso”:“2015-01-07T23:47:25.201Z”,“epoch”:1420674445.201 } 
+Return type dict 
+
+
+
+
+
+
+--------------------------------
+
+--------------------------------
+
+
+
+1.2AuthenticatedClient 
+
+–AuthenticatedClient 
+
+
+
+
+cbpro/AuthenticatedClient.py
+ForauthenticatedrequeststotheCoinbaseexchange 
+
+
+6	Chapter1.Documentation 
+
+cbpro2Documentation,Release1.0.4 
+
+classcbpro.authenticated_client.AuthenticatedClient(key,b64secret,passphrase, 
+api_url=’https://api.pro.coinbase.com’) 
+ProvidesaccesstoPrivateEndpointsonthecbproAPI. 
+Allrequestsdefaulttotheliveapi_url:‘https://api.pro.coinbase.com’.Totestyourapplicationusingthesand- 
+boxmodifytheapi_url. 
+     url 
+Theapiurlforthisclientinstancetouse. 
+Typestr 
+     auth 
+Customauthenticationhandlerforeachrequest. 
+TypeCBProAuth 
+session 
+PersistentHTTPconnectionobject. 
+         Typerequests.Session 
+buy(product_id,order_type,**kwargs) 
+Placeabuyorder. 
+Thisisincludedtomaintainbackwardscompatibilitywitholderversionsofcbpro-Python.Formaximum 
+supportfromdocstringsandfunctionsignaturesseetheordertype-specificfunctionsplace_limit_order, 
+place_market_order,andplace_stop_order. 
+Parameters 
+•product_id(str)–Producttoorder(eg.‘BTC-USD’) 
+•order_type(str)–Ordertype(‘limit’,‘market’,or‘stop’) 
+•**kwargs–Additionalargumentscanbespecifiedfordifferentordertypes. 
+ReturnsOrderdetails.Seeplace_orderforexample. 
+Returntypedict 
+cancel_all(product_id=None) 
+Withbesteffort,cancelallopenorders. 
+Parametersproduct_id(Optional[str])–Onlycancelordersforthisproduct_id 
+Returns 
+Alistofidsofthecanceledorders.Example:: 
+[“144c6f8e-713f-4682-8435-5280fbe8b2b4”,	“debe4907-95dc-442f-af3b- 
+cec12f42ebda”,“cf7aceee-7b08-4227-a76c-3858144323ab”,“dfc5ae27-cadb- 
+4c0c-beef-8994936fde8a”,“34fecfbf-de33-4273-b2c6-baf8e8948be4” 
+                     ] 
+         Returntypelist 
+cancel_order(order_id) 
+Cancelapreviouslyplacedorder. 
+Iftheorderhadnomatchesduringitslifetimeitsrecordmaybepurged.Thismeanstheorderdetailswill 
+notbeavailablewithget_order(order_id).Iftheordercouldnotbecanceled(alreadyfilledorpreviously 
+canceled,etc),thenanerrorresponsewillindicatethereasoninthemessagefield. 
+          Caution:Theorderidistheserver-assignedorderidandnottheoptionalclient_oid. 
+
+
+1.2.AuthenticatedClient	7 
+
+cbpro2Documentation,Release1.0.4 
+
+Parametersorder_id(str)–Theorder_idoftheorderyouwanttocancel 
+Returns 
+Containingtheorder_idofcancelledorder.Example::[“c5ab5eae-76be-480e-8961- 
+00792dc7e138”] 
+         Returntypelist 
+close_position(repay_only) 
+Closeposition. 
+Parametersrepay_only(bool)–Undocumentedbycbpro. 
+         ReturnsUndocumented 
+coinbase_deposit(amount,currency,coinbase_account_id) 
+Depositfundsfromacoinbaseaccount. 
+YoucanmovefundsbetweenyourCoinbaseaccountsandyourcbprotradingaccountswithinyourdaily 
+limits.MovingfundsbetweenCoinbaseandcbproisinstantandfree. 
+SeeAuthenticatedClient.get_coinbase_accounts()	toreceive	informationregardingyourcoin- 
+base_accounts. 
+Parameters 
+•amount(Decimal)–Theamounttodeposit. 
+•currency(str)–Thetypeofcurrency. 
+•coinbase_account_id(str)–IDofthecoinbaseaccount. 
+Returns 
+Informationaboutthedeposit.Example:: 
+{“id”:“593533d2-ff31-46e0-b22e-ca754147a96a”,“amount”:“10.00”,“currency”: 
+“BTC”, 
+                } 
+         Returntypedict 
+coinbase_withdraw(amount,currency,coinbase_account_id) 
+Withdrawfundstoacoinbaseaccount. 
+YoucanmovefundsbetweenyourCoinbaseaccountsandyourcbprotradingaccountswithinyourdaily 
+limits.MovingfundsbetweenCoinbaseandcbproisinstantandfree. 
+SeeAuthenticatedClient.get_coinbase_accounts()	toreceive	informationregardingyourcoin- 
+base_accounts. 
+Parameters 
+•amount(Decimal)–Theamounttowithdraw. 
+•currency(str)–Thetypeofcurrency(eg.‘BTC’) 
+•coinbase_account_id(str)–IDofthecoinbaseaccount. 
+Returns 
+Informationaboutthedeposit.Example:: 
+{“id”:”593533d2-ff31-46e0-b22e-ca754147a96a”,“amount”:”10.00”,“currency”: 
+“BTC”, 
+
+
+8	Chapter1.Documentation 
+
+cbpro2Documentation,Release1.0.4 
+
+
+                } 
+         Returntypedict 
+create_report(report_type,start_date,end_date,product_id=None,account_id=None,re- 
+            port_format=’pdf’,email=None) 
+Createreportofhistoricinformationaboutyouraccount. 
+Thereportwillbegeneratedwhenresourcesareavailable.Reportstatuscanbequeriedvia 
+get_report(report_id). 
+Parameters 
+•report_type(str)–‘fills’or‘account’ 
+•start_date(str)–StartingdateforthereportinISO8601 
+•end_date(str)–EndingdateforthereportinISO8601 
+•product_id(Optional[str])–IDoftheproducttogenerateafillsreportfor. 
+  Requiredifaccount_typeis‘fills’ 
+•account_id(Optional[str])–IDoftheaccounttogenerateanaccountreport 
+  for.Requiredifreport_typeis‘account’. 
+•report_format(Optional[str])–‘pdf’or‘csv’.Defaultis‘pdf’. 
+               •email(Optional[str])–Emailaddresstosendthereportto. 
+Returns 
+Reportdetails.Example:: 
+{“id”:“0428b97b-bec1-429e-a94c-59232926778d”,“type”:“fills”,“status”:“pend- 
+ing”,“created_at”:“2015-01-06T10:34:47.000Z”,“completed_at”:undefined, 
+“expires_at”:“2015-01-13T10:35:47.000Z”,“file_url”:undefined,“params”:{ 
+”start_date”:	“2014-11-01T00:00:00.000Z”,“end_date”:	“2014-11- 
+30T23:59:59.000Z” 
+                  } 
+                } 
+         Returntypedict 
+crypto_withdraw(amount,currency,crypto_address) 
+Withdrawfundstoacryptoaddress. 
+Parameters 
+•amount(Decimal)–Theamounttowithdraw 
+•currency(str)–Thetypeofcurrency(eg.‘BTC’) 
+•crypto_address(str)–Cryptoaddresstowithdrawto. 
+Returns 
+Withdrawdetails.Example:: 
+{“id”:”593533d2-ff31-46e0-b22e-ca754147a96a”,“amount”:”10.00”,“currency”: 
+“BTC”, 
+                } 
+         Returntypedict 
+
+
+1.2.AuthenticatedClient	9 
+
+cbpro2Documentation,Release1.0.4 
+
+deposit(amount,currency,payment_method_id) 
+Depositfundsfromapaymentmethod. 
+SeeAuthenticatedClient.get_payment_methods()toreceiveinformationregardingpaymentmethods. 
+Parameters 
+•amount(Decmial)–Theamounttodeposit. 
+•currency(str)–Thetypeofcurrency. 
+•payment_method_id(str)–IDofthepaymentmethod. 
+Returns 
+Informationaboutthedeposit.Example:: 
+{“id”:“593533d2-ff31-46e0-b22e-ca754147a96a”,“amount”:“10.00”,“currency”: 
+“USD”,“payout_at”:“2016-08-20T00:31:09Z” 
+                } 
+         Returntypedict 
+get_account(account_id) 
+Getinformationforasingleaccount. 
+Usethisendpointwhenyouknowtheaccount_id. 
+Parametersaccount_id(str)–Accountidforaccountyouwanttoget. 
+Returns 
+Accountinformation.Example:: 
+{“id”:“a1b2c3d4”,“balance”:“1.100”,“holds”:“0.100”,“available”:“1.00”,“cur- 
+                   rency”:“USD” 
+                } 
+         Returntypedict 
+get_account_history(account_id,**kwargs) 
+Listaccountactivity.Accountactivityeitherincreasesordecreasesyouraccountbalance. 
+Entrytypeindicatesthereasonfortheaccountchange.*transfer:Fundsmovedto/fromCoinbaseto 
+cbpro*match:Fundsmovedasaresultofatrade*fee:Feeasaresultofatrade*rebate:Feerebateas 
+perourfeeschedule 
+Ifanentryistheresultofatrade(match,fee),thedetailsfieldwillcontainadditionalinformationabout 
+thetrade. 
+Parameters 
+•account_id(str)–Accountidtogethistoryof. 
+               •kwargs(dict)–AdditionalHTTPrequestparameters. 
+Returns 
+Historyinformationfortheaccount.Example:: 
+                [ 
+{“id”:“100”,“created_at”:“2014-11-07T08:19:27.028459Z”,“amount”: 
+“0.001”,“balance”:“239.669”,“type”:“fee”,“details”:{ 
+
+
+
+10	Chapter1.Documentation 
+
+cbpro2Documentation,Release1.0.4 
+
+”order_id”:“d50ec984-77a8-460a-b958-66f114b0de9b”,“trade_id”:“74”, “product_id”:“BTC-USD” 
+  } 
+},{ 
+  ... 
+} 
+                ] 
+         Returntypelist 
+get_account_holds(account_id,**kwargs) 
+Getholdsonanaccount. 
+ThismethodreturnsageneratorwhichmaymakemultipleHTTPrequestswhileiteratingthroughit. 
+Holdsareplacedonanaccountforactiveordersorpendingwithdrawrequests. 
+Asanorderisfilled,theholdamountisupdated.Ifanorderiscanceled,anyremainingholdisremoved. 
+Forawithdraw,onceitiscompleted,theholdisremoved. 
+Thetypefieldwillindicatewhytheholdexists.Theholdtypeis‘order’forholdsrelatedtoopenorders 
+and‘transfer’forholdsrelatedtoawithdraw. 
+Thereffieldcontainstheidoftheorderortransferwhichcreatedthehold. 
+Parameters 
+•account_id(str)–Accountidtogetholdsof. 
+                •kwargs(dict)–AdditionalHTTPrequestparameters. 
+Returns 
+Holdinformationfortheaccount.Example:: 
+                  [ 
+{“id”:	“82dcd140-c3c7-4507-8de4-2c529cd1a28f”,	“account_id”: 
+“e0b3f39a-183d-453e-b754-0c13e5bab0b3”,“created_at”:		“2014-11- 
+06T10:34:47.123456Z”,“updated_at”:“2014-11-06T10:40:47.123456Z”, 
+“amount”:“4.23”,“type”:“order”,“ref”:“0a205de4-dd35-4370-a285- 
+fe8fc375a273”, 
+                     },{...} 
+                  ] 
+          Returntypegenerator(list) 
+get_accounts() 
+Getalistoftradingallaccounts. 
+Whenyouplaceanorder,thefundsfortheorderareplacedonhold.Theycannotbeusedforotherorders 
+orwithdrawn.Fundswillremainonholduntiltheorderisfilledorcanceled.Thefundsonholdforeach 
+accountwillbespecified. 
+Returns 
+Infoaboutallaccounts.Example:: 
+                  [ 
+
+
+1.2.AuthenticatedClient	11 
+
+cbpro2Documentation,Release1.0.4 
+
+{“id”:“71452118-efc7-4cc4-8780-a5e22d4baa53”,“currency”:“BTC”, 
+“balance”:“0.0000000000000000”,“available”:“0.0000000000000000”, 
+“hold”:“0.0000000000000000”,“profile_id”:“75da88c5-05bf-4f54-bc85- 
+5c775bd68254” 
+},{ 
+  ... 
+} 
+        ] 
+Returntypelist 
+•Additionalinfoincludedinresponseformarginaccounts. 
+get_coinbase_accounts() 
+Getalistofyourcoinbaseaccounts. 
+ReturnsCoinbaseaccountdetails. 
+Returntypelist 
+get_fills(product_id=None,order_id=None,**kwargs) 
+Getalistofrecentfills. 
+Asof8/23/18-Requestswithouteitherorder_idorproduct_idwillberejected 
+ThismethodreturnsageneratorwhichmaymakemultipleHTTPrequestswhileiteratingthroughit. 
+Feesarerecordedintwostages.Immediatelyafterthematchingenginecompletesamatch,thefillis 
+insertedintoourdatastore.Oncethefillisrecorded,asettlementprocesswillsettlethefillandcreditboth 
+tradingcounterparties. 
+The‘fee’fieldindicatesthefeeschargedforthisfill. 
+The‘liquidity’fieldindicatesifthefillwastheresultofaliquidityproviderorliquiditytaker.Mindicates 
+MakerandTindicatesTaker. 
+Parameters 
+•product_id(str)–Limitlisttothisproduct_id 
+•order_id(str)–Limitlisttothisorder_id 
+•kwargs(dict)–AdditionalHTTPrequestparameters. 
+Returns 
+Containinginformationonfills.Example:: 
+                  [ 
+{“trade_id”:74,“product_id”:“BTC-USD”,“price”:“10.00”,“size”: 
+“0.01”,“order_id”:“d50ec984-77a8-460a-b958-66f114b0de9b”,“cre- 
+ated_at”:“2014-11-07T22:19:28.578544Z”,“liquidity”:“T”,“fee”: 
+“0.00025”,“settled”:true,“side”:“buy” 
+                     },{ 
+                       ... 
+                     } 
+                  ] 
+
+
+12	Chapter1.Documentation 
+
+cbpro2Documentation,Release1.0.4 
+
+          Returntypelist 
+get_fundings(status=None,**kwargs) 
+Everyorderplacedwithamarginprofilethatdrawsfundingwillcreateafundingrecord. 
+ThismethodreturnsageneratorwhichmaymakemultipleHTTPrequestswhileiteratingthroughit. 
+Parameters 
+•status(list/str)–Limitfundingrecordstothesestatuses.**Options:‘out- 
+  standing’,‘settled’,‘rejected’ 
+•kwargs(dict)–AdditionalHTTPrequestparameters. 
+Returns 
+Containinginformationonmarginfunding.Example:: 
+                  [ 
+{“id”:“b93d26cd-7193-4c8d-bfcc-446b2fe18f71”,“order_id”:“b93d26cd- 
+7193-4c8d-bfcc-446b2fe18f71”,“profile_id”:“d881e5a6-58eb-47cd-b8e2- 
+8d9f2e3ec6f6”,“amount”:“1057.6519956381537500”,“status”:“settled”, 
+“created_at”:“2017-03-17T23:46:16.663397Z”,“currency”:“USD”,“re- 
+paid_amount”:“1057.6519956381537500”,“default_amount”:“0”,“re- 
+paid_default”:false 
+                     },{ 
+                       ... 
+                     } 
+                  ] 
+          Returntypelist 
+get_order(order_id) 
+Getasingleorderbyorderid. 
+Iftheorderiscanceledtheresponsemayhavestatuscode404iftheorderhadnomatches. 
+Caution:Openordersmaychangestatebetweentherequestandtheresponsedependingonmarket 
+conditions. 
+Parametersorder_id(str)–Theordertogetinformationof. 
+Returns 
+Containinginformationonorder.Example:: 
+{“created_at”:	“2017-06-18T00:27:42.920136Z”,	“executed_value”: 
+“0.0000000000000000”,“fill_fees”:“0.0000000000000000”,“filled_size”: 
+“0.00000000”,		“id”:	“9456f388-67a9-4316-bad1-330c5353804f”, 
+“post_only”:	true,“price”:“1.00000000”,“product_id”:“BTC-USD”, 
+“settled”:false,“side”:“buy”,“size”:“1.00000000”,“status”:“pending”, 
+“stp”:“dc”,“time_in_force”:“GTC”,“type”:“limit” 
+                  } 
+          Returntypedict 
+get_orders(product_id=None,status=None,**kwargs) 
+Listyourcurrentopenorders. 
+ThismethodreturnsageneratorwhichmaymakemultipleHTTPrequestswhileiteratingthroughit. 
+
+
+1.2.AuthenticatedClient	13 
+
+cbpro2Documentation,Release1.0.4 
+
+Onlyopenorun-settledordersarereturned.Assoonasanorderisnolongeropenandsettled,itwillno 
+longerappearinthedefaultrequest. 
+Orderswhicharenolongerrestingontheorderbook,willbemarkedwiththe‘done’status.Thereisa 
+smallwindowbetweenanorderbeing‘done’and‘settled’.Anorderis‘settled’whenallofthefillshave 
+settledandtheremainingholds(ifany)havebeenremoved. 
+Forhigh-volumetradingitisstronglyrecommendedthatyoumaintainyourownlistofopenordersand 
+useoneofthestreamingmarketdatafeedstokeepitupdated.Youshouldpolltheopenordersendpoint 
+oncewhenyoustarttradingtoobtainthecurrentstateofanyopenorders. 
+Parameters 
+•product_id(Optional[str])–Onlylistordersforthisproduct 
+•status(Optional[list/str])–Limitlistoforderstothisstatusorsta- 
+tuses.Passing‘all’returnsordersofallstatuses.**Options:‘open’,‘pending’, 
+‘active’,‘done’, 
+   ’settled’ 
+**default:[‘open’,‘pending’,‘active’] 
+Returns 
+Containinginformationonorders.Example:: 
+                  [ 
+{“id”:“d0c5340b-6d6c-49d9-b567-48c4bfca13d2”,“price”:“0.10000000”, 
+“size”:“0.01000000”,“product_id”:“BTC-USD”,“side”:“buy”, 
+“stp”:“dc”,“type”:“limit”,“time_in_force”:“GTC”,“post_only”: 
+false,“created_at”:	“2016-12-08T20:02:28.53864Z”,“fill_fees”: 
+“0.0000000000000000”,“filled_size”:“0.00000000”,“executed_value”: 
+“0.0000000000000000”,“status”:“open”,“settled”:false 
+                     },{ 
+                       ... 
+                     } 
+                  ] 
+          Returntypelist 
+get_payment_methods() 
+Getalistofyourpaymentmethods. 
+ReturnsPaymentmethoddetails. 
+Returntypelist 
+get_position() 
+GetAnoverviewofyourmarginprofile. 
+ReturnsDetailsaboutfunding,accounts,andmargincall. 
+Returntypedict 
+get_report(report_id) 
+Getreportstatus. 
+Usetoqueryaspecificreportonceithasbeenrequested. 
+Parametersreport_id(str)–ReportID 
+
+
+14	Chapter1.Documentation 
+
+cbpro2Documentation,Release1.0.4 
+
+ReturnsReportdetails,includingfileurlonceitiscreated. 
+Returntypedict 
+get_trailing_volume() 
+Getyour30-daytrailingvolumeforallproducts. 
+Thisisacachedvaluethat’scalculatedeverydayatmidnightUTC. 
+Returns 
+               30-daytrailingvolumes.Example:: 
+                  [ 
+{“product_id”:“BTC-USD”,“exchange_volume”:“11800.00000000”,“vol- 
+ume”:“100.00000000”,“recorded_at”:“1973-11-29T00:05:01.123456Z” 
+                     },{ 
+                       ... 
+                     } 
+                  ] 
+          Returntypelist 
+margin_transfer(margin_profile_id,transfer_type,currency,amount) 
+Transferfundsbetweenyourstandardprofileandamarginprofile. 
+Parameters 
+•margin_profile_id(str)–MarginprofileIDtowithdrawordepositfrom. 
+•transfer_type(str)–‘deposit’or‘withdraw’ 
+•currency(str)–Currencytotransfer(eg.‘USD’) 
+•amount(Decimal)–Amounttotransfer 
+Returns 
+Transferdetails.Example:: 
+{“created_at”:“2017-01-25T19:06:23.415126Z”,“id”:“80bc6b74-8b1f-4c60- 
+a089-c61f9810d4ab”,“user_id”:	“521c20b3d4ab09621f000011”,“pro- 
+file_id”:“cda95996-ac59-45a3-a42e-30daeb061867”,“margin_profile_id”: 
+“45fa9e3b-00ba-4631-b907-8a98cbdf21be”,“type”:“deposit”,“amount”: 
+“2”,“currency”:“USD”,“account_id”:“23035fc7-0707-4b59-b0d2- 
+95d0c035f8f5”,	“margin_account_id”:	“e1d9862c-a259-4e83-96cd- 
+376352a9d24d”,“margin_product_id”:“BTC-USD”,“status”:“completed”, 
+“nonce”:25 
+                  } 
+          Returntypedict 
+place_limit_order(product_id,	side,	price,	size,	client_oid=None,stp=None, 
+time_in_force=None,	cancel_after=None,	post_only=None,	over- 
+draft_enabled=None,funding_amount=None) 
+Placealimitorder. 
+Parameters 
+•product_id(str)–Producttoorder(eg.‘BTC-USD’) 
+•side(str)–Orderside(‘buy’or‘sell) 
+
+1.2.AuthenticatedClient	15 
+
+cbpro2Documentation,Release1.0.4 
+
+•price(Decimal)–Pricepercryptocurrency 
+•size(Decimal)–Amountofcryptocurrencytobuyorsell 
+•client_oid(Optional[str])–User-specifiedOrderID 
+•stp(Optional[str])–Self-tradepreventionflag.Seeplace_orderfordetails. 
+•time_in_force(Optional[str])–Timeinforce.Options:‘GTC’Good 
+tillcanceled‘GTT’Goodtilltime(setbycancel_after)‘IOC’Immediateorcancel 
+‘FOK’Fillorkill 
+•cancel_after(Optional[str])–Cancelafterthisperiodfor‘GTT’or- 
+ders.Optionsare‘min’,‘hour’,or‘day’. 
+•post_only(Optional[bool])–Indicatesthattheordershouldonlymake 
+liquidity.Ifanypartoftheorderresultsintakingliquidity,theorderwillberejected 
+andnopartofitwillexecute. 
+•overdraft_enabled(Optional[bool])–Iftruefundingaboveandbe- 
+yondtheaccountbalancewillbeprovidedbymargin,asnecessary. 
+•funding_amount(Optional[Decimal])–Amountofmarginfundingto 
+beprovidedfortheorder.Mutuallyexclusivewithoverdraft_enabled. 
+ReturnsOrderdetails.Seeplace_orderforexample. 
+Returntypedict 
+place_market_order(product_id,side,size=None,funds=None,client_oid=None,stp=None, 
+overdraft_enabled=None,funding_amount=None) 
+Placemarketorder. 
+Parameters 
+•product_id(str)–Producttoorder(eg.‘BTC-USD’) 
+•side(str)–Orderside(‘buy’or‘sell) 
+•size(Optional[Decimal])–Desiredamountincrypto.Specifythisor 
+  funds. 
+•funds(Optional[Decimal])–Desiredamountofquotecurrencytouse. 
+  Specifythisorsize. 
+•client_oid(Optional[str])–User-specifiedOrderID 
+•stp(Optional[str])–Self-tradepreventionflag.Seeplace_orderfordetails. 
+•overdraft_enabled(Optional[bool])–Iftruefundingaboveandbe- 
+  yondtheaccountbalancewillbeprovidedbymargin,asnecessary. 
+•funding_amount(Optional[Decimal])–Amountofmarginfundingto 
+         beprovidedfortheorder.Mutuallyexclusivewithoverdraft_enabled. 
+ReturnsOrderdetails.Seeplace_orderforexample. 
+          Returntypedict 
+place_order(product_id,side,order_type,**kwargs) 
+Placeanorder. 
+Thethreeordertypes(limit,market,andstop)canbeplacedusingthismethod.Specificmethodsare 
+providedforeachordertype,butifamoregenericinterfaceisdesiredthismethodisavailable. 
+          Parameters 
+
+
+16	Chapter1.Documentation 
+
+cbpro2Documentation,Release1.0.4 
+
+•product_id(str)–Producttoorder(eg.‘BTC-USD’) 
+•side(str)–Orderside(‘buy’or‘sell) 
+•order_type(str)–Ordertype(‘limit’,‘market’,or‘stop’) 
+•**client_oid(str)–OrderIDselectedbyyoutoidentifyyourorder.This 
+shouldbeaUUID,whichwillbebroadcastinthepublicfeedforreceivedmes- 
+sages. 
+•**stp(str)–Self-tradepreventionflag.cbprodoesn’tallowself-trading.This 
+behaviorcanbemodifiedwiththisflag.Options:‘dc’DecreaseandCancel(de- 
+fault)‘co’Canceloldest‘cn’Cancelnewest‘cb’Cancelboth 
+•**overdraft_enabled(Optional[bool])–Iftruefundingaboveandbe- 
+yondtheaccountbalancewillbeprovidedbymargin,asnecessary. 
+•**funding_amount(Optional[Decimal])–Amountofmarginfunding 
+tobeprovidedfortheorder.Mutuallyexclusivewithoverdraft_enabled. 
+•**kwargs–Additionalargumentscanbespecifiedfordifferentordertypes.See 
+thelimit/market/stopordermethodsfordetails. 
+Returns 
+Orderdetails.Example:: 
+{“id”:“d0c5340b-6d6c-49d9-b567-48c4bfca13d2”,“price”:“0.10000000”, 
+“size”:“0.01000000”,“product_id”:“BTC-USD”,“side”:“buy”,“stp”:“dc”, 
+“type”:“limit”,“time_in_force”:“GTC”,“post_only”:false,“created_at”: 
+“2016-12-08T20:02:28.53864Z”,“fill_fees”:	“0.0000000000000000”, 
+“filled_size”:“0.00000000”,“executed_value”:“0.0000000000000000”, 
+“status”:“pending”,“settled”:false 
+                  } 
+          Returntypedict 
+place_stop_order(product_id,side,price,size=None,funds=None,client_oid=None,stp=None, 
+                         overdraft_enabled=None,funding_amount=None) 
+Placestoporder. 
+Parameters 
+•product_id(str)–Producttoorder(eg.‘BTC-USD’) 
+•side(str)–Orderside(‘buy’or‘sell) 
+•price(Decimal)–Desiredpriceatwhichthestopordertriggers. 
+•size(Optional[Decimal])–Desiredamountincrypto.Specifythisor 
+  funds. 
+•funds(Optional[Decimal])–Desiredamountofquotecurrencytouse. 
+  Specifythisorsize. 
+•client_oid(Optional[str])–User-specifiedOrderID 
+•stp(Optional[str])–Self-tradepreventionflag.Seeplace_orderfordetails. 
+•overdraft_enabled(Optional[bool])–Iftruefundingaboveandbe- 
+  yondtheaccountbalancewillbeprovidedbymargin,asnecessary. 
+•funding_amount(Optional[Decimal])–Amountofmarginfundingto 
+                   beprovidedfortheorder.Mutuallyexclusivewithoverdraft_enabled. 
+
+
+1.2.AuthenticatedClient	17 
+
+cbpro2Documentation,Release1.0.4 
+
+ReturnsOrderdetails.Seeplace_orderforexample. 
+Returntypedict 
+repay_funding(amount,currency) 
+Repayfunding.Repaystheolderfundingrecordsfirst. 
+Parameters 
+•amount(int)–Amountofcurrencytorepay 
+      •currency(str)–Thecurrency,exampleUSD 
+ReturnsNotspecifiedbycbpro. 
+sell(product_id,order_type,**kwargs) 
+Placeasellorder. 
+Thisisincludedtomaintainbackwardscompatibilitywitholderversionsofcbpro-Python.Formaximum 
+supportfromdocstringsandfunctionsignaturesseetheordertype-specificfunctionsplace_limit_order, 
+place_market_order,andplace_stop_order. 
+Parameters 
+•product_id(str)–Producttoorder(eg.‘BTC-USD’) 
+•order_type(str)–Ordertype(‘limit’,‘market’,or‘stop’) 
+•**kwargs–Additionalargumentscanbespecifiedfordifferentordertypes. 
+ReturnsOrderdetails.Seeplace_orderforexample. 
+Returntypedict 
+withdraw(amount,currency,payment_method_id) 
+Withdrawfundstoapaymentmethod. 
+SeeAuthenticatedClient.get_payment_methods()toreceiveinformationregardingpaymentmethods. 
+Parameters 
+•amount(Decimal)–Theamounttowithdraw. 
+•currency(str)–Currencytype(eg.‘BTC’) 
+•payment_method_id(str)–IDofthepaymentmethod. 
+Returns 
+Withdrawdetails.Example:: 
+{“id”:”593533d2-ff31-46e0-b22e-ca754147a96a”,“amount”:“10.00”,“cur- 
+rency”:“USD”,“payout_at”:“2016-08-20T00:31:09Z” 
+                  } 
+          Returntypedict 
+
+1.3Authentication 
+
+
+Contents 
+•Authentication 
+
+
+
+
+
+
+18	Chapter1.Documentation 
+
+cbpro2Documentation,Release1.0.4 
+
+
+–Authentication 
+
+
+
+
+1.3.1Authentication 
+classcbpro.cbpro_auth.CBProAuth(api_key,secret_key,passphrase) 
+
+1.4OrderBook 
+
+
+Contents 
+•OrderBook 
+–OrderBook 
+
+
+
+
+
+
+
+1.4.1OrderBook 
+1.5WebsocketClient 
+
+
+Contents 
+•WebsocketClient 
+–WebsocketClient 
+
+
+
+
+
+
+
+1.5.1WebsocketClient 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1.4.OrderBook	19 
+
+cbpro2Documentation,Release1.0.4 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+20	Chapter1.Documentation 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+c 
+cbpro.authenticated_client,6 cbpro.cbpro_auth,19 
+cbpro.order_book,19 
+cbpro.public_client,3 
+cbpro.websocket_client,19 
+
+
+
+
+
+
+
+
+PythonModuleIndex 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+21 
+
+cbpro2Documentation,Release1.0.4 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+22	PythonModuleIndex 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A 
+auth	(cbpro.authenticated_client.AuthenticatedClient 
+attribute),7 
+AuthenticatedClient	(class	in 
+cbpro.authenticated_client),6 
+B 
+buy()(cbpro.authenticated_client.AuthenticatedClient 
+method),7 
+C 
+cancel_all()(cbpro.authenticated_client.AuthenticatedClient 
+method),7 
+cancel_order()(cbpro.authenticated_client.AuthenticatedClient 
+method),7 
+cbpro.authenticated_client(module),6 
+cbpro.cbpro_auth(module),19 
+cbpro.order_book(module),19 
+cbpro.public_client(module),3 
+cbpro.websocket_client(module),19 
+CBProAuth(classincbpro.cbpro_auth),19 
+close_position()(cbpro.authenticated_client.AuthenticatedClient 
+        method),8 
+coinbase_deposit() 
+(cbpro.authenticated_client.AuthenticatedClient 
+        method),8 
+coinbase_withdraw() 
+(cbpro.authenticated_client.AuthenticatedClient 
+        method),8 
+create_report()(cbpro.authenticated_client.AuthenticatedClient 
+        method),9 
+crypto_withdraw() 
+(cbpro.authenticated_client.AuthenticatedClient 
+        method),9 
+D 
+deposit()(cbpro.authenticated_client.AuthenticatedClient 
+method),9 
+
+
+
+
+
+
+
+
+Index 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+23 
+
+cbpro2Documentation,Release1.0.4 
+
+
+        (cbpro.public_client.PublicClientmethod), 
+        5 
+get_product_trades() 
+(cbpro.public_client.PublicClientmethod), 
+        5 
+get_products()	(cbpro.public_client.PublicClient 
+method),6 
+get_report()(cbpro.authenticated_client.AuthenticatedClient 
+method),14 
+get_time()	(cbpro.public_client.PublicClient 
+method),6 
+get_trailing_volume() 
+(cbpro.authenticated_client.AuthenticatedClient 
+        method),15 
+M 
+margin_transfer() 
+(cbpro.authenticated_client.AuthenticatedClient 
+        method),15 
+P 
+place_limit_order() 
+(cbpro.authenticated_client.AuthenticatedClient 
+        method),15 
+place_market_order() 
+(cbpro.authenticated_client.AuthenticatedClient 
+        method),16 
+place_order()(cbpro.authenticated_client.AuthenticatedClient 
+        method),16 
+place_stop_order() 
+(cbpro.authenticated_client.AuthenticatedClient 
+        method),17 
+PublicClient(classincbpro.public_client),3 
+R 
+repay_funding()(cbpro.authenticated_client.AuthenticatedClient 
+method),18 
+S 
+sell()(cbpro.authenticated_client.AuthenticatedClient 
+method),18 
+session(cbpro.authenticated_client.AuthenticatedClient 
+attribute),7 
+U 
+url(cbpro.authenticated_client.AuthenticatedClientat- 
+tribute),7 
+url(cbpro.public_client.PublicClientattribute),3 
+W 
+withdraw()(cbpro.authenticated_client.AuthenticatedClient 
+method),18 
+
+
+24	Index 
+

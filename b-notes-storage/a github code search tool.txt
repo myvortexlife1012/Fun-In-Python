@@ -1,0 +1,5 @@
+a github code search tool: https://github.com/search?q=opencog&type=Code
+
+this could help you possibly
+
+I found it a while back and was impressed

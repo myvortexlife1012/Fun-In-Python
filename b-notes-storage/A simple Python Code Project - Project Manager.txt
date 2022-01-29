@@ -1,0 +1,105 @@
+A simple Python Code Project - Project Manager
+
+-----
+
+I need a project manager.
+
+I need this person for around 2 weeks.
+
+I need them to handle fiverr communication - to a few python coders, and some kids who know photoshop.
+
+-----
+
+
+
+I need someone to run point - on a small software project.
+
+It will be written in .py python code - that can run on any OS.
+
+---
+
+CODE NAME:
+
+It will be called 'click()'
+
+It will use python's ability to click on things - and convert it into a systematic way - to build what I call, a 'click series'
+
+----
+
+A CLICK SERIES - IS:
+  - A group of clicks, keyboard input, and other code - that can all run as a set (simple and easy).
+
+----
+
+My goal is to automate 90% of what we do on our computers.
+
+---
+
+So we can simply tell the computer what click-series we want to run - with a voice command - that is the last step of the process. Until then it will be all testing - using typed commands - to call a certain click series.
+
+---
+
+Two such click series examples - use cases:
+
+Example 1:
+Straight Forward:
+
+A Standard Click Series:
+- another is watching a movie trailer
+-- click() does all of the steps - and starts to play the trailer - in your browser
+
+Example 2:
+Advanced
+
+A Click Series - (with other programming)
+- is creating a click series to fill in forms online
+
+---
+
+You can see that click() can be used to do standard things on your computer
+
+but it can also be used as a python method - to perform more complex python tasks, with additional programming logic.
+
+---
+
+ONE PART OF THE PROJECT:
+
+I need to collect what I call the 'click collections' ... so it will be a computer screenshot - taken into photoshop or gimp - and the person measures each button - with and height - for a series of windows on that operating system ... and forms a text file - with that information
+
+Then we give that info to the python coder - and he adds it into the click options that are available
+
+--
+
+
+Then I can generate some automation for myself - using that version of click()
+
+And then I will tell you what we need to develop next.
+
+--
+
+Once I have automated about 90% of our day, and automate lots of fun uses for click() ... then I believe the project will be complete
+
+---
+
+I have about 20 click collections - that will need to have the button widths/heights, and x,y coordinates from the corner they are closest too.
+
+I have some notes sketched - to provide direction.
+
+---
+
+Could you recommend someone who could help me?
+
+I need someone a project manager - who understands - (1) python - and (2) photoshop/or similar program.
+
+Then they can help me.
+
+---
+
+What do you think?
+
+I have a budget of $2,000 - and I have a priority list - I can give you - I want to get a certain group of things done first.
+
+If I give you a budget of $500 - can you get the first part done (it's the first core 10% of the project)?
+
+---
+

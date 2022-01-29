@@ -1,0 +1,30 @@
+OpenCog AI - Features.txt
+
+from github
+(it's for linux - ubuntu only - for the package to install - linux package - not for python on windows)
+(Virtual Machine)
+
+Overview
+--------
+Most of the basic components used in OpenCog are distributed across
+various git repos, (mostly) grouped under https://github.com/opencog
+
+This git repository contains a crude natural language processing
+pipeline, several embodied chatbots, and some control/action-selection
+mechanisms.  These include:
+
+* Ghost, a Chatscript-compatible chatbot with additional capabilities
+  for accepting visual sensory input, and for controlling robot
+  movements.
+
+* OpenPsi, a model of psychological states. Its currently a mashup of
+  two unrelated ideas: a generic rule-class action-selection and planning
+  system, and a model of human psychological states. An open to-do item
+  is to untangle these two.
+
+* An assortment of natural language processing subsystems, including:
+  * Natural language generation (for expressing thoughts as sentences).
+  * Natural language input (for reading and hearing).
+  * Relex2logic, converting natural language to logic expressions.
+  * Assorted chatbots, some of which are embodied.
+  * A Lojban tool.

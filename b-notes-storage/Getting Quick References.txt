@@ -1,0 +1,11 @@
+Getting Quick References.txt
+
+a quick python reference
+a quick linux reference
+
+a quick reference
+
+maybe I should do one bot to just look for this type of data
+
+----
+

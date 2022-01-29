@@ -1,0 +1,6 @@
+basic trading rule things - starting point logic - for my logic - what i want to do
+very general - expand on each later - figure out what i need fully
+--------
+
+rule - if it drops 30% - get out...
+

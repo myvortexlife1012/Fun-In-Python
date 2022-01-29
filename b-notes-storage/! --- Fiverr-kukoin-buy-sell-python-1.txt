@@ -1,0 +1,11 @@
+I need a trading bot for KuCoin ... in python
+
+
+it is the kucoin API:
+https://docs.kucoin.com/
+
+
+... I need it to buy and sell SHIB-to-USDT and ELON-to-USDT
+
+Who can help me write that?
+I would like it in python preferably

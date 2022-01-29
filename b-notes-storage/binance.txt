@@ -1,0 +1,16 @@
+binance.txt
+
+https://www.binance.com/en/my/wallet/account/payment/receive'
+
+nickname: myvortexlife1012
+
+pin: 842084
+
+
+--
+
+Save this Backup Key in a secure location
+
+NZUDZCRB2OT67HQT
+
+This Key will allow you to recover your Authenticator should you lose your phone. Otherwise, resetting Binance/Google Authenticator will take at least 7 days.
