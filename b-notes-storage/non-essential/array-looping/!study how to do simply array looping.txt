@@ -1,0 +1,76 @@
+#------------------------------------
+#study how to do simply array looping.txt
+#------------------------------------
+# https://www.codegrepper.com/code-examples/python/python+array+for+loop
+#
+#
+#
+#python loop through list
+#---
+list = [1, 3, 6, 9, 12] 
+   
+for i in list: 
+    print(i)
+#---
+
+#----------------------------
+
+#how to loop the length of an array pytoh
+#---
+array = range(10)
+for i in range(len(array)):
+  print(array[i])
+#---
+
+
+#----------------------------
+
+#list loop python
+#---
+list = [1, 3, 5, 7, 9] 
+
+# with index   
+for index, item in enumerate(list): 
+    print (item, " at index ", index)
+    
+# without index
+for item in list:
+  	print(item)
+#---
+
+
+#----------------------------
+
+#python for loop with array
+#---
+foo = ['foo', 'bar']
+for i in foo:
+  print(i) #outputs 'foo' then 'bar'
+for i in range(len(foo)):
+  print(foo[i]) #outputs 'foo' then 'bar'
+i = 0
+while i < len(foo):
+  print(foo[i]) #outputs 'foo' then 'bar'
+#---
+
+
+#----------------------------
+
+#iterate through an array python
+#---
+colors = ["red", "green", "blue", "purple"]
+i = 0
+while i < len(colors):
+    print(colors[i])
+    i += 1
+#---
+
+
+#----------------------------
+
+#python for loop in array
+#---
+for i in foo:
+  print(i) #outputs 'foo' then 'bar'
+#---
+

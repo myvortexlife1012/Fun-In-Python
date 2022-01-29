@@ -1,0 +1,18 @@
+EST. time to wait--m-h,d-w - in the trade.txt
+
+
+- time that is predicted to wait (for it to go up-enough-OR-up-and then down-eough) - while in possession of the crypto(swapped)
+What type of predicted profitable trade - is present - if any?
+
+
+-When checking the price-
+   (current price)
+
+
+Is it a 2 day wait trade - that opened up
+
+Is it a within 1 day trade - that opened up
+
+Is it a week trade - that opened up
+
+is it a month hold trade - that opened up

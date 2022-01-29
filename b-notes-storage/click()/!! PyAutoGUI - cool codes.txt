@@ -1,0 +1,3 @@
+PyAutoGUI - cool codes
+
+ - if you screenshot/crop out buttons from websites, you can use the button image to search and find it - if its visible on the whole screen

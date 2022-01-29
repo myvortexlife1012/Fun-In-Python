@@ -1,0 +1,200 @@
+#Chatbox - Requirements.txt
+
+# Looping - waiting for typed input / end the loop - when 'exit' is requested
+
+
+python - initializing multidimensional arrays
+nested arrays
+
+
+#-----------
+#
+# OUTPUT: (simple)
+# using just the print() statement for output
+#
+#----------
+
+
+
+import datetime
+
+convo1 = {
+    1: [('hello', 'hi'), ('hello'), ],
+    2: [('how are you', 'how are you doing'), ('I am fine'), ],
+    3: [('your day going well', 'yes, very well, thank you'), ('yes, very well, thank you'), ],
+}
+convo2 = convo1
+
+convos = {
+    'convo-1': [{
+        1: [('hello', 'hi'), ('hello'), ],
+        2: [('how are you', 'how are you doing'), ('I am fine'), ],
+        3: [('your day going well', 'yes, very well, thank you'), ('yes, very well, thank you'), ],
+    }],
+
+    'convo-2': [{
+        1: [('Jarvis'), ('Yes, what can I do?'), ],
+        2: [('hey Jarvis'), ('Yes, what is it?'), ],
+        3: [('I\'m talking to you Jarvis'), ('I know, I\'m right here'), ],
+        4: [('your day going well', 'yes, very well, thank you'), ('yes, very well, thank you'), ],
+    }],
+
+    'convo-3': [{
+        1: [('who are you', 'who are you jarvis', 'tell me about yourself', 'tell me about yourself jarvis'),
+            ('Hello, I am Jarvis Your AI Asisstant. I am smallish in size. I am logical. I\'m here for you.'), ],
+    }],
+
+    'convo-4': [{
+        1: [('I did say chocolate'), ('I thought you did. Do you like it?'), ],
+        2: [('I like chocolate', 'yea I like chocolate', 'do you like chocolate'), ('did you say chocolate?'), ],
+        3: [('yea i said chocolate'), ('do you like chocolate?'), ],
+        4: [('what type of chocolate'), ('The good kinds.'), ],
+        5: [('you like chocolate'), ('did you say chocolate? I could go for some right now'), ],
+        6: [('did you say chocolate'), ('Yes I said it. it\'s good.'), ],
+        7: [('do you like chocolate or do i like chocolate'), ('We both might like it'), ],
+        8: [('favorite food', 'what is your favorite food'), ('I like chocolate'), ],
+        9: [('are you sure'), ('Yes, I like chocolate'), ],
+        10: [('how sure are you'), ('Quite a bit actually, chocolate is really good'), ],
+        11: [('how many ways do you like chocolate'),
+             ('too many to count, but we will start with 17 - chocolate is just so good'), ],
+    }],
+
+    # look up a map
+    'convo-5': [{
+        1: [('Where is...',), ('You want me to pull up a google map?'), ],
+    }],
+
+    # look up info on a subject
+    # '...' means - it removes those words, and processes after
+    # '...' means it notices the first part - and processes the function - on the rest of the sentence
+    'convo-6': [{
+        1: [('What is...', 'Look up info on...',), ('You want me to pull up wikipedia?'), ],
+    }],
+
+    # time
+    'convo-7': [{
+        1: [('what time is it',), ('_function', 'time1()',), ],
+    }],
+
+    # date
+    'convo-8': [{
+        1: [('what day is it', 'what day of the week is it', "what's the date today", "what's today's date", "what's the date", 'what date is it',), ('_function', 'date1()',), ],
+    }],
+
+    # close program
+    'convo-9': [{
+        1: [('turn off', 'exit', 'close', 'close program', 'close it down', 'close please', 'close it',
+             'shutdown please', 'shutdown', 'shut down', 'shut it down', "Ok I'm done right now",
+             "Ok I'm done for now", "Ok I'm done", "I'm done", "I'm done for now", "I'm done right now",),
+            ('_function', 'exit()',), ],
+    }],
+
+}
+
+print(convos)
+
+
+# -----functions-----
+def time1():
+    import datetime
+    str = datetime.datetime.now().strftime('%-I:%M %p')
+    # 5:03 AM
+    # talk(str)
+
+
+def date1():
+    date1 = datetime.datetime.now().strftime('%A, %B %d, %Y')
+    time1 = datetime.datetime.now().strftime('%-I:%M %p')
+    str = "It's " + date1 + ' and the time is ' + time1
+    # It's Sunday, October 03, 2021 and the time is 5:01 AM
+    # talk(str)
+# -----functions-----
+
+
+
+
+
+
+
+  
+----
+
+
+
+#to exit from chatting
+
+convo[8] = 
+    ['turn off', 'exit', 'close', 'close program', 'close it down', 'close please', 'close it', 'shutdown please', 'shutdown', 'shut down', 'shut it down', 'Ok I'm done right now', 'Ok I'm done for now', 'Ok I'm done', 'I'm done', 'I'm done for now', 'I'm done right now'], exit_chatbot()
+
+
+
+
+convo[5] = 
+    ['what time is it'], time1()
+        def time1():
+          import datetime
+          datetime.datetime.now().strftime('%-I:%M %p')
+          #5:03 AM
+
+
+convo[6] =
+    ['what day is it', 'what day of the week is it', 'what's the date today', 'what's today's date', 'what's the date', 'what date is it'], date1()
+        def date1():
+          date1 = datetime.datetime.now().strftime('%A, %B %d, %Y')
+          time1 = datetime.datetime.now().strftime('%-I:%M %p')
+          print('It's ' + date1 + ' and the time is ' + time1)
+          #It's Sunday, October 03, 2021 and the time is 5:01 AM
+
+
+
+
+
+
+
+convo[4] = 'Where is', 'You want me to pull up a google map?'
+
+
+
+--------
+
+
+#basic convo
+
+convo[1] =
+    [['hello'], 'hello']], 
+    [['how are you'], 'I am fine'], 
+    [['your day going well', 'is your day going well'], 'yes, very well, thank you']], 
+
+
+
+convo[2]
+    ['Jarvis'], 'Yes, what can I do?'
+    ['hey Jarvis'], 'Yes, what is it?'
+    ['I'm talking to you Jarvis'], 'I know, I'm right here'
+    ['I'm talking to you'], 'I know, I'm right here'
+    
+convo[3] = ['who are you', 'who are you jarvis', 'tell me about yourself', 'tell me about yourself jarvis'], 'Hello, I am Jarvis Your AI Asisstant. I am smallish in size. I am logical. I'm here for you.' 
+
+
+        
+#---------------------
+#interests convos
+
+convo[2] = 
+    ['I did say chocolate'], 'I thought you did. Do you like it?'
+    ['I like chocolate', 'yea I like chocolate', 'do you like chocolate'], 'did you say chocolate?'
+    ['yea i said chocolate'], 'do you like chocolate?'
+    ['yea it's good'], 'I think it's good too'
+    ['what type of chocolate'], 'The good kinds.'
+    ['you like chocolate'], 'did you say chocolate? I could go for some right now'
+    ['did you say chocolate'], 'Yes I said it. it's good.'
+    ['do you like chocolate or do i like chocolate'], 'We both might like it'
+    ['favorite food', 'what's your favorite food'], 'I like chocolate'
+    ['are you sure'], 'Yes, I like chocolate'
+    ['how sure are you'], 'Quite a bit actually, chocolate is really good'
+    ['how many ways do you like chocolate'], 'too many to count, but we will start with 17 - chocolate is just so good'
+
+
+
+
+

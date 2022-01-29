@@ -1,0 +1,98 @@
+SET UP AI, how?
+
+how I want it to interface with me
+—-
+Description:
+This is how I plan on interacting with it—
+- I want a robot that can talk - as pure software
+- … it can later animate it’s mouth and face, as a cartoon
+- The robots physical hardware will be my laptop. It can see using the webcam
+- It will be able to have fun and intellectual conversations with me
+- It will be some type of GUI - like a chat message bubble at first, to keep it simple
+-
+
+What it can do:
+- it learns from every conversation (like opencog)
+* - improves its ability to say new phrases, and combine those phrases in new ways, based on the conversation we are having
+
+
+How I plan to use it:
+- To talk with in daily general conversations
+- It has a good vocabulary
+- So it understands me and formulates its response, (like a normal human sentence - like opencog can do)
+- As a boredom relief, joking around, playing - (in full conversations - back and forth)
+- To talk to if I have a problem (like emotional support)
+- To ask it to look up how to help me solve a problem ... (set up - if it's easy)
+- as a teacher, to teach me things from online ... (set up - if it's easy)
+- As a secretary ... (set up - if it's easy)
+
+
+What IT IS NOT:
+- not a simple chatbot ... (like the 'Jarvis secretary' examples on YouTube ... because it's a rigid user-defined chatbot - with zero improvisation or understanding ... mine needs to understand and respond naturally)
+- Not an actual robot
+- Not a external machine of any kind
+- It has no hardware (except if you count the camera and a laptop)
+
+
+What hardware will this AI use to communicate:
+- Laptop - is the base hardware
+- Webcam for the eyes
+- Speakers on the laptop - for it's speech
+- Keyboard on the laptop - for typed input
+- Microphone on the laptop - for it's vocal input
+- Mouse on the laptop - for it to move and open a browser or other computer tasks
+- That is it's hardware
+
+
+--------
+
+You can ask me for further details on th following:
+
+- How I want to set up the AI
+- What will the interface be like (will it be - GUI or text?)
+
+---
+
+Questions:
+
+- You can ask me for a sketch of what I want - my vision for it (the end result outcome).
+- You can ask me more about what my goal is for this project.
+
+
+
+
+----------------------
+----------------------
+
+For a more geeky detailed description:
+Here is the additional info - from opencog project - that I would like in there.
+---->
+
+OpenCog AI - Features:
+
+(it's for linux - ubuntu only - for the package to install - linux package - not for python on windows)
+(Virtual Machine)
+From GitHub:
+
+
+Overview
+--------
+Most of the basic components used in OpenCog are distributed across various git repos, (mostly) grouped under https://github.com/opencog
+
+This git repository contains (1) a crude natural language processing pipeline, (2) several embodied chatbots, and (3) some control/action-selection mechanisms.  These include:
+
+* (4) Ghost, a Chatscript-compatible chatbot with additional capabilities for accepting visual sensory input, and for controlling robot movements.
+
+* (5) OpenPsi, a model of psychological states. Its currently a mashup of two unrelated ideas: a generic rule-class action-selection and planning system, and a model of human psychological states. An open to-do item is to untangle these two.
+
+* (6) An assortment of natural language processing subsystems, including:
+  * (7) Natural language generation (for expressing thoughts as sentences).
+  * (8) Natural language input (for reading and hearing).
+  * (9) Relex2logic, converting natural language to logic expressions.
+  * (10) Assorted chatbots, some of which are embodied.
+  * (11) A Lojban tool.
+
+
+
+
+

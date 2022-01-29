@@ -1,0 +1,77 @@
+Open Cognition - Design
+
+3. OpenCog and the Four Key Aspects of AGI Design
+
+At a high level, the work of AI system design may be divided into four aspects:
+
+-----------
+
+1. Cognitive Architecture: the overall design of an AI system; what parts does
+it have, and how do they connect to each other.
+
+2. Knowledge Representation: how the AI system internally stores declarative,
+procedural and episodic knowledge, and how creates its own representations
+for elemental and abstracted knowledge in new domains it encounters.
+
+3. Learning: how the AI system learns new elemental and abstracted
+knowledge, and how it learns how to learn, and so on.
+
+4. Teaching Methodologies: how the AI system is coupled with other systems so as to enable it to gain new knowledge about itself, the world and others.
+
+---
+
+
+Open Cognition AI (OpenCog) will help significantly with all four aspects:
+
+
+
+1. Cognitive Architecture: the OpenCog framework is architecture-neutral, and will provide facilities to define rich and varied cognitive architectures via configuration files, with the guiding but flexible principles that a cognitive architecture will consist of:
+
+* functional units which are modular
+
+* knowledge representation using a local AtomTable containing knowledge (see below) and a collection of MindAgent objects implementing cognitive, perceptual or action processes that act on this AtomTable, and/or interact with the outside world
+
+
+2. Knowledge Representation: OpenCog will feature:
+
+  * a generalized version of the Novamente AtomTable knowledge representation utilized in the Novamente Cognition Engine (2004). This representation technology allows rival connectionist and symbolic artificial intelligence systems to interoperate 
+
+  * an implementation of a LISP-like language called Combo, specifically tailored for operating on knowledge represented in AtomTable format
+
+
+3. Learning: OpenCog will be seeded with two powerful learning mechanisms:
+
+  * MOSES probabilistic-program-evolution module
+    (http://code.google.com/p/ moses)
+
+  * PLN Probabilistic Logic Networks module for probabilistic logical inference
+
+
+4. Teaching Methodologies: OpenCog will be will be introduced with two powerful toolsets:
+
+  * AGISim integration, an open-source 3D simulation world intended
+specifically for instruction of em
+
+  * RelEx integration, a natural language comprehension system that intakes English sentences and outputs logical relationships suitable for analysis via AI algorithms. ReEx is to be released soon in conjunction with the Wikia Search project.
+
+
+
+
+
+4. OpenCog and the “Operating System” and “Virtual Machine” Metaphors
+
+OpenCog is a vertical systems-level framework for AGI development, so comparisons to the designs of operating systems such as Linux/UNIX or Windows and virtual machine environments such as Java and .NET are useful.
+
+OpenCog operates atop and utilizes the services of traditional operating systems, while at the same time many of its own components have parallels to and operate with the assistance of complimentary OS components; a partial list is found below.
+
+---------------------------------
+OS or VM Environment | OpenCog
+---------------------------------
+Filesystem or simple        = Database AtomTable
+Process or Thread Scheduler = CPS (Cognitive Process Scheduler)
+Daemons or Services         = MindAgent
+I/O from hardware           = I/O from input filters to AtomTable via XML
+Programming Languages (Java, C, shell, etc.) = Combo (can be used for MindAgents)
+Garbage Collection          = Forgetting MindAgent
+
+

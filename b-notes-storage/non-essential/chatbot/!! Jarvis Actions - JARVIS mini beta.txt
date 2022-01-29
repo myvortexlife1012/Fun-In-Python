@@ -1,0 +1,176 @@
+JARVIS mini beta v0.01
+
+
+python book reader
+for downloaded books
+
+
+------
+remember this note - saving a "string" - feature - save notes - remind me of the whole list later
+
+google images
+saving 20-100 images
+-2 modes-
+-low quality mode
+-high quality mode (download higher res image)
+
+
+send an email
+-send to 3 people
+-subject
+-body
+part 2:
+--automate a email to send later - also
+
+
+send a text
+--
+part 2
+automate to send it later - if possible
+
+
+
+dollar tree - broom dustpan
+
+---------
+
+
+
+Here is a good start
+
+16 what can I do functions
+19 files - to get Jarvis going
+
+--------------------------
+(what other actions do I want?)
+--------------------------
+
+Jarvis Actions.txt
+
+#setting up jarvis features
+#-----------
+# 16 what can I do functions
+#
+
+
+
+ I am going to set these up:
+
+#what can I do? - function that tells me in (1) top5 ... what-you-can-do5 ... 3-5 ways what I can do - the new features that are ready, 
+
+
+#IMAGE SEARCH - IMAGE DOWNLOAD
+# 4 STEPS
+#STEP 1: download one google image search result page - .html
+#keep using it - for this
+#STEP 2: find all the image urls
+#STEP 3: Save_img function
+#STEP 4: Save 1 image, save 2, save an array of image searches, how many images each
+
+#...step 6-7
+#BUILD a movie html file for each movie - with trailers and stats
+
+----------------
+----------------
+BUILD A BIG
+outputted
+File system
+
+So I can do anything later that I want
+----------------
+----------------
+
+
+(2) A long list of every thing you can say 
+---------------------------------------------
+(3) Jarvis can tell me who he is, 
+---------------------------------------------
+(4) he can greet me differently, 
+---------------------------------------------
+(5) tell me the 3 options for the date and time, 
+---------------------------------------------
+(6) read my favorite Wikipedia article to me (default butterfly) --(advanced option: a paragraph every hour), 
+---------------------------------------------
+(7) play my favorite movie (The Land of the Lost) (in VLC player), 
+---------------------------------------------
+(8) play my favorite song (Splendor - Cigarette) (in VLC player) (plus youtube search) (plus YouTube actual video page) (so 3 actions) 2 tabs and vlc, default showing tab is the individual video, 
+---------------------------------------------
+(7) launch a browser of google image search - for favorite thing (butterflies default), 
+---------------------------------------------
+(8) compliment me-4 types: direct-general-subtle-epic, 
+---------------------------------------------
+(9) encourage me, 
+---------------------------------------------
+(10)tell me-I can get a lot of cool stuff done today--what will you do? - what else? x 2, if it doesn't hear anything for 2 seconds it ends (or it waits until you're done talking) it says it again, then it ends, 
+---------------------------------------------
+(11) tell me--so how's about the girlfriend?-pause-think having it thoughts-we are in the pre-manifestation, 
+---------------------------------------------
+(12) jarvis-jokes---how many things am I going to help you with today? (Joke with high numbers, random number from 33 to 333), 
+---------------------------------------------
+(13) watch movie trailers 
+---------------------------------------------
+(14) open browser open a YouTube search - to find - runway model videos, every hour ask the question,
+---------------------------------------------
+(15) shuffle dance video ... open YouTube search-"random shuffle dance 2021" video,
+#-------------
+#
+
+
+
+OTHER STUFF TO ADD ALSO
+
+#meme me - creates and popups up a window with the created meme (imgmaker)
+#
+# rate and playlist that movie trailer
+# a youtube playlist thing for the videos I watch there... so I can keep all the nasty ones,
+#bye - logs off of using Jarvis
+#tell me who is Jarvis
+#text to speech
+#different greetings
+#date function
+#time function
+#wikipedia search & read - and it reads it to me - functions to read the first 300 characters, to read the first 500 characters, 1st 1000, whole article - next section
+#send email for me
+#chrome search
+#computer - logout, shutdown, restart - functions
+#play songs
+#remember function - save it - and functions to read all on the list so far
+#screen shot - take a screenshot and save it
+#cpu and battery update - battery is at 50%
+#jokes function
+#home automation
+#car automation
+#an excellent personal assistant
+#Answer in spoken voice
+#recognize spoken voice
+#Answer simple commands
+#-----------
+
+AI WRITER
+--writes for me - types up new content based on what I have wrote so far
+
+
+------------
+
+
+Be in gmail - on an open email - and it reads it to me, subject line first
+(whatever is the active open part - of the email thread)
+
+-------------
+--reads my emails to me
+---- until I say 'Stop' Reading
+--then it stops reading immediately
+
+-----
+
+At the end say:
+"Done reading this email"
+
+#
+#--here is the code I have used
+#---------
+import pyttsx3 # pip install pyttsx3
+engine = pyttsx3.init()
+engine.say("Soon gmail will read its emails to me")
+engine.runAndWait()
+

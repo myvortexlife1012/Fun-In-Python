@@ -1,0 +1,5 @@
+Help me get an AI set up please. To have general conversations with.
+  > Like OpenCog
+
+You can use any free open source AI project.
+

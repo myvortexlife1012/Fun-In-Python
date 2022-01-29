@@ -1,0 +1,30 @@
+Fiver - Ask for File - from OpenCog
+-
+
+Come up with some way to ask for this
+-----
+
+
+- who has all the files for opencog -
+who has all the files - on something that's running
+
+atom file was missing
+
+---
+opencv - AI framework (robotics)
+--anyone have a working ai in this one
+
+
+---
+
+
+link-grammar.jar (need)
+
+---
+
+There is someone who keeps a past repository
+
+for opencog
+
+---
+

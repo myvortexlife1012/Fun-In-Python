@@ -1,0 +1,31 @@
+Photoshop - I need help doing some busy work
+
+
+Here are the details ... take a look at what it is I am asking you to do: 
+
+I need help with taking screenshots and measuring where buttons are on windows.
+
+I have 5-10 apps that I need help copying where their buttons locations are IN Photoshop
+
+This is for an automation project I am working on. I want to make clicks easier and automate many of them everyday.
+
+---
+
+We will be taking measurements with the marquee tool, info pallete, using the Info Window - on screenshots.
+
+----
+
+Measurments will be taken in pixels
+
+---
+
+I have made a video showing the exact process that I use, that you can use for me.
+
+ - Anyone can do this, after they watch the video.
+
+
+
+https://sites.google.com/view/click---documentation/home
+
+click() Measuring a Click Collection - (with background royalty free music)
+https://www.youtube.com/watch?v=Xm5Izljg0Y8

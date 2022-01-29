@@ -1,0 +1,41 @@
+click - codes 1.txt
+#Move to searched text on active screen with pyautogui
+
+
+import webbrowser
+import pyautogui
+
+
+var = 'Filtered Questions'
+webbrowser.open('https://stackexchange.com/')
+time.sleep(2)
+
+pyautogui.hotkey('ctrl', 'f')
+pyautogui.typewrite(var)
+#code to place mouse cursor to the occurrence of var
+
+#--------------------------------------
+
+import time
+from PIL import ImageGrab  # screenshot
+
+import pytesseract
+from pytesseract import Output
+pytesseract.pytesseract.tesseract_cmd = (r"C:\...\AppData\Local\Programs\Tesseract-OCR\tesseract") # needed for Windows as OS
+
+screen =  ImageGrab.grab()  # screenshot
+cap = screen.convert('L')   # make grayscale
+
+data=pytesseract.image_to_boxes(cap,output_type=Output.DICT)
+
+print(data)
+
+
+#---------------------------------------
+
+
+
+
+
+
+

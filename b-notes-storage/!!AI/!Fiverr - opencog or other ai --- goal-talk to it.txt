@@ -1,0 +1,23 @@
+goal - so they know I want to talk to it
+---
+Set Up OpenCog (full chatBot-eva) - to Talk (opencog server)
+
+Set Up ConceptNet - to talk
+
+
+-----------
+
+I heard a chatbot in OpenCog does not show you the full capabilities ... https://wiki.opencog.org/w/Natural_language_processing
+t
+Me
+Oct 21, 9:06 AM
+Can you set up the full set - on opencog - so that I get the full experience?
+
+
+How to do a chatbot in OpenCog (I want all the features)
+https://github.com/opencog/opencog/blob/master/opencog/nlp/chatbot/README
+
+"Initial OpenCog Based Dialogue System Design Document"
+an ongoing thesis by Ruiting Lian
+
+http://en.wikipedia.org/wiki/MultiNet

@@ -1,0 +1,48 @@
+Macro - Upload to OpenSea.io - .txt
+--------
+
+python - record time in between clicks and where you click
+
+key logger, captures all single keys pressed, including noting - ctrl+a, ctrl+c, ctrl+v, escape key --- unless i use only the mouse -- only select text with ctrl+a
+mouse logger, left-right clicks, copy mouse location x y - 1x every second
+for macro use later
+
+------
+I still need to capture - right - and left clicks
+
+---
+How to Get Mouse Clicks in Python
+
+https://www.youtube.com/watch?v=kJshtCfqCsY
+
+
+----
+
+Count time intervals (secs) between 2 button clicks
+
+--------
+
+import time
+import random
+from Tkinter import *
+
+def PrintNumber():
+   global j, label
+   j+=1
+   label.config(text=str(j))
+   print j
+   t = (time.strftime("%H:%M:%S"))
+   d = time.strftime("%d/%m/%Y")
+   return
+
+j=0
+mgui=Tk()
+mgui.geometry('200x200')
+mgui.title('Queue System')
+st = Button(mgui, text="Next Customer", command = PrintNumber)
+st.pack()
+label = Label(mgui, text=str(j))
+label.pack()  
+mgui.mainloop()
+
+

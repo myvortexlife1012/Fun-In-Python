@@ -1,0 +1,13 @@
+Do you have a universit degree in Artificial Intelligence?
+
+If so, I want you to build me a simple one that I can talk to on my laptop - perhaps in a virtual machine.
+
+I want it to be kind of like a teacher - if possible, but that is not a requirement.
+
+The requirement is that it can communicate and interact with me verbally, like a person (based on the capabilities of opencog talking through the robot, or opencog controlling a dog on minecraft - which I want also later).
+
+Let me know...
+
+If this is something you're interested in, please let me know.
+
+Thank you.

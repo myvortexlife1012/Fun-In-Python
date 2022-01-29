@@ -1,0 +1,269 @@
+Study 'Time' Stuff - in crypto.txt
+
+
+
+10/7/2021
+
+
+------------
+
+
+Get the 2 edge triangle - angle - of each dip and spike - as it goes up
+
+FOR EACH CRYPTO:
+show the average angle \/ ... the wider it is ... the slower it rises and falls
+the skinnier it is ... the faster it rises and falls
+
+if it's skinnier - it is more of a fun, volitile - rising crypto
+if it's wider - it is a slower, more thoughtful - rising crypto
+
+7:22p
+
+the times of day - the V shape changes - to wider - or to skinnier
+
+average V angle for the last ... 2 weeks (Step 2. for knowing if I should buy now)
+average V angle for the last ... 2 months (Step 1. for considering if I should buy now)
+
+
+- this will help the bot trade - by recognizing -- how to buy or sell - based on the fast or slowness of spikes and dips
+
+7:25p
+
+
+
+----------
+
+
+REMEMBER:
+
+Crypto Always Goes Up
+But how and when does it spike up/down?
+---
+you know it's going to follow the form - you just don't know how -- crypto always goes up
+
+REASON:
+it has value in and of itself ... as a means of alternate currency - like **preselection** - people already like money -so they like that too
+
+it's just a matter of the happy/sad up/down and when that happens - and how to sell as it's going down, and stuff like that
+
+5:56p
+
+
+-----
+
+SUMMARY:
+
+Never go principal - 1 easy solution
+Always go proncipal - 10 easy solutions
+
+and let your mind - only think like that
+
+5:10p
+
+----
+
+
+PERSONAL LESSON:
+PRINCIPLE:
+PRONCIPLE:
+
+
+so when you approach a problem
+you never think about a solution
+you think of 10 easy solutions - and never 1
+
+-read below to understand
+
+5:08p
+
+---------------------
+
+
+backup principle
+we do not 1 machine learning
+1 task
+but 3-10 different ways to complete the same task, with the same final end result outcome - of accomplishing the task
+
+--
+
+we have backups of backups
+3-10 ways to find out which happy stocks for longer (price going up), and sad stocks for longer (price going down)
+
+the backup principle
+it's covering the exception - 4 levels deep
+find out if stock is happy or sad
+  - do 3 double checks - using different processes/functions/logic/ each time
+
+Don't solve the problem once
+solve it 3-10 times
+solve the same problem 10 times - but in a different way
+
+
+---
+Then you will approximate that you know - the answer
+---
+
+~5p
+
+
+
+
+
+
+
+
+
+----
+
+
+THE SCARE EFFECT - when it rises too much
+-
+((take into account)) the idea that when it spikes - people get scared, and
+
+TO ASSIST
+WHEN TO SELL - after it goes up, or if it doesn't go up
+---
+- to help - in SELLING - after it has gone up - quite a bit - or if it starts to go down more than I would like
+
+
+----
+
+
+LIKE CRYPTO - is the crypto liked today or not - maybe people are scared
+
+LIKE IT OR NOT
+
+how much do people like it - or not like it
+today, this week, this month
+
+just a way to view the data
+
+----
+
+eventually I can come up with reasons (patterns) *WHY* it is happening
+--and build in additional logic
+----when I understand more
+
+
+------------
+
+
+Think about time - in all aspects
+we don't usually think about time - we live in tiem
+
+Ways time can be studied so that
+
+average
+
+on Sunday - what section of time - did it rise the most - and the most often
+on Monday - what minutes or 10 minutes, hour - did it go up the most
+on Tuesday - what was it for this day?
+on Wednesday
+on Thursday
+on Friday
+
+all of the going ups - we mirror them - and study and predict when it will go down too
+
+
+if it goes down - we need to study it going down
+and be able to predict that - precisely
+
+Will it go down - you reverse the info - and you study off of the bad examples - when it goes down the most
+--when is it common - min/hrs/day of the week
+
+----
+
+Which Month - it goes up the most / goes down the most --- over all the years
+which month of the year - are sales higher - in bitcoin
+is there a month of the year - past year of data - where it rose -- over the past 12 years
+
+can I find some seasonal fluctuation?
+-------
+
+
+once we have all of that long term data
+
+before we make any decisions
+start a weekly study of the crypto stock asset thingy
+
+start analyzing it  weekly - when you want to buy it
+
+-----
+
+double check when -- what minute during the day -- is the crypto price moving the most (up or down)
+---what are those metrics - in terms of...
+
+from right now -- which week of the month has generated the most - stocks going up / or going down
+
+
+log that
+
+---
+
+
+...10-20 more ideas here...
+
+
+widdle it down - so that the decision is accurate
+
+
+----
+
+How time stuff has to do with 
+
+When is the Best Time and Day to Buy Bitcoin? | Data Proof
+https://www.youtube.com/watch?v=PJFmoVJuXHc
+
+Which 10 minute period did the stocks go up the most
+which 60 minute perdiod
+which 2 hours period
+
+
+
+
+-----------------------
+
+
+
+
+
+-------
+you consolidate your methods
+and organize - 1 layer or time
+
+before continuing
+--every couple weeks
+
+------
+
+find a good one to switch it into, it is rising today + the curve is ready - for a buy today
+Steps:
+--find a switch crypto that is rising
+-first
+then switch enough crypto - into new account
+then back out - to sell
+
+------
+
+
+before it buys something for real - 1x
+-->
+-it test buys -20 successful transactions - just using data from the previous time
+once it finds the right patterns - to do 20 successful data-only-test transactions
+
+it runs the buy function and it does it 20 times - while being rewarded - for successfully - navigating the "mario level" of the "crypto stock market"
+
+----------
+OLD STOCK DATA - OLD CRYPTO DATA
+=
+AI TRAINING - Gym
+Obstacle Course
+----------
+I can use the old stock data as - positive reward training
+LIKE an Atari AI training gym
+---
+It's going to jump like mario and avoid all of the obstacles - and do all of what is needed - to keep being rewarded - with positive reward points - for each task successfully done
+
+I need a - list of each mini task - to be rewarded
+
+

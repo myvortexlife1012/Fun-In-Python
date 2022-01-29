@@ -1,0 +1,136 @@
+The Steps To Measure buttons:
+
+------------------------------
+
+Note: If you don't have the programs, I will give them to you. Just ask me.
+
+------------------------------
+
+Step 0.
+THE SET UP
+
+
+a.
+Install 3 programs:
+-Photoshop
+-FastStone Capture (Screen Capture) (give trial link)
+-Notepad2 (Notepad Replacement) (give link)
+
+You are given the program - you open it - resize window so it has space on all sides of it - center in the middle - take an initial screenshot - It will go into your folder
+
+
+------------------------------
+
+
+Step 1.
+Open All The Programs
+
+
+- once you get those windows open then you can continue to step 2
+
+
+  (1) Photoshop (measure buttons)
+  (2) FastStone Capture (automates screenshots better) (save to any folder)
+  (3) Notepad (building the click collection for this program)
+  (4) Any Needed Screenshots Folder:
+  "Pictures/click()/Click Collections (CCs)/'Common Window Buttons'/"
+    (YOU'LL Need to drag the new image into photoshop)
+
+------------------------------
+
+
+Step 2. Minimize all programs (Windows Key + D ... show desktop)
+
+------------------------------
+
+
+Step 3. Open App to Measure: Notepad2
+
+OPEN:
+Open the program or window - to use to build this click collection ... in this case it is Notepad2, since it is so simple, it is an easy choice to get the simple common buttons used in Windows.
+
+RESIZE:
+Resize the window to smaller than full screen ... give it about 2 inches or more space around it ... and Center the window in the center of the screen
+
+
+[...more steps ... watch the video...]
+
+Step 9. ...
+Step 10. ...
+
+
+
+------------------------------
+
+
+
+
+
+
+
+------------------------------
+Define The Screenshot Folder:
+------------------------------
+where the new - per button - screenshots will go
+ - to visually see each button's width
+ - as you check each button's width - on hover
+ - in User/Pictures/ folder on windows
+------------------------------
+
+
+
+
+
+
+------------------------------
+------------------------------
+------------------------------
+-SET UP FASTSTONE CAPTURE-
+------------------------------
+------------------------------
+------------------------------
+NOTE: THIS MAKES THE SCREENSHOT PROCESS MUCH EASIER - ONCE YOU SET THIS UP
+------------------------------
+------------------------------
+
+
+FastStone Capture - Settings to Change
+-See if there is a faststone capture TRIAL LINK to give them
+
+
+TAB: CAPTURE:
+[x] Run and minimize to System Tray when Windows starts
+[x] Include Mouse Pointer in the capture
+
+
+TAB: AUTO SAVE:
+Format: [JPG] Quality [80]
+
+[ ] Display message after file is saved successfully
+[x] Copy to Clipboard
+[x] Open output folder
+[ ] Opoen in external program
+
+
+TAB: HOTKEYS:
+--
+delete all first -  click on each shortcut in blue - click 'delete' key - then ok - repeat for all
+---
+then  click on Window / Object - where it says (None) and type - Alt+W
+then  click on Rectangular Region - where it says (None) and type - Alt+M
+then  click on Freehand Region - where it says (None) and type - Alt+N
+then  click on Full Screen - where it says (None) and type - the PrtSc (btn)
+then  click on Repeat Last Capture - where it says (None) and type - Alt+X
+
+-----------------
+NEXT: LAST STEP:
+
+File Auto Save - Set up
+---Go to start menu - clock - right-click on [FastStone icon] > Output > click on "To File (Auto-Save)"
+
+--- NOW all screenshots you take will be saved in the folder you set - in settings
+
+--------------
+
+
+

@@ -1,0 +1,388 @@
+What I'm doing
+
+
+
+I want to do the screenshot stuff now
+
+so first step is to minimize everything, open the program I am going to screen capture - center the window in the screen ...
+
+
+Next step is to begin measuring - from the relative position of the top left corner of the - app - Notepad2 - in this case
+
+---
+so...
+
+
+Put your mouse over the first button - so you can see it's width
+
+we will start at the left top corner - and we need to measure that first little program icon
+
+-
+I will click on it so you can see it does something - and then I will screenshot it - and open it in photoshop - then save the width and height - from the top left corner
+
+---
+
+Make sure the screenshot will go in the right folder
+
+right click - on icon in the clock-icon area, the faststone icon > Settings
+-Then go to Tab: AutoSave
+--change output folder - to where you want them for this current click collection we are measuring now
+
+--
+
+
+I verified the screenshots will go in the right folder
+
+So I can continue
+
+--
+
+I will take the first screenshot of the first button area
+
+-------
+
+
+I put my mouse on the element - so I can see it's hover or clicked state - to verify it's full dimensions
+
+I pressed PrtSc button - and Faststone captured the screen and opened the folder for it.
+
+----
+
+Now I'm going to open the image in photoshop - to see it's dimensions - width and height - and it's location from the top left point of the window (which is used for programming later)
+
+---
+
+Open Photoshop + Drag in photo
+
+--
+
+Photo is in photoshop
+
+--
+
+Now I want to zoom in to the area I'm looking at ... and open the Photoshop > Window> Info
+
+press CTRL + K (Preferences) ... change units to pixels
+
+UNITS & RULERS:
+Rulers: 'pixels'
+Type: 'pixels'
+
+Press OK
+
+----
+
+Get the Square Marquee Tool - 
+
+
+Draw a square around the button, with selection tool
+
+
+Note the width and height of the area - in the INFO Window
+
+Button - Top Left - Position[1]
+Area Name: Program Icon
+Width: 34 pixels
+Height: 36 pixels
+Distance away from top-left: 0,0 (x,y)
+ (x) Distance away from left: 0
+ (y) Distance away from top: 0
+
+
+
+--------------------------------------------
+---------TOP LEFT-----------------------
+--------------------------------------------
+
+
+
+----
+
+For this project - the Top Left is always 0,0
+--as you go down, y increases
+--as you go to the right, x increases
+(The bottom right - is where the max pixel height and width of the window)
+
+
+-------
+
+
+the next button we measure will have other than 0,0 x & y
+
+so I will do the 2nd example as well
+
+----
+
+
+Select the next area
+
+--
+Note it's width and height
+
+width: 176 pixels
+height: 36 pixels
+
+now we need to get it's x, y - from the top left of the window ... to do that, we need to - trace a box, from the top left - to the top left of this button
+
+----
+
+to do this the best, we must crop the window - from the screenshot - to continue
+
+--
+Crop
+
+Save as - to a 2nd file:
+
+"--cropped"
+
+add that into the end of the filename - before the extension
+
+
+Original:
+2021-10-31_171830.jpg
+---
+Save-As:
+2021-10-31_171830--cropped.jpg
+
+Click save (save it into same folder)
+JPEG quality: 8 'High' > press 'OK'
+
+
+
+------
+
+Now we are working on the cropped - window only
+
+Since we are working on the 2nd click spot - zoom in
+
+
+zoom in ... to the area ... use CTRL+ '+' 
+
+Position: TL-1
+Area Title: Window Icon
+width: 176 pixels
+height: 36 pixels
+(x,y from top left)
+x: 34 (that was the width of the 1st button)
+y: 0
+
+That is the top left corner of that button
+the 2nd button
+
+------
+
+
+Next we will do the close button - since it is the 1st position from the top-right
+
+
+but now we need a new screenshot - because - hovering over that button - in the actual program - we can see the width and height
+
+- so we go to do that 
+
+--------
+
+
+You can close the cropped image
+
+minimize photoshop and any other folders, so you can see just the app we are creating this common click collection with
+
+
+
+---
+
+
+so you put your mouse over the close button - it turns red - then you press the PrtSc button
+
+- it captures the screenshot and opens the folder with it - and this file is selected
+
+Drag it into photoshop
+
+-----
+
+
+zoom into the close button
+ very close - so it fills a big part of the screen - to make it easy to select - with the Square Marquee Tool
+---
+
+width: 58
+height: 36
+
+...
+
+now to get it's x,y - from the top-right (anchor) corner
+
+so crop just the window only - on the screenshot
+
+then draw a square marquee across to the top right of this red close button
+
+since it's anchored to the top-right - we will use the top-right pixel location - as the (anchor) corner to measure from
+
+Position: TL-2
+Area Title: Window Title
+width: 58
+height: 36
+(x,y from top left)
+x: 0
+y: 0
+
+
+--------------------------------------------
+---------TOP RIGHT-----------------------
+--------------------------------------------
+
+
+
+
+for the next button - to see it's width and height - we need to do that again - take another screenshot - of the mouse over state of the maximize button
+
+---
+so close the current image - you don't need to save it unless you want to
+
+-minimize the windows and take the next button-hover-screnshot
+
+PrtSc
+
+Drag this one into photoshop now
+
+
+zoom in to select it and get the width and height
+
+width: 58
+height: 36
+---
+
+see if it is exactly the same as the close button - cause it could be the exact same width
+
+It is ... so the 3rd button will be easier
+
+---
+
+It looks like there is a pixel of space between the buttons - so that will affect the top-left corner measurement only
+
+Position: TR-2
+Area Title: Maximize
+x,y (from top-right)
+width: 58
+height: 36
+x: 117 pixels (it's 117 pixels away from the right side)
+y: 0 pixels (it's 0 pixels away from the top)
+
+
+
+----------------
+
+
+
+3rd button - from top-right
+3rd click position
+
+Position: TR-3
+Area Title: Minimize
+width: 58
+height: 36
+(x,y from top right)
+x: 176 pixels  (from the right side of the window)
+y: 0 pixels  (from the top of the window)
+
+
+
+do position 4 (a window drag area)
+
+
+Position: TR-4
+Area Title: Window Drag Area
+width: 568
+height: 36
+(x,y, from top right)
+x: 744 pixels (from right)
+y: 0 pixels (from top)
+
+
+
+
+--------------------------------------------
+---------BOTTOM RIGHT-----------------------
+--------------------------------------------
+
+
+
+now let's do the bottom right drag area
+
+width of the area that turns into the drag mouse icon
+
+Position: BR-1
+Area Title: Window Resize Drag Area
+width: 16 pixels
+height: 28 pixels
+(top left corner of drag area - from x,y(0,0) at bottom right) (0,0 is bottom right corner)
+x: 16
+y: 28
+
+
+
+
+------------------------------
+------------------------------
+
+
+
+4 DEFAULT CLICK LOCATIONS
+(drag-resize)
+FOR ALL WINDOWS:
+---
+Position: TL-Corner (0,0 (x,y) )
+Area Title: Window Resize Drag Area
+Position: TR-Corner (0,0 (x,y) )
+Area Title: Window Resize Drag Area
+Position: BL-Corner (0,0 (x,y) )
+Area Title: Window Resize Drag Area
+Position: BR-Corner (0,0 (x,y) )
+Area Title: Window Resize Drag Area
+---
+NOTE:
+each corner's 0,0 (x,y) is a window resize drag area - that one pixel location
+---
+
+
+
+
+--------------------------------------------
+
+
+So that's everything
+in this example.
+
+So now I will gather all of my click collection data and put it below.
+
+---
+
+
+
+
+
+
+
+
+
+
+That is it. That completes the tutorial of how to build a click collection
+
+
+
+Thanks for helping me
+
+:)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

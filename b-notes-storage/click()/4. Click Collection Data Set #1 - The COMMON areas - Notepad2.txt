@@ -1,0 +1,142 @@
+Click Collection Data Set - The COMMON areas - Notepad2.txt
+
+
+--------
+Click Collection Data Set:
+ - App Measuring: Notepad2
+ - Set Name: 'The COMMON areas'
+ - Measuring: WINDOWS COMMON click or drag areas, relative to each corner
+--------
+You will give me this type of data in the final delivery
+
+
+
+--------------------------------------------
+---------TOP LEFT-----------------------
+--------------------------------------------
+
+
+
+
+Position: TL-1
+Area Title: Window Icon
+width: 176 pixels
+height: 36 pixels
+(x,y from top left)
+x: 34 (that was the width of the 1st button)
+y: 0
+
+
+
+Position: TL-2
+Area Title: Window Title
+width: 58
+height: 36
+(x,y from top left)
+x: 0
+y: 0
+
+
+
+--------------------------------------------
+---------TOP RIGHT-----------------------
+--------------------------------------------
+
+
+
+
+Position: TR-2
+Area Title: Maximize
+x,y (from top-right)
+width: 58
+height: 36
+x: 117 pixels (it's 117 pixels away from the right side)
+y: 0 pixels (it's 0 pixels away from the top)
+
+
+
+
+
+Position: TR-3
+Area Title: Minimize
+width: 58
+height: 36
+(x,y from top right)
+x: 176 pixels  (from the right side of the window)
+y: 0 pixels  (from the top of the window)
+
+
+
+
+
+
+Position: TR-4
+Area Title: Window Drag Area
+width: 568
+height: 36
+(x,y, from top right)
+x: 744 pixels (from right)
+y: 0 pixels (from top)
+
+
+
+
+--------------------------------------------
+---------BOTTOM RIGHT-----------------------
+--------------------------------------------
+
+
+
+Position: BR-1
+Area Title: Window Resize Drag Area
+width: 16 pixels
+height: 28 pixels
+(top left corner of drag area - from x,y(0,0) at bottom right) (0,0 is bottom right corner)
+x: 16
+y: 28
+
+
+
+--------------------------------------------
+---------BOTTOM LEFT-----------------------
+--------------------------------------------
+(none)
+(in this example)
+
+
+
+------------------------------
+------------------------------
+
+
+
+4 DEFAULT CLICK LOCATIONS
+(drag-resize)
+FOR ALL WINDOWS:
+---
+Position: TL-Corner (0,0 (x,y) )
+Area Title: Window Resize Drag Area
+Position: TR-Corner (0,0 (x,y) )
+Area Title: Window Resize Drag Area
+Position: BL-Corner (0,0 (x,y) )
+Area Title: Window Resize Drag Area
+Position: BR-Corner (0,0 (x,y) )
+Area Title: Window Resize Drag Area
+---
+NOTE:
+each corner's 0,0 (x,y) is a window resize drag area - that one pixel location
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
