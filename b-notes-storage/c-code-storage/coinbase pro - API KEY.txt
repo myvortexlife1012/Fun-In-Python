@@ -1,0 +1,19 @@
+coinbase pro - API KEY.txt
+
+https://pro.coinbase.com/profile/api
+
+api key: f79f8518f6903b35056e5c30a76b3162
+
+API Secret: eoP4ErE/A0DzjNKRjNuxpy6aLcriQVpNr+XvJNyqsox9h40cJONFh5P3Z+KQUVGc9P7pulaWAAmD3UXf2XaMiQ==
+
+Phrase:
+oven deliver monitor clutch find type giggle judge paddle lottery left inhale
+
+----------
+
+API DOCS:
+
+https://docs.cloud.coinbase.com/exchange/docs
+
+
+------------
