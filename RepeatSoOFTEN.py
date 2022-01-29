@@ -1,4 +1,8 @@
 #v1
+
+#--- add in a way so it only gets a new background if the right arrow is pressed
+# python if right arrow is pressed
+#
 #repeat every 5 minutes, or other timeframe
 #put what you want it to do in - the - repeating_function()
 
@@ -9,7 +13,7 @@ def RepeatSoOFTEN(): # 60*5 #60x#=#minutes ... #2 #60
     import sched, time
     schedule = sched.scheduler(time.time, time.sleep)
     # SET THE SECONDS TO REPEAT IT - **HERE** (1 of 2):
-    every_so_many_seconds = 5 #set this below as well - 2 places
+    every_so_many_seconds = 2 #set this below as well - 2 places
 
 
     def timestamp():
@@ -26,9 +30,10 @@ def RepeatSoOFTEN(): # 60*5 #60x#=#minutes ... #2 #60
         #print(f"\nScheduling it to Repeat Every -{every_so_many_seconds}- second(s):")
         timestamp()
 
+#if -------
         # Change the background automatically
         import listAllFILES as lfs
-        folder_path = "z-IMAGES_1"
+        folder_path = "z-IMAGES_1/0.cool"
         array = lfs.listAllFILES(folder_path)
         length = array[0]
         pics = array[1]
