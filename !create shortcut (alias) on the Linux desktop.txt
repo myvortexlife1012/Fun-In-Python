@@ -1,0 +1,10 @@
+#create shortcut (alias) on the Linux desktop
+#
+#this simulates the folder or file shortcuts windows has - for Linux
+#
+
+#do it by making chmod + x - and then the file will execute when double-clicked
+
+#it is a python file or a linux command file that opens the text editor with a certain file I want
+
+#since ubuntu doesn't have desktop shortcuts
