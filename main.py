@@ -2,9 +2,18 @@
 # make exe for the background change app
 # pip install auto-py-to-exe # type 'auto-py-to-exe' in the console ... gui appears
 
+
+
+# import OpenAFileOrFolder as opn
+# filepath = r"C:\Users\myvor\Pictures\0.animals\beautiful tiger wallpapers\!image18.jpg"
+# opn.openFileWithDefaultProgram(filepath)
+
+
+
+"""
 import AllWINDOWS as wins
 wins.whereMouseClicks()
-
+"""
 
 """
 import ctypes
