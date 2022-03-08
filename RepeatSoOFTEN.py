@@ -38,7 +38,7 @@ def RepeatSoOFTEN(): # 60*5 #60x#=#minutes ... #2 #60
         length = array[0]
         pics = array[1]
 
-        import BackgroundChooseRANDOM as bgcrand
+        import BackgroundCHOOSE as bgcrand
         bgcrand.BackgroundChooseRANDOM(array)
 
     #calls the repeating_function() function

@@ -1,6 +1,6 @@
 #v3
-#import sayTHIS as st
-#st.sayTHIS() #defaults to "Hello World"
+# import sayTHIS as say
+# say.say() #defaults to "Hello World"
 
 # Required:
 # pip install pyttsx3

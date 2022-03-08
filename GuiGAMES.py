@@ -1,12 +1,1464 @@
 # GUI GAMES
 
+#games to make:
+# Ping Pong
+# Volley Ball
+# Hand Ball
+# games where you're chasing something
+#----------
+
+# import GuiGAMES as g
+# g.PongPlay()
+# g.SudokuPlay()
+# g.BattleshipPlay()
+# g.MinesweeperPlay() # #take it out of the function - it doesn't run like this
+# g.ticTacToePlay()
+# g.firstGame()
+
+#------------------------------------------------
+
+# import GuiGAMES as g
+# g.tkinterGame1()
+
+def tkinterGame1():
+    import tkinter
+    import time
+
+    Window_Width = ww = 800
+    Window_Height = wh = 600
+    Ball_Start_XPosition = 50
+    Ball_Start_YPosition = 50
+    Ball_Radius = 30
+    Ball_min_movement = 5
+    Refresh_Sec = 0.01
+
+    def create_animation_window():
+        Window = tkinter.Tk()
+        Window.title("Ball Moving In Bounds - Python Guides")
+
+        Window.geometry(f'{Window_Width}x{Window_Height}')
+        print(f'ww:{ww} x wh:{wh}')
+        return Window
+
+    def create_animation_canvas(Window):
+        canvas = tkinter.Canvas(Window)
+        canvas.configure(bg="Blue")
+        canvas.pack(fill="both", expand=True)
+        return canvas
+
+    def create_circle(x, y, r, canvasName):  # center coordinates, radius
+        x0 = x - r
+        y0 = y - r
+        x1 = x + r
+        y1 = y + r
+        return canvasName.create_oval(x0, y0, x1, y1, fill="Red", outline="Black", width=4)
+
+
+    def animate_ball(Window, canvas, xinc, yinc):
+        #you assign it to a variable, when you want to move it later
+        ball = create_circle(Ball_Start_XPosition, Ball_Start_YPosition, Ball_Radius, canvas)
+
+        while True:
+            canvas.move(ball, xinc, yinc)
+            Window.update()
+            time.sleep(Refresh_Sec)
+            ball_pos = canvas.coords(ball)
+            # unpack array to variables
+            al, bl, ar, br = ball_pos
+            if al < abs(xinc) or ar > Window_Width - abs(xinc):
+                xinc = -xinc
+            if bl < abs(yinc) or br > Window_Height - abs(yinc):
+                yinc = -yinc
+
+    Animation_Window = create_animation_window()
+    Animation_canvas = create_animation_canvas(Animation_Window)
+    animate_ball(Animation_Window, Animation_canvas, Ball_min_movement, Ball_min_movement)
+
+
+
+#------------------------------------------------
+
+
+
+from pygame.locals import *
+
+
+# prices = ticksToPricesOnly(ticks)
+def ticksToPricesOnly(ticks):
+    prices = []
+    for tick in ticks:
+        price = priceFromTickJSONdata(tick)
+        prices.append(price)
+    return prices
+
+
+# import GuiGAMES as g
+# string="ticks[0] : [ETH-USD][0] {'trade_id': 215131057, 'price': '2575.56', 'size': '0.49265816', 'time': '2022-01-30T00:48:56.801899Z', 'bid': '2574.94', 'ask': '2575.45', 'volume': '134313.62568946'}"
+# price = g.priceFromTickJSONdata(string)
+def priceFromTickJSONdata(string):
+    tPrice1 = string.split("'price': '")
+    tPrice2 = tPrice1[1].split("'")
+    tPrice = float(tPrice2[0])
+    return tPrice
+
+#----------------------------------------------
+
+
+
+#--------------------------
+
+# import GuiGAMES as g
+# g.liveCryptoTickerPlot1()
+
+#I MADE THE LINES, CIRCLES, AND LINES FROM PRICE TO PRICE
+def liveCryptoTickerPlot1():
+    import GuiGAMES as g
+    #load the tick data
+    import OPENsomething as open
+    filename = "crypto_tick_data-eth.txt"
+    cryptoName = "ETHERIUM - ETH - Live Crypto Data Simulation"
+    ticks = open.readFile(filename) # array of lines
+    # print(f"ticks[0] : {ticks[0]}")
+    prices = ticksToPricesOnly(ticks)
+    print(f"prices : {prices}")
+
+    #plot 1, wait 1 sec, plot the 2nd one
+    #set up the lines of 10 plot points
+    import pygame, sys
+    #from pygame.locals import *
+    ww = 600  # window width
+    wh = 400  # window height
+
+    def main():
+        pygame.init()
+        DISPLAY = pygame.display.set_mode((ww, wh), 0, 32)
+        WHITE = (255, 255, 255)
+        BLUE = (0, 0, 255)
+        DISPLAY.fill(WHITE) #x-,y|
+
+        #title of graph
+        pygame.font.init()  # you have to call this at the start,
+        # if you want to use this module.
+        myfont = pygame.font.SysFont('Times', 18)
+        textsurface = myfont.render(cryptoName, False, BLUE)
+        DISPLAY.blit(textsurface, (ww/2-180, 10))  # x-,y|,w,h
+
+        #put the line - across equally the width
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*1, 50), (ww/11*1, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*2, 50), (ww/11*2, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*3, 50), (ww/11*3, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*4, 50), (ww/11*4, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*5, 50), (ww/11*5, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*6, 50), (ww/11*6, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*7, 50), (ww/11*7, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*8, 50), (ww/11*8, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*9, 50), (ww/11*9, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*10, 50), (ww/11*10, wh-10), 1)
+        #pygame.draw.line(surface, color, start_pos, end_pos, width)
+
+        # price from tick string
+        # import GuiGAMES as g
+        # price = g.priceFromTickJSONdata(ticks[0])
+        # print(f"price: {price}")
+        pygame.draw.circle(DISPLAY, BLUE, (ww/11*9+30, 100), 4, 0)#x-,y|
+        pygame.draw.circle(DISPLAY, BLUE, (ww/11*8+30, 150), 4, 0)#x-,y|
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*9+30, 100), (ww/11*8+30, 150), 1)
+        pygame.draw.circle(DISPLAY, BLUE, (ww/11*7+30, 130), 4, 0)#x-,y|
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*8+30, 150), (ww/11*7+30, 130), 1)
+        pygame.draw.circle(DISPLAY, BLUE, (ww/11*6+30, 140), 4, 0)#x-,y|
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*7+30, 130), (ww/11*6+30, 140), 1)
+        pygame.draw.circle(DISPLAY, BLUE, (ww/11*5+30, 165), 4, 0)#x-,y|
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*6+30, 140), (ww/11*5+30, 165), 1)
+        pygame.draw.circle(DISPLAY, BLUE, (ww/11*4+30, 150), 4, 0)#x-,y|
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*5+30, 165), (ww/11*4+30, 150), 1)
+        pygame.draw.circle(DISPLAY, BLUE, (ww/11*3+30, 130), 4, 0)#x-,y|
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*4+30, 150), (ww/11*3+30, 130), 1)
+        pygame.draw.circle(DISPLAY, BLUE, (ww/11*2+30, 160), 4, 0)#x-,y|
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*3+30, 130), (ww/11*2+30, 160), 1)
+        pygame.draw.circle(DISPLAY, BLUE, (ww/11*1+30, 180), 4, 0)#x-,y|
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*2+30, 160), (ww/11*1+30, 180), 1)
+        #pygame.draw.circle(surface, color, center, radius)
+
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+            pygame.display.update()
+            pygame.time.delay(10)
+
+
+    main()
+
+
+
+#--------------------------
+
+# import GuiGAMES as g
+# g.liveCryptoTickerPlot2()
+
+#create the high and low of the chart, and replot it
+#then animate the points - every second
+def liveCryptoTickerPlot2():
+    import GuiGAMES as g
+    #load the tick data
+    import OPENsomething as open
+    filename = "crypto_tick_data-eth.txt"
+    cryptoName = "ETHERIUM - ETH - Live Crypto Data Simulation"
+    ticks = open.readFile(filename) # array of lines
+    # print(f"ticks[0] : {ticks[0]}")
+    prices = ticksToPricesOnly(ticks)
+    print(f"prices : {prices}")
+
+    #plot 1, wait 1 sec, plot the 2nd one
+    #set up the lines of 10 plot points
+    import pygame, sys
+    #from pygame.locals import *
+    ww = 600  # window width
+    wh = 400  # window height
+
+    def main():
+        pygame.init()
+        DISPLAY = pygame.display.set_mode((ww, wh), 0, 32)
+        WHITE = (255, 255, 255)
+        BLUE = (0, 0, 255)
+        DISPLAY.fill(WHITE) #x-,y|
+
+        #title of graph
+        pygame.font.init()  # you have to call this at the start,
+        # if you want to use this module.
+        myfont = pygame.font.SysFont('Times', 18)
+        textsurface = myfont.render(cryptoName, False, BLUE)
+        DISPLAY.blit(textsurface, (ww/2-180, 10))  # x-,y|,w,h
+
+        #put the line - across equally the width
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*1, 50), (ww/11*1, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*2, 50), (ww/11*2, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*3, 50), (ww/11*3, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*4, 50), (ww/11*4, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*5, 50), (ww/11*5, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*6, 50), (ww/11*6, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*7, 50), (ww/11*7, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*8, 50), (ww/11*8, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*9, 50), (ww/11*9, wh-10), 1)
+        pygame.draw.line(DISPLAY, BLUE, (ww/11*10, 50), (ww/11*10, wh-10), 1)
+        #pygame.draw.line(surface, color, start_pos, end_pos, width)
+
+        # price from tick string
+        # import GuiGAMES as g
+        # price = g.priceFromTickJSONdata(ticks[0])
+        # print(f"price: {price}")
+
+
+        counter = 0
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+            pygame.display.update()
+            pygame.time.delay(10)
+
+            pygame.draw.circle(DISPLAY, BLUE, (ww / 11 * 9 + 30, 100), 4, 0)  # x-,y|
+            pygame.draw.circle(DISPLAY, BLUE, (ww / 11 * 8 + 30, 150), 4, 0)  # x-,y|
+            pygame.draw.line(DISPLAY, BLUE, (ww / 11 * 9 + 30, 100), (ww / 11 * 8 + 30, 150), 1)
+            pygame.display.update()
+            pygame.time.delay(500)
+            pygame.draw.circle(DISPLAY, BLUE, (ww / 11 * 7 + 30, 130), 4, 0)  # x-,y|
+            pygame.draw.line(DISPLAY, BLUE, (ww / 11 * 8 + 30, 150), (ww / 11 * 7 + 30, 130), 1)
+            pygame.display.update()
+            pygame.time.delay(500)
+            pygame.draw.circle(DISPLAY, BLUE, (ww / 11 * 6 + 30, 140), 4, 0)  # x-,y|
+            pygame.draw.line(DISPLAY, BLUE, (ww / 11 * 7 + 30, 130), (ww / 11 * 6 + 30, 140), 1)
+            pygame.display.update()
+            pygame.time.delay(500)
+            pygame.draw.circle(DISPLAY, BLUE, (ww / 11 * 5 + 30, 165), 4, 0)  # x-,y|
+            pygame.draw.line(DISPLAY, BLUE, (ww / 11 * 6 + 30, 140), (ww / 11 * 5 + 30, 165), 1)
+            pygame.display.update()
+            pygame.time.delay(500)
+            pygame.draw.circle(DISPLAY, BLUE, (ww / 11 * 4 + 30, 150), 4, 0)  # x-,y|
+            pygame.draw.line(DISPLAY, BLUE, (ww / 11 * 5 + 30, 165), (ww / 11 * 4 + 30, 150), 1)
+            pygame.display.update()
+            pygame.time.delay(500)
+            pygame.draw.circle(DISPLAY, BLUE, (ww / 11 * 3 + 30, 130), 4, 0)  # x-,y|
+            pygame.draw.line(DISPLAY, BLUE, (ww / 11 * 4 + 30, 150), (ww / 11 * 3 + 30, 130), 1)
+            pygame.display.update()
+            pygame.time.delay(500)
+            pygame.draw.circle(DISPLAY, BLUE, (ww / 11 * 2 + 30, 160), 4, 0)  # x-,y|
+            pygame.draw.line(DISPLAY, BLUE, (ww / 11 * 3 + 30, 130), (ww / 11 * 2 + 30, 160), 1)
+            pygame.display.update()
+            pygame.time.delay(500)
+            pygame.draw.circle(DISPLAY, BLUE, (ww / 11 * 1 + 30, 180), 4, 0)  # x-,y|
+            pygame.draw.line(DISPLAY, BLUE, (ww / 11 * 2 + 30, 160), (ww / 11 * 1 + 30, 180), 1)
+            pygame.display.update()
+            pygame.time.delay(10)
+            # pygame.draw.circle(surface, color, center, radius)
+
+            counter += 1
+
+
+    main()
+
+
+
+
+
+
+#-------------------------------------
+# import GuiGAMES as g
+# g.pygame1()
+
+#I MADE THE SQUARE
+def pygame1():
+    import pygame, sys
+    #from pygame.locals import *
+
+    def main():
+        pygame.init()
+        DISPLAY = pygame.display.set_mode((500, 400), 0, 32)
+        WHITE = (255, 255, 255)
+        BLUE = (0, 0, 255)
+        DISPLAY.fill(WHITE)
+        pygame.draw.rect(DISPLAY, BLUE, (200, 150, 100, 50))
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+            pygame.display.update()
+
+    main()
+
+#-------------------------
+# import GuiGAMES as g
+# g.pygame2()
+#I MADE THE SQUARE FALL
+def pygame2():
+    import pygame, sys
+    #from pygame.locals import *
+
+    def main():
+        pygame.init()
+        DISPLAY = pygame.display.set_mode((500, 400), 0, 32)
+        WHITE = (255, 255, 255)
+        BLUE = (0, 0, 255)
+        DISPLAY.fill(WHITE)
+        pygame.draw.rect(DISPLAY, BLUE, (200, 150, 100, 50))
+        x = 100
+        y = 100
+        velocity = 0
+        acceleration = 0.1
+        while True:
+            keys = pygame.key.get_pressed()
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+            DISPLAY.fill((255, 255, 255))
+            pygame.draw.rect(DISPLAY, BLUE, (x, y, 50, 50))
+            y += velocity
+            velocity += acceleration
+            if keys[pygame.K_SPACE]:
+                print("key was pressed")
+                velocity = -3
+
+            pygame.display.update()
+            pygame.time.delay(10)
+
+    main()
+
+
+#-------------------------
+# import GuiGAMES as g
+# g.pygame3()
+# arrow keys move the block around
+def pygame3():
+    import pygame, sys
+    #from pygame.locals import *
+
+    def main():
+        pygame.init()
+        DISPLAY = pygame.display.set_mode((500, 400), 0, 32)
+        WHITE = (255, 255, 255)
+        BLUE = (0, 0, 255)
+        DISPLAY.fill(WHITE)
+        pygame.draw.rect(DISPLAY, BLUE, (200, 150, 100, 50))
+        x = 100
+        y = 100
+        velocity = 0
+        acceleration = 0.1
+        while True:
+
+
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        print("up key pressed")
+                        x = x + 0
+                        y = y - 50
+                    elif event.key == pygame.K_DOWN:
+                        print("down key pressed")
+                        x = x + 0
+                        y = y + 50
+                    elif event.key == pygame.K_LEFT:
+                        print("left key pressed")
+                        x = x - 50
+                        y = y + 0
+                    elif event.key == pygame.K_RIGHT:
+                        print("right key pressed")
+                        x = x + 50
+                        y = y + 0
+
+            DISPLAY.fill((255, 255, 255))
+            pygame.draw.rect(DISPLAY, BLUE, (x, y, 50, 50))
+
+            #y += velocity
+            #velocity += acceleration
+
+            pygame.display.update()
+            pygame.time.delay(10)
+
+    main()
+
+
+#-------------------------
+# import GuiGAMES as g
+# g.pygame4()
+# box falls to the ground - keys move it
+def pygame4():
+    import pygame, sys
+    #from pygame.locals import *
+
+    def main():
+        pygame.init()
+        DISPLAY = pygame.display.set_mode((500, 400), 0, 32)
+        WHITE = (255, 255, 255)
+        BLUE = (0, 0, 255)
+        DISPLAY.fill(WHITE)
+        pygame.draw.rect(DISPLAY, BLUE, (200, 150, 100, 50))
+        x = 100
+        y = 100
+        velocity = 0
+        acceleration = 0.01
+        while True:
+
+
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        print("up key pressed")
+                        x = x + 0
+                        y = y - 50
+                    elif event.key == pygame.K_DOWN:
+                        print("down key pressed")
+                        x = x + 0
+                        y = y + 50
+                    elif event.key == pygame.K_LEFT:
+                        print("left key pressed")
+                        x = x - 50
+                        y = y + 0
+                    elif event.key == pygame.K_RIGHT:
+                        print("right key pressed")
+                        x = x + 50
+                        y = y + 0
+            if y>350:
+                y=350
+            print(f"x:{x},y:{y},velocity:{velocity},acceleration:{acceleration}")
+            DISPLAY.fill((255, 255, 255))
+            pygame.draw.rect(DISPLAY, BLUE, (x, y, 50, 50))
+
+            if y<350:
+                y += velocity
+                velocity += acceleration
+
+            pygame.display.update()
+            pygame.time.delay(10)
+
+    main()
+
+
+#-------------------------
+# import GuiGAMES as g
+# g.pygame5()
+# box moves around in bounds - like pong, the x,y values change together
+def pygame5():
+    import pygame, sys
+    #from pygame.locals import *
+
+    def main():
+        pygame.init()
+        DISPLAY = pygame.display.set_mode((500, 400), 0, 32)
+        WHITE = (255, 255, 255)
+        BLUE = (0, 0, 255)
+        DISPLAY.fill(WHITE)
+        pygame.draw.rect(DISPLAY, BLUE, (200, 150, 100, 50))
+        x = 100
+        y = 100
+        velocity = 3
+        direction = "l"
+        direction2 = "u"
+        #acceleration = 0.01
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        print("up key pressed")
+                        x = x + 0
+                        y = y - 50
+                    elif event.key == pygame.K_DOWN:
+                        print("down key pressed")
+                        x = x + 0
+                        y = y + 50
+                    elif event.key == pygame.K_LEFT:
+                        print("left key pressed")
+                        x = x - 50
+                        y = y + 0
+                    elif event.key == pygame.K_RIGHT:
+                        print("right key pressed")
+                        x = x + 50
+                        y = y + 0
+
+            print(f"x:{x},y:{y}")
+            DISPLAY.fill((255, 255, 255))
+            pygame.draw.rect(DISPLAY, BLUE, (x, y, 50, 50))
+
+            # move it right or left here
+            if direction == "r":
+                x += velocity
+            if direction == "l":
+                x -= velocity
+            #move it up or down here
+            if direction2 == "u":
+                y -= velocity
+            if direction2 == "d":
+                y += velocity
+
+            #go the other way when it reaches the right side
+            if x>420: #on the right side
+                direction="l"
+                #print("changing direction to going left")
+            if x<30: #on the left side
+                direction="r"
+                #print("changing direction to going right")
+            if y<20: #on the top side
+                #print("you're at the top")
+                direction2 = "d"
+                #print("changing direction to going down")
+            if y>340: #on the bottom side
+                direction2 = "u"
+                #print("changing direction to going up")
+
+            pygame.display.update()
+            pygame.time.delay(50)
+
+    main()
+
+
+
+#-------------------------
+# import GuiGAMES as g
+# g.pygame6()
+# box moves SHAKY around in bounds - like pong, the x,y values change together
+def pygame6():
+    import pygame, sys
+    #from pygame.locals import *
+
+    def main():
+        pygame.init()
+        DISPLAY = pygame.display.set_mode((500, 400), 0, 32)
+        WHITE = (255, 255, 255)
+        BLUE = (0, 0, 255)
+        DISPLAY.fill(WHITE)
+        pygame.draw.rect(DISPLAY, BLUE, (200, 150, 100, 50))
+        x = 100
+        y = 100
+        velocity = 5
+        direction = "l"
+        direction2 = "u"
+        #acceleration = 0.01
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        print("up key pressed")
+                        x = x + 0
+                        y = y - 50
+                    elif event.key == pygame.K_DOWN:
+                        print("down key pressed")
+                        x = x + 0
+                        y = y + 50
+                    elif event.key == pygame.K_LEFT:
+                        print("left key pressed")
+                        x = x - 50
+                        y = y + 0
+                    elif event.key == pygame.K_RIGHT:
+                        print("right key pressed")
+                        x = x + 50
+                        y = y + 0
+
+            #print(f"x:{x},y:{y}")
+            DISPLAY.fill((255, 255, 255))
+            pygame.draw.rect(DISPLAY, BLUE, (x, y, 50, 50))
+
+            import random
+            r = random.randint(1,10)
+            r2 = random.randint(1,10)
+            # move it right or left here
+            if direction == "r":
+                if(r2>5):
+                    x += velocity + r2
+            if direction == "l":
+                if(r2>5):
+                    x -= velocity + r2
+            #move it up or down here
+            if direction2 == "u":
+                if(r>5):
+                    y -= velocity*.5 + r
+            if direction2 == "d":
+                if(r>5):
+                    y += velocity*.5 + r
+
+            #go the other way when it reaches the right side
+            if x>420: #on the right side
+                direction="l"
+                #print("changing direction to going left")
+            if x<30: #on the left side
+                direction="r"
+                #print("changing direction to going right")
+            if y<20: #on the top side
+                #print("you're at the top")
+                direction2 = "d"
+                #print("changing direction to going down")
+            if y>340: #on the bottom side
+                direction2 = "u"
+                #print("changing direction to going up")
+
+            pygame.display.update()
+            pygame.time.delay(50)
+
+    main()
+
+
+#-------------------------
+# import GuiGAMES as g
+# g.pygame7()
+# pong - both player boards are moving up and down
+def pygame7():
+    import pygame, sys
+    #from pygame.locals import *
+
+    def main():
+        pygame.init()
+        ww=500 #window width
+        wh=400 #window height
+        DISPLAY = pygame.display.set_mode((ww, wh), 0, 32)
+        WHITE = (255, 255, 255)
+        BLUE = (0, 0, 255)
+        GREEN = (0, 255, 0)
+        RED = (255, 0, 0)
+        BLACK = (0, 0, 0)
+        TEXTCOLOR = (0, 0, 0)
+
+        #DISPLAY.fill(BLACK)
+        #pygame.draw.line(surface, color, start_pos, end_pos, width)
+        #pygame.draw.circle(DISPLAY, WHITE, (200, 150), 12, 0)
+        #pygame.draw.circle(surface, color, center, radius)
+        #pygame.draw.rect(SURFACE, RGB_COLOR, (X, Y, WIDTH, HEIGHT))
+        #pygame.draw.rect(DISPLAY, WHITE, (100, 50, 200, 30)) #x-,y|,w,h
+        #pygame.draw.rect(DISPLAY, WHITE, (100, 420, 200, 30))
+        x = ww/2
+        y = wh/2
+        circleRadius = 12
+        barH = 150
+        barW = 20
+        xP1 = 30 #30, 120 # x-,y|
+        xP2 = 450 #450, 120 # x-,y|
+        yP1 = 120 # x-,y|
+        yP2 = 120 # x-,y|
+        velocity = 3
+        direction = "l"
+        direction2 = "u"
+        #acceleration = 0.01
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+            #print(f"x:{x},y:{y}")
+
+            if yP1>wh-barH-10:
+                direction2="u"  # x-,y| .. barH=150 ... ww = 500  # window width ... wh = 400  # window height
+            elif yP1<10:
+                direction2="d"  # x-,y| .. barH=150 ... ww = 500  # window width ... wh = 400  # window height
+
+            if direction2 == "d":
+                yP1 = yP1 + velocity
+                yP2 = yP2 + velocity
+            if direction2 == "u":
+                yP1 = yP1 - velocity
+                yP2 = yP2 - velocity
+
+            #yP2 = 120  # x-,y|
+
+
+            DISPLAY.fill(BLACK)
+            # pygame.draw.circle(surface, color, center, radius)
+            pygame.draw.circle(DISPLAY, WHITE, (x, y), circleRadius)
+            pygame.draw.rect(DISPLAY, WHITE, (xP1, yP1, barW, barH))  # x-,y|,w,h
+            # pygame.draw.rect(SURFACE, RGB_COLOR, (X, Y, WIDTH, HEIGHT)) # x-,y|,w,h
+            pygame.draw.rect(DISPLAY, RED, (xP2, yP2, barW, barH))  # x-,y|,w,h
+
+
+            pygame.display.update()
+            pygame.time.delay(50)
+
+    main()
+
+
+#-------------------------
+# import GuiGAMES as g
+# g.pygame8()
+# pong - both player boards are moving up and down
+# get the ball moving - and set the game up on autopilot
+#pong automatic - next version - Store/Show Player Points, extend the screen
+def pygame8():
+    import pygame, sys
+    #from pygame.locals import *
+
+    def main():
+        pygame.init()
+        ww=500 #window width
+        wh=400 #window height
+        DISPLAY = pygame.display.set_mode((ww, wh), 0, 32)
+        WHITE = (255, 255, 255)
+        BLUE = (0, 0, 255)
+        GREEN = (0, 255, 0)
+        RED = (255, 0, 0)
+        BLACK = (0, 0, 0)
+        TEXTCOLOR = (0, 0, 0)
+
+        #DISPLAY.fill(BLACK)
+        #pygame.draw.line(surface, color, start_pos, end_pos, width)
+        #pygame.draw.circle(DISPLAY, WHITE, (200, 150), 12, 0)
+        #pygame.draw.circle(surface, color, center, radius)
+        #pygame.draw.rect(SURFACE, RGB_COLOR, (X, Y, WIDTH, HEIGHT))
+        #pygame.draw.rect(DISPLAY, WHITE, (100, 50, 200, 30)) #x-,y|,w,h
+        #pygame.draw.rect(DISPLAY, WHITE, (100, 420, 200, 30))
+        x = ww/2
+        y = wh/2
+        circleRadius = 12
+        barH = 150
+        barW = 20
+        xP1 = 30 #30, 120 # x-,y|
+        xP2 = 450 #450, 120 # x-,y|
+        yP1 = 120 # x-,y|
+        yP2 = 120 # x-,y|
+        p1points = 0
+        p2points = 0
+        directionBall = "l"
+        directionBall2 = "d"
+        velocity = 6
+        direction = "l"
+        direction2 = "u"
+        #acceleration = 0.01
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+            #print(f"x:{x},y:{y}")
+
+            if yP1>wh-barH-10:
+                direction2="u"  # x-,y| .. barH=150 ... ww = 500  # window width ... wh = 400  # window height
+            elif yP1<10:
+                direction2="d"  # x-,y| .. barH=150 ... ww = 500  # window width ... wh = 400  # window height
+
+            if direction2 == "d":
+                yP1 = yP1 + velocity
+                yP2 = yP2 + velocity
+            if direction2 == "u":
+                yP1 = yP1 - velocity
+                yP2 = yP2 - velocity
+
+            #yP2 = 120  # x-,y|
+            # move it right or left here
+            #directionBall = "l"
+            if directionBall == "r":
+                x += velocity
+            if directionBall == "l":
+                x -= velocity
+            #move it up or down here
+            #directionBall2 = "u"
+            if directionBall2 == "u":
+                y -= velocity*.5
+            if directionBall2 == "d":
+                y += velocity*.5
+
+
+            ballInP2barArea = True
+            #if y matches between, yP1 - yP1+BarHeight
+            if y>=yP1 and y<=yP1+barH:
+                ballInP1barArea = True
+            else:
+                ballInP1barArea = False
+            if y>=yP2 and y<=yP2+barH:
+                ballInP2barArea = True
+            else:
+                ballInP2barArea = False
+
+            #go the other way when it reaches the right side
+            if x>440 and ballInP2barArea==True: #on the right side #x-,y|,w,h
+                directionBall="l"
+                #print("changing direction to going left")
+            if x<65 and ballInP1barArea==True: #on the left side #x-,y|,w,h
+                directionBall="r"
+                #print("changing direction to going right")
+            if y<20: #on the top side  #x-,y|,w,h
+                #print("you're at the top")
+                directionBall2 = "d"
+                #print("changing direction to going down")
+            if y>380: #on the bottom side #x-,y|,w,h
+                directionBall2 = "u"
+                #print("changing direction to going up")
+
+            # RESETTING:
+            # Assigning Points:
+            if x<10 and ballInP1barArea==False: #on the left side #x-,y|,w,h
+                pass
+                #start a new game - center the 3 elements - start over
+                #p2points += 1 ... #change all the x's and y's ... and save the point
+                x = ww / 2
+                y = wh / 2
+                xP1 = 30  # 30, 120 # x-,y|
+                xP2 = 450  # 450, 120 # x-,y|
+                yP1 = 120  # x-,y|
+                yP2 = 120  # x-,y|
+                p2points += 1
+                print(f"p1points: {p1points} ... p2points: {p2points}")
+                directionBall = "r"
+                directionBall2 = "d"
+            if x > 500 and ballInP2barArea==False:
+                x = ww / 2
+                y = wh / 2
+                xP1 = 30  # 30, 120 # x-,y|
+                xP2 = 450  # 450, 120 # x-,y|
+                yP1 = 120  # x-,y|
+                yP2 = 120  # x-,y|
+                p1points += 1
+                print(f"p1points: {p1points} ... p2points: {p2points}")
+                directionBall = "r"
+                directionBall2 = "d"
+
+            DISPLAY.fill(BLACK)
+            # pygame.draw.circle(surface, color, center, radius)
+            pygame.draw.circle(DISPLAY, WHITE, (x, y), circleRadius)
+            pygame.draw.rect(DISPLAY, WHITE, (xP1, yP1, barW, barH))  # x-,y|,w,h
+            # pygame.draw.rect(SURFACE, RGB_COLOR, (X, Y, WIDTH, HEIGHT)) # x-,y|,w,h
+            pygame.draw.rect(DISPLAY, RED, (xP2, yP2, barW, barH))  # x-,y|,w,h
+
+
+            pygame.display.update()
+            pygame.time.delay(50)
+
+    main()
+
+
+#-------------------------
+# import GuiGAMES as g
+# g.pygame9()
+# pong automatic
+# - this version - Store/Show Player Points, extend the screen
+#add in keypresses - to move the 2 bars up and down
+def pygame9():
+    import pygame, sys
+    #from pygame.locals import *
+
+    def main():
+        pygame.init()
+        ww=500 #window width
+        wh=400 #window height
+        DISPLAY = pygame.display.set_mode((ww, wh), 0, 32)
+        WHITE = (255, 255, 255)
+        BLUE = (0, 0, 255)
+        GREEN = (0, 255, 0)
+        RED = (255, 0, 0)
+        BLACK = (0, 0, 0)
+        TEXTCOLOR = (0, 0, 0)
+
+        #DISPLAY.fill(BLACK)
+        #pygame.draw.line(surface, color, start_pos, end_pos, width)
+        #pygame.draw.circle(DISPLAY, WHITE, (200, 150), 12, 0)
+        #pygame.draw.circle(surface, color, center, radius)
+        #pygame.draw.rect(SURFACE, RGB_COLOR, (X, Y, WIDTH, HEIGHT))
+        #pygame.draw.rect(DISPLAY, WHITE, (100, 50, 200, 30)) #x-,y|,w,h
+        #pygame.draw.rect(DISPLAY, WHITE, (100, 420, 200, 30))
+        x = ww/2
+        y = wh/2
+        circleRadius = 12
+        barH = 150
+        barW = 20
+        xP1 = 30 #30, 120 # x-,y|
+        xP2 = 450 #450, 120 # x-,y|
+        yP1 = 120 # x-,y|
+        yP2 = 120 # x-,y|
+        p1points = 0
+        p2points = 0
+        directionBall = "l"
+        directionBall2 = "d"
+        velocity = 6
+        direction = "l"
+        direction2 = "u"
+        #acceleration = 0.01
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+                #add in keypresses - to move the 2 bars up and down
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        print("up key pressed")
+                        yP1 = yP1 - 50
+                    elif event.key == pygame.K_DOWN:
+                        print("down key pressed")
+                        yP1 = yP1 + 50
+                    elif event.key == pygame.K_LEFT:
+                        print("left key pressed")
+                        yP2 = yP2 - 50
+                    elif event.key == pygame.K_RIGHT:
+                        print("right key pressed")
+                        yP2 = yP2 + 50
+
+                    #fix it for going off the edges - and getting messed up - maybe
+                    if yP2<0:
+                        yP2=0
+                    if yP2 > wh:
+                        yP2 = wh-barH
+                    if yP1 < 0:
+                        yP1 = 0
+                    if yP1 > wh:
+                        yP1 = wh - barH
+
+            #print(f"x:{x},y:{y}")
+
+            #if top of the bar goes off screen, bring it back
+            if yP1>wh-barH-10:
+                direction2="u"  # x-,y| .. barH=150 ... ww = 500  # window width ... wh = 400  # window height
+            elif yP1<10:
+                direction2="d"  # x-,y| .. barH=150 ... ww = 500  # window width ... wh = 400  # window height
+
+            #move things here - based on the direction
+            if direction2 == "d":
+                yP1 = yP1 + velocity
+                yP2 = yP2 + velocity
+            if direction2 == "u":
+                yP1 = yP1 - velocity
+                yP2 = yP2 - velocity
+
+            #yP2 = 120  # x-,y|
+            # move it right or left here
+            #directionBall = "l"
+            if directionBall == "r":
+                x += velocity
+            if directionBall == "l":
+                x -= velocity
+            #move it up or down here
+            #directionBall2 = "u"
+            if directionBall2 == "u":
+                y -= velocity*.5
+            if directionBall2 == "d":
+                y += velocity*.5
+
+
+            ballInP2barArea = True
+            #if y matches between, yP1 - yP1+BarHeight
+            if y>=yP1 and y<=yP1+barH:
+                ballInP1barArea = True
+            else:
+                ballInP1barArea = False
+            if y>=yP2 and y<=yP2+barH:
+                ballInP2barArea = True
+            else:
+                ballInP2barArea = False
+
+            #go the other way when it reaches the right side
+            if x>440 and ballInP2barArea==True: #on the right side #x-,y|,w,h
+                directionBall="l"
+                #print("changing direction to going left")
+            if x<65 and ballInP1barArea==True: #on the left side #x-,y|,w,h
+                directionBall="r"
+                #print("changing direction to going right")
+            if y<20: #on the top side  #x-,y|,w,h
+                #print("you're at the top")
+                directionBall2 = "d"
+                #print("changing direction to going down")
+            if y>380: #on the bottom side #x-,y|,w,h
+                directionBall2 = "u"
+                #print("changing direction to going up")
+
+            # RESETTING:
+            # Assigning Points:
+            if x<10 and ballInP1barArea==False: #on the left side #x-,y|,w,h
+                pass
+                #start a new game - center the 3 elements - start over
+                #p2points += 1 ... #change all the x's and y's ... and save the point
+                x = ww / 2
+                y = wh / 2
+                xP1 = 30  # 30, 120 # x-,y|
+                xP2 = 450  # 450, 120 # x-,y|
+                yP1 = 120  # x-,y|
+                yP2 = 120  # x-,y|
+                p2points += 1
+                print(f"p1points: {p1points} ... p2points: {p2points}")
+                directionBall = "r"
+                directionBall2 = "d"
+            if x > 500 and ballInP2barArea==False:
+                x = ww / 2
+                y = wh / 2
+                xP1 = 30  # 30, 120 # x-,y|
+                xP2 = 450  # 450, 120 # x-,y|
+                yP1 = 120  # x-,y|
+                yP2 = 120  # x-,y|
+                p1points += 1
+                print(f"p1points: {p1points} ... p2points: {p2points}")
+                directionBall = "r"
+                directionBall2 = "d"
+
+            DISPLAY.fill(BLACK)
+            # pygame.draw.circle(surface, color, center, radius)
+            pygame.draw.circle(DISPLAY, WHITE, (x, y), circleRadius)
+            pygame.draw.rect(DISPLAY, WHITE, (xP1, yP1, barW, barH))  # x-,y|,w,h
+            # pygame.draw.rect(SURFACE, RGB_COLOR, (X, Y, WIDTH, HEIGHT)) # x-,y|,w,h
+            pygame.draw.rect(DISPLAY, RED, (xP2, yP2, barW, barH))  # x-,y|,w,h
+
+            pygame.font.init()  # you have to call this at the start,
+            # if you want to use this module.
+            myfont = pygame.font.SysFont('Comic Sans MS', 16)
+            textsurface = myfont.render(f'Player 1 Points: {p1points}', False, WHITE)
+            DISPLAY.blit(textsurface, (50, wh-30)) # x-,y|,w,h
+            textsurface2 = myfont.render(f'Player 2 Points: {p2points}', False, WHITE)
+            DISPLAY.blit(textsurface2, (350, wh-30)) # x-,y|,w,h
+
+            pygame.display.update()
+            pygame.time.delay(50)
+
+    main()
+
+
+# -------------------------
+# import GuiGAMES as g
+# g.pygame10()
+# pong automatic
+# - this version
+# - take off auto move of the 2 player bars
+# - use up and down keys - for Player 1
+# - use left and right keys - for Player 2
+# - next version - when I hit up and down keys - it moves smoothly instead of jumping
+def pygame10():
+    import pygame, sys
+    # from pygame.locals import *
+
+    def main():
+        pygame.init()
+        ww = 500  # window width
+        wh = 400  # window height
+        DISPLAY = pygame.display.set_mode((ww, wh), 0, 32)
+        WHITE = (255, 255, 255)
+        BLUE = (0, 0, 255)
+        GREEN = (0, 255, 0)
+        RED = (255, 0, 0)
+        BLACK = (0, 0, 0)
+        TEXTCOLOR = (0, 0, 0)
+
+        # DISPLAY.fill(BLACK)
+        # pygame.draw.line(surface, color, start_pos, end_pos, width)
+        # pygame.draw.circle(DISPLAY, WHITE, (200, 150), 12, 0)
+        # pygame.draw.circle(surface, color, center, radius)
+        # pygame.draw.rect(SURFACE, RGB_COLOR, (X, Y, WIDTH, HEIGHT))
+        # pygame.draw.rect(DISPLAY, WHITE, (100, 50, 200, 30)) #x-,y|,w,h
+        # pygame.draw.rect(DISPLAY, WHITE, (100, 420, 200, 30))
+        x = ww / 2
+        y = wh / 2
+        circleRadius = 12
+        barH = 150
+        barW = 20
+        xP1 = 30  # 30, 120 # x-,y|
+        xP2 = 450  # 450, 120 # x-,y|
+        yP1 = 120  # x-,y|
+        yP2 = 120  # x-,y|
+        p1points = 0
+        p2points = 0
+        directionBall = "l"
+        directionBall2 = "d"
+        velocity = 6
+        direction = "l"
+        direction2 = "u"
+        # acceleration = 0.01
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+                # add in keypresses - to move the 2 bars up and down
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        print("up key pressed")
+                        yP1 = yP1 - 50
+                    elif event.key == pygame.K_DOWN:
+                        print("down key pressed")
+                        yP1 = yP1 + 50
+                    elif event.key == pygame.K_LEFT:
+                        print("left key pressed")
+                        yP2 = yP2 - 50
+                    elif event.key == pygame.K_RIGHT:
+                        print("right key pressed")
+                        yP2 = yP2 + 50
+            # print(f"x:{x},y:{y}")
+
+            # if top of the bar goes off screen, bring it back
+            # if it touches the bottom:
+            if yP1 > wh - barH - 10: # x-,y|
+                pass
+            # if it touches the top
+            elif yP1 < 10: # x-,y|
+                pass
+
+            # yP2 = 120  # x-,y|
+            # move it right or left here
+            # directionBall = "l"
+            if directionBall == "r":
+                x += velocity
+            if directionBall == "l":
+                x -= velocity
+            # move it up or down here
+            # directionBall2 = "u"
+            if directionBall2 == "u":
+                y -= velocity * .5
+            if directionBall2 == "d":
+                y += velocity * .5
+
+            ballInP2barArea = True
+            # if y matches between, yP1 - yP1+BarHeight
+            # player 1
+            if y >= yP1 and y <= yP1 + barH:
+                ballInP1barArea = True
+            else:
+                ballInP1barArea = False
+            # player 2
+            if y >= yP2 and y <= yP2 + barH:
+                ballInP2barArea = True
+            else:
+                ballInP2barArea = False
+
+            # go the other way when it reaches the right side
+            if x > ww-60 and ballInP2barArea == True:  # on the right side #x-,y|,w,h
+                directionBall = "l"
+                # print("changing direction to going left")
+            if x < 65 and ballInP1barArea == True:  # on the left side #x-,y|,w,h
+                directionBall = "r"
+                # print("changing direction to going right")
+            if y < 20:  # on the top side  #x-,y|,w,h
+                # print("you're at the top")
+                directionBall2 = "d"
+                # print("changing direction to going down")
+            if y > wh-20:  # on the bottom side #x-,y|,w,h
+                directionBall2 = "u"
+                # print("changing direction to going up")
+
+            # RESETTING The Game Board & Points for Both Players:
+            # Assigning Points:
+            #if the ball goes past the P1 Bar, and goes out:
+            if x < 10 and ballInP1barArea == False:  # on the left side #x-,y|,w,h
+                pass
+                # start a new game - center the 3 elements - start over
+                # p2points += 1 ... #change all the x's and y's ... and save the point
+                x = ww / 2
+                y = wh / 2
+                xP1 = 30  # 30, 120 # x-,y|
+                xP2 = 450  # 450, 120 # x-,y|
+                yP1 = 120  # x-,y|
+                yP2 = 120  # x-,y|
+                p2points += 1
+                print(f"p1points: {p1points} ... p2points: {p2points}")
+                directionBall = "r"
+                directionBall2 = "d"
+            # if the ball goes past the P2 Bar, and goes out:
+            if x > 500 and ballInP2barArea == False:
+                x = ww / 2
+                y = wh / 2
+                xP1 = 30  # 30, 120 # x-,y|
+                xP2 = 450  # 450, 120 # x-,y|
+                yP1 = 120  # x-,y|
+                yP2 = 120  # x-,y|
+                p1points += 1
+                print(f"p1points: {p1points} ... p2points: {p2points}")
+                directionBall = "r"
+                directionBall2 = "d"
+
+            DISPLAY.fill(BLACK)
+            # pygame.draw.circle(surface, color, center, radius)
+            pygame.draw.circle(DISPLAY, WHITE, (x, y), circleRadius)
+            pygame.draw.rect(DISPLAY, WHITE, (xP1, yP1, barW, barH))  # x-,y|,w,h
+            # pygame.draw.rect(SURFACE, RGB_COLOR, (X, Y, WIDTH, HEIGHT)) # x-,y|,w,h
+            pygame.draw.rect(DISPLAY, RED, (xP2, yP2, barW, barH))  # x-,y|,w,h
+
+            pygame.font.init() # you have to call this at the start of using fonts
+            myfont = pygame.font.SysFont('Comic Sans MS', 16)
+            textsurface1 = myfont.render(f'Player 1 Points: {p1points}', False, WHITE)
+            DISPLAY.blit(textsurface1, (50, wh - 30))  # x-,y|,w,h
+            textsurface2 = myfont.render(f'Player 2 Points: {p2points}', False, WHITE)
+            DISPLAY.blit(textsurface2, (350, wh - 30))  # x-,y|,w,h
+
+            pygame.display.update()
+            pygame.time.delay(50)
+
+    main()
+
+
+
+
+# -------------------------
+# import GuiGAMES as g
+# g.pygame11()
+# pong automatic - #ping pong - pong
+# - this version
+# - when I hit up and down keys - it moves smoothly instead of jumping
+def pygame11():
+    import pygame, sys
+    # from pygame.locals import *
+
+    def main():
+        pygame.init()
+        ww = 500  # window width
+        wh = 400  # window height
+        DISPLAY = pygame.display.set_mode((ww, wh), 0, 32)
+        WHITE = (255, 255, 255)
+        BLUE = (0, 0, 255)
+        GREEN = (0, 255, 0)
+        RED = (255, 0, 0)
+        BLACK = (0, 0, 0)
+        TEXTCOLOR = (0, 0, 0)
+
+        # DISPLAY.fill(BLACK)
+        # pygame.draw.line(surface, color, start_pos, end_pos, width)
+        # pygame.draw.circle(DISPLAY, WHITE, (200, 150), 12, 0)
+        # pygame.draw.circle(surface, color, center, radius)
+        # pygame.draw.rect(SURFACE, RGB_COLOR, (X, Y, WIDTH, HEIGHT))
+        # pygame.draw.rect(DISPLAY, WHITE, (100, 50, 200, 30)) #x-,y|,w,h
+        # pygame.draw.rect(DISPLAY, WHITE, (100, 420, 200, 30))
+        x = ww / 2
+        y = wh / 2
+        circleRadius = 12
+        barH = 150
+        barW = 20
+        xP1 = 30  # 30, 120 # x-,y|
+        xP2 = 450  # 450, 120 # x-,y|
+        yP1 = 120  # x-,y|
+        yP2 = 120  # x-,y|
+        p1points = 0
+        p2points = 0
+        directionBall = "l"
+        directionBall2 = "d"
+        velocity = 6
+        direction = "l"
+        direction2 = "u"
+        # acceleration = 0.01
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+                # add in keypresses - to move the 2 bars up and down
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        print("up key pressed")
+                        yP1 = yP1 - 50
+                    elif event.key == pygame.K_DOWN:
+                        print("down key pressed")
+                        yP1 = yP1 + 50
+                    elif event.key == pygame.K_LEFT:
+                        print("left key pressed")
+                        yP2 = yP2 - 50
+                    elif event.key == pygame.K_RIGHT:
+                        print("right key pressed")
+                        yP2 = yP2 + 50
+            # print(f"x:{x},y:{y}")
+
+            # if top of the bar goes off screen, bring it back
+            # if it touches the bottom:
+            if yP1 > wh - barH - 10: # x-,y|
+                pass
+            # if it touches the top
+            elif yP1 < 10: # x-,y|
+                pass
+
+            # yP2 = 120  # x-,y|
+            # move it right or left here
+            # directionBall = "l"
+            if directionBall == "r":
+                x += velocity
+            if directionBall == "l":
+                x -= velocity
+            # move it up or down here
+            # directionBall2 = "u"
+            if directionBall2 == "u":
+                y -= velocity * .5
+            if directionBall2 == "d":
+                y += velocity * .5
+
+            ballInP2barArea = True
+            # if y matches between, yP1 - yP1+BarHeight
+            # player 1
+            if y >= yP1 and y <= yP1 + barH:
+                ballInP1barArea = True
+            else:
+                ballInP1barArea = False
+            # player 2
+            if y >= yP2 and y <= yP2 + barH:
+                ballInP2barArea = True
+            else:
+                ballInP2barArea = False
+
+            # go the other way when it reaches the right side
+            if x > ww-60 and ballInP2barArea == True:  # on the right side #x-,y|,w,h
+                directionBall = "l"
+                # print("changing direction to going left")
+            if x < 65 and ballInP1barArea == True:  # on the left side #x-,y|,w,h
+                directionBall = "r"
+                # print("changing direction to going right")
+            if y < 20:  # on the top side  #x-,y|,w,h
+                # print("you're at the top")
+                directionBall2 = "d"
+                # print("changing direction to going down")
+            if y > wh-20:  # on the bottom side #x-,y|,w,h
+                directionBall2 = "u"
+                # print("changing direction to going up")
+
+            # RESETTING The Game Board & Points for Both Players:
+            # Assigning Points:
+            #if the ball goes past the P1 Bar, and goes out:
+            if x < 10 and ballInP1barArea == False:  # on the left side #x-,y|,w,h
+                pass
+                # start a new game - center the 3 elements - start over
+                # p2points += 1 ... #change all the x's and y's ... and save the point
+                x = ww / 2
+                y = wh / 2
+                xP1 = 30  # 30, 120 # x-,y|
+                xP2 = 450  # 450, 120 # x-,y|
+                yP1 = 120  # x-,y|
+                yP2 = 120  # x-,y|
+                p2points += 1
+                print(f"p1points: {p1points} ... p2points: {p2points}")
+                directionBall = "r"
+                directionBall2 = "d"
+            # if the ball goes past the P2 Bar, and goes out:
+            if x > 500 and ballInP2barArea == False:
+                x = ww / 2
+                y = wh / 2
+                xP1 = 30  # 30, 120 # x-,y|
+                xP2 = 450  # 450, 120 # x-,y|
+                yP1 = 120  # x-,y|
+                yP2 = 120  # x-,y|
+                p1points += 1
+                print(f"p1points: {p1points} ... p2points: {p2points}")
+                directionBall = "r"
+                directionBall2 = "d"
+
+            DISPLAY.fill(BLACK)
+            # pygame.draw.circle(surface, color, center, radius)
+            pygame.draw.circle(DISPLAY, WHITE, (x, y), circleRadius)
+            pygame.draw.rect(DISPLAY, WHITE, (xP1, yP1, barW, barH))  # x-,y|,w,h
+            # pygame.draw.rect(SURFACE, RGB_COLOR, (X, Y, WIDTH, HEIGHT)) # x-,y|,w,h
+            pygame.draw.rect(DISPLAY, RED, (xP2, yP2, barW, barH))  # x-,y|,w,h
+
+            pygame.font.init() # you have to call this at the start of using fonts
+            myfont = pygame.font.SysFont('Comic Sans MS', 16)
+            textsurface1 = myfont.render(f'Player 1 Points: {p1points}', False, WHITE)
+            DISPLAY.blit(textsurface1, (50, wh - 30))  # x-,y|,w,h
+            textsurface2 = myfont.render(f'Player 2 Points: {p2points}', False, WHITE)
+            DISPLAY.blit(textsurface2, (350, wh - 30))  # x-,y|,w,h
+
+            pygame.display.update()
+            pygame.time.delay(50)
+
+    main()
+
+
+
+
+
+#------------------------------------------------
+
+
+
 
 # import GuiGAMES as guiGames
-# guiGames.PongPlay()
-# guiGames.SudokuPlay()
-# guiGames.BattleshipPlay()
-# guiGames.MinesweeperPlay() # #take it out of the function - it doesn't run like this
-# guiGames.ticTacToePlay()
+# guiGames.firstGame()
+
+#draws a circle where you click - diff colors
+def firstGame():
+    # Import statements are to enable the code to use the functions from the library
+    import pygame
+    import sys
+    import os
+    import random
+
+    # instructions to windows to center the game window in the center of
+    # the screen, which it might ignore
+    os.environ["SDL_VIDEO_CENTERED"] = "1"
+
+    # initialize pygame
+    pygame.init()
+
+    # Right way
+    SCREENWIDTH = 500
+    SCREENHEIGHT = 500
+    SCREENSIZE = [SCREENWIDTH, SCREENHEIGHT]
+    SCREEN = pygame.display.set_mode(SCREENSIZE)
+
+    # caption for the game
+    pygame.display.set_caption("My first game in pygame")
+
+    RADIUS = 20
+    ZEROINTENSITY = 0
+    MAXINTENSITY = 255
+
+    while True:
+        pos = pygame.mouse.get_pos()
+        for events in pygame.event.get():
+            if events.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            # Here for any commands inside the for loop
+            if events.type == pygame.MOUSEBUTTONDOWN:
+                COLOR = (random.randint(ZEROINTENSITY, MAXINTENSITY), random.randint(ZEROINTENSITY, MAXINTENSITY),
+                         random.randint(ZEROINTENSITY, MAXINTENSITY))
+                # note- we have skipped the last parameter and by default, 0 is taken
+                pygame.draw.circle(SCREEN, COLOR, pos, RADIUS)
+
+        # beware of the positioning of this line. It should be inside the while
+        # for all the commands that need to be executed inside the while
+        pygame.display.update()
 
 
 # v1

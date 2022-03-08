@@ -1,24 +1,2239 @@
 #GUI APPS
 
+# import GuiAPPs as apps
+# apps.basicCanvasDrawing1() # LEARNING - tkinter canvas - drawing
+#
+# apps.fileListWithOpen()
+#
+"""
+import GuiAPPs as apps
+#imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\png.png'
+#imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\grass.gif'
+imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\will-turner-GTPT_fNFQiE-unsplash.jpg'
+apps.openImage4Canvas(imagePath,500,500) # w and h
+"""
+# guiApps.notificationMESSAGE()
+#
+# apps.simpleWindow1()
+#
+# apps.guiBGchangeShow()
+# apps.guiAppShow()
+# apps.guiBallMovePlay()
+# apps.guiCalcShow()
+# apps.guiColorsShow()
+# apps.GuiCOMMISSIONshow()
+# apps.GuiCOOLdesignShow()
+# apps.guiDateShow()
+# apps.guiPhotoGalleryShow() # "z-IMAGES_1\0.cool\"
+# apps.HTMLlikeDesignShow()
+# apps.GuiMACLauncherShow()
+# apps.GuiSplashSCREENshow()
+# apps.GuiTIMERshow()
+# apps.GuiWEATHERshow()
+# import GuiAPPs as apps
+# apps.GuiWindowLAYOUTSshow() #cycles thru them as you close them
+# apps.GuiWithImageBUTTONSshow()
+# apps.GUIphotosViewerBroke()
+
+from tkinter import * #some programs need this out of the function
+
+
+
+#--------------------------------
+
+
+
+
+# import GuiAPPs as a
+# a.pdnaBankSHOWMyPeople() # photo gallery layout
+#
+# make images buttons or links
+#
+# 6 Clickable Images with Filenames # a photo gallery layout # buttons that do things
+def pdnaBankSHOWMyPeople():
+    #import OPENsomething as o
+    #peopleCSV = o.pdnaBankGetMyPeopleCSV()
+    import listAllFILES as f
+    nameImgs = [ ["Woman", "image.jpg"], ["Woman2", "image2.jpg"] ] # [] list of ... name, thumbImgPath
+    print(f"\n--nameImgs ({len(nameImgs)}): {nameImgs}")
+    c=0
+    for nameImg in nameImgs:
+        if c <= 10:
+            name = nameImg[0]
+            thumbPath = nameImg[1]
+            print(f" ({c}) name/thumbPath ... {name} / {thumbPath}")
+        else:
+            break
+        c += 1
+    return nameImgs
+
+
+#------------------------------------------
+
+# import GuiAPPs as g
+# x,y = g.getPixelxyFromDeg360(deg360=191.1)
+def getPixelxyFromDeg360(deg360=191.1, position=0):
+    #-------------------------------------------------
+    # the 0 is having problems getting plotted right
+    # -------------------------------------------------
+    import ASTROLOGYmagi as m
+    import FUNCTIONS as f
+    #locations for the xy around the circle - accoring to each 30 degrees - a px to px line to draw the values on
+    xyLoc = m.xyLoc # 0: {'start-deg': 0, 'end-deg': 30, 'minXY': [80, 340], 'maxXY': [120, 340]},
+
+    #print(f"deg360: {deg360}")
+    deg360 = float(deg360)
+
+    #looping through all of the start and end degrees
+    #when it matches - determine the right pixel location - along - from min-to-max
+    # - EXAMPLE: 18Libra=18/30=0.6, so it would be .6 * the pixel distance from min to max + plus min
+    for i in range(len(xyLoc)):
+        loc = xyLoc[i]
+
+        start_deg = loc['start-deg'] #start of the 12th cut piece
+        end_deg = loc['end-deg'] #end of the 12th cut piece
+
+        #if deg360<=30:
+            #pass
+            #leftover_deg = deg360
+            #print(f"HELP - deg360 ({deg360}) >= start_deg ({start_deg}) and deg360 ({deg360}) < end_deg ({end_deg})")
+        # this is the degree group I'm in - found
+        if deg360>=start_deg and deg360<end_deg: #if it falls within:
+            leftover_deg = f.round_down4(deg360-start_deg) # how much is left - % of /30 - that is how far - between minxy and maxxy
+            #for now just return the minxy value - to get things going
+
+            # it will be a percentage between these pixel locations
+            minX, minY = loc['minXY']
+            maxX, maxY = loc['maxXY']
+            #print(f"minY: {minY} / maxY: {maxY}") #340 - 340 = 0
+            pxDistanceDiffX = maxX - minX
+            if pxDistanceDiffX<0:
+                pxDistanceDiffX = minX - maxX
+            #print(f"pxDistanceDiffX: {pxDistanceDiffX}")
+            pixelX_add = int(f.round_down(pxDistanceDiffX / 30 * leftover_deg))
+            pxDistanceDiffY = maxY - minY
+            if pxDistanceDiffY<=0:
+                pxDistanceDiffY = minY - maxY
+            #print(f"pxDistanceDiffY: {pxDistanceDiffY}") #DiffY is 0 - when deg is under 30
+            pixelY_add = int(f.round_down(pxDistanceDiffY / 30 * leftover_deg))
+            #----------------------------
+            positionMoveX = position * 15 # x--
+            positionMoveY = position * 15 # y|
+            #positionMoveX = 0
+            #positionMoveY = 0
+
+            if minX < maxX:
+                x = minX + pixelX_add + positionMoveX # x--
+            else: # if minX > maxX:
+                x = minX - pixelX_add - positionMoveX # x--
+
+            if minY < maxY:
+                y = minY + pixelY_add + positionMoveY # y|
+            else: # if minY > maxY:
+                y = minY - pixelY_add - positionMoveY # y|
+
+            #print(f"{i}) deg360: {deg360}, leftover_deg: {leftover_deg}  / NEW X,Y - / minX: {minX}, NEW-x: {x}, maxX: {maxX} / minY: {minY}, NEW-y: {y}, maxY: {maxY}  /  pxDistanceDiffX: {pxDistanceDiffX}, pxDistanceDiffY: {pxDistanceDiffY}  /  pixelX_add: {pixelX_add}, pixelY_add: {pixelY_add}")
+
+            return x, y
+
+#------------------------------------------
+
+# import GuiAPPs as g
+# g.chartWheel()
+def chartWheel():
+    show = True
+    #---------------------------------------
+    # UNCOMMENT LAST LINE - TO SEE OUTPUT
+    #---------------------------------------
+    import GuiAPPs as g
+    import ASTROLOGYfunctions as aa
+    import FUNCTIONS as f
+    #me = aa.me()
+    #planets2 = me['planets']['360']
+    today = aa.today()
+    planets2 = today['planets']['360']
+
+    geo = []
+    helio = []
+    #remove helio - or seperate them
+    for planetLine in planets2:
+        #print(f"planetLine: {planetLine}")
+        p1=planetLine.split(": ")
+        planetName = p1[0]
+        DegRxDecDisSpeed = p1[1]
+        d = DegRxDecDisSpeed.split("/")
+        degrees = d[0]
+        #Rx = d[1]
+        #declination = d[2]
+        #distance = d[3]
+        #speed = d[4]
+
+        if "_g" in planetName:
+            geo.append(planetLine)
+        if "_h" in planetName:
+            helio.append(planetLine)
+
+    planets = geo
+    #planets = helio
+    #----------------------------------------
+    from PIL import ImageTk, Image
+    # from tkinter import *
+    w = Tk()  # the window - attributes
+    w.title('Astrology Chart Wheel for Magi')
+    w.geometry('880x685')  # window width and height
+    w.config(bg='#345')  # window background color
+    # THE CANVAS (w) - is tied in below with the passed 'w' var:
+    canvas = Canvas(  # this is what you can draw on - a canvas square
+        w,
+        height=650,  # it's a square area, w-h
+        width=700,
+        bg="#fff"  # canvas background color
+    )
+    canvas.pack(side = TOP, anchor = NW, padx = 70, pady = 20)
+    #-------------------------------------------
+    # title
+    canvas.create_text(350, 20, fill="darkblue", font="Times 18 italic bold", text="Astrology Chart Wheel for Magi")
+    # -------------------
+    # the chart circle:
+    canvas.create_oval(110, 110, 570, 570)
+    # -------------------
+    canvas.create_text(80, 340, fill="darkblue", font="Times 10 italic bold", text="0 deg")
+    canvas.create_text(120, 475, fill="darkblue", font="Times 10 italic bold", text="30 deg")
+    canvas.create_text(212, 565, fill="darkblue", font="Times 10 italic bold", text="60 deg")
+    canvas.create_text(340, 600, fill="darkblue", font="Times 10 italic bold", text="90 deg")
+    canvas.create_text(470, 575, fill="darkblue", font="Times 10 italic bold", text="120 deg")
+    canvas.create_text(570, 480, fill="darkblue", font="Times 10 italic bold", text="150 deg")
+    canvas.create_text(600, 340, fill="darkblue", font="Times 10 italic bold", text="180 deg")
+    canvas.create_text(570, 200, fill="darkblue", font="Times 10 italic bold", text="210 deg")
+    canvas.create_text(470, 110, fill="darkblue", font="Times 10 italic bold", text="240 deg")
+    canvas.create_text(340, 80, fill="darkblue", font="Times 10 italic bold", text="270 deg")
+    canvas.create_text(210, 105, fill="darkblue", font="Times 10 italic bold", text="300 deg")
+    canvas.create_text(113, 200, fill="darkblue", font="Times 10 italic bold", text="330 deg")
+
+    canvas.create_line(80, 340, 600, 340)  # line, x1,y1, x2,y2
+    canvas.create_line(340, 600, 340, 80)  # line, x1,y1, x2,y2
+    canvas.create_line(120, 475, 570, 200)  # line, x1,y1, x2,y2
+    canvas.create_line(212, 565, 470, 110)  # line, x1,y1, x2,y2
+    canvas.create_line(470, 575, 210, 105)  # line, x1,y1, x2,y2
+    canvas.create_line(570, 480, 113, 200)  # line, x1,y1, x2,y2
+
+    #---------------------------
+    # plot all the planets with their name - around the circle - geo longitudes
+    # if there is already one planet that is in that location - conjuction - move it away - to see it
+
+    used5degSection = {}
+    c=0
+    for i in range(72):
+        used5degSection[i * 5] = 0
+        c += 5
+
+    #print(f"used5degSection ({len(used5degSection)}):")
+    #f.print2(used5degSection)
+    #print("exiting")
+    #exit()
+    for planet in planets:
+        p1=planet.split(": ")
+        planetName = p1[0]
+        DegDecDisSpeed = p1[1]
+        d = DegDecDisSpeed.split("/")
+        degrees = f.round_down1(float(d[0]))
+        degreesRoundedDownTo5 = aa.degreesRoundedDownToA5(degrees)
+        used5degSection[degreesRoundedDownTo5] += 1
+        numberInThatPosition = used5degSection[degreesRoundedDownTo5]
+        #declination = d[1]
+        #distance = d[2]
+        #speed = d[3]
+        x,y = g.getPixelxyFromDeg360(deg360=degrees, position=numberInThatPosition)
+
+        #based on the degrees - plot around the cirlce - the planet name
+        text1 = f"{planetName} ({degrees})"
+        canvas.create_text(x, y, fill="darkblue", font="Times 6", text=text1) # italic bold
+        #text1 = canvas.create_text( 140, 68, fill="darkblue", font="Times 10 italic bold", text="Chiron")
+
+
+    if show==True:
+        w.mainloop() # starts it
+
+
+
+"""
+#use the lines to Connect Planets
+#canvas.create_line(50, 50, 200, 100) #line, x1,y1, x2,y2
+#
+#canvas.create_line(300, 35, 300, 200, dash=(4, 2)) # dashed line
+#canvas.create_line(55, 85, 155, 85, 105, 180, 55, 85) # triangle
+
+#-----------------------------
+
+# These draw the lines - so it looks like divided by 12 signs / sections
+#
+canvas.create_text(80, 340, fill="darkblue", font="Times 10 italic bold", text="0 deg")
+canvas.create_text(120, 475, fill="darkblue", font="Times 10 italic bold", text="30 deg")
+canvas.create_text(212, 565, fill="darkblue", font="Times 10 italic bold", text="60 deg")
+canvas.create_text(340, 600, fill="darkblue", font="Times 10 italic bold", text="90 deg")
+canvas.create_text(470, 575, fill="darkblue", font="Times 10 italic bold", text="120 deg")
+canvas.create_text(570, 480, fill="darkblue", font="Times 10 italic bold", text="150 deg")
+canvas.create_text(600, 340, fill="darkblue", font="Times 10 italic bold", text="180 deg")
+canvas.create_text(570, 200, fill="darkblue", font="Times 10 italic bold", text="210 deg")
+canvas.create_text(470, 110, fill="darkblue", font="Times 10 italic bold", text="240 deg")
+canvas.create_text(340, 80, fill="darkblue", font="Times 10 italic bold", text="270 deg")
+canvas.create_text(210, 105, fill="darkblue", font="Times 10 italic bold", text="300 deg")
+canvas.create_text(113, 200, fill="darkblue", font="Times 10 italic bold", text="330 deg")
+"""
+
+
+
+#------------------------------------------
+
+# import GuiAPPs as a
+# a.pdnaBankGallery3() # photo gallery layout
+#
+# make images buttons or links
+#
+# 6 Clickable Images with Filenames # a photo gallery layout # buttons that do things
+# 3 across, 3 down, 9 total per page
+def pdnaBankGallery3():
+    s = 24 #0, 24, 48, etc #startingNumber
+    #print(f"\n--nameImgs ({len(nameImgs)}): {nameImgs}")
+    # nameImgs[0][0]=name ... nameImgs[0][1]=thumbnail
+
+    from PIL import ImageTk, Image
+    # from tkinter import *
+    w = Tk()  # the window - attributes
+    w.title('pdnaBank Gallery')
+    w.geometry('850x700')  # window width and height
+    w.config(bg='#345')  # window background color
+
+    # THE CANVAS (ws) - is tied in below with the passed 'ws' var:
+    canvas = Canvas(  # this is what you can draw on - a canvas square
+        w,
+        height=650,  # it's a square area, w-h
+        width=700,
+        bg="#fff"  # canvas background color
+    )
+
+    #canvas.pack()  # maybe it gets it ready for you to draw on it
+    canvas.pack(side = TOP, anchor = NW, padx = 70, pady = 20)  # maybe it gets it ready for you to draw on it
+
+    """
+    canvas.create_rectangle(  # you can draw a box - onto the canvas
+        30, 30, 180, 120,  # xy, xy - of the 200px-w-h canvas - where do we draw a box?
+        outline="#fb0",  # outline color - 1px
+        fill="#345")  # the fill color - inside the box
+    # orange = #fb0 #inside the rectangle
+    """
+    # nameImgs[0][0]=name ... nameImgs[0][1]=thumbnail
+
+    imageFilepath = "C:/Users/myvor/PycharmProjects/pythonProject/z-IMAGES_1/grassy_hills.jpg"
+    img1 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img2 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img3 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img4 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img5 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img6 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img7 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img8 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img9 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img10 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img11 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img12 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img13 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img14 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img15 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img16 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img17 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img18 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img19 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img20 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img21 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img22 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img23 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+    img24 = ImageTk.PhotoImage(Image.open(imageFilepath))  # img = PhotoImage(file=imagePath)
+
+    # -------------------
+
+    #---------------------------
+    #row 1
+    button1 = Button(w, image=img1, command=quit)#.pack() #make the image clickable
+    button1.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button1.place(x=80, y=68) # x-y|
+    text1 = canvas.create_text( 140, 68, fill="darkblue", font="Times 10 italic bold",
+        text="Grassy Hills") #nameImgs[0][0] # x-y| # "Person's Name Here"
+
+    button2 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button2.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button2.place(x=300, y=68) # x-y|
+    text2 = canvas.create_text( 370, 68, fill="darkblue", font="Times 10 italic bold",
+        text="Grassy Hills") #nameImgs[0][0] # x-y| # "Person's Name Here"
+
+    button3 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button3.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button3.place(x=530, y=68)  # x-y|
+    text3 = canvas.create_text(600, 68, fill="darkblue", font="Times 10 italic bold",
+        text="Grassy Hills") #nameImgs[0][0] # x-y| # "Person's Name Here"
+
+    #---------------------------
+    # row 2
+    button4 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button4.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button4.place(x=80, y=130) # x-y|
+    text4 = canvas.create_text( 140, 130, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+    button5 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button5.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button5.place(x=300, y=130) # x-y|
+    text5 = canvas.create_text( 370, 130, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[3][0]
+
+    button6 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button6.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button6.place(x=530, y=130)  # x-y|
+    text6 = canvas.create_text(600, 130, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+
+    #---------------------------
+    #row 3
+    button7 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button7.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button7.place(x=80, y=200) # x-y|
+    text7 = canvas.create_text( 140, 210, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[4][0]
+
+    button8 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button8.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button8.place(x=300, y=200) # x-y|
+    text8 = canvas.create_text(370, 210, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[5][0]
+
+    button9 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button9.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button9.place(x=530, y=200)  # x-y|
+    text9 = canvas.create_text(600, 210, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+    #---------------------------
+    #row 4
+    button10 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button10.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button10.place(x=80, y=270) # x-y|
+    text10 = canvas.create_text( 140, 280, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[4][0]
+
+    button11 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button11.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button11.place(x=300, y=270) # x-y|
+    text11 = canvas.create_text(370, 280, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[5][0]
+
+    button12 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button12.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button12.place(x=530, y=270)  # x-y|
+    text12 = canvas.create_text(600, 280, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+
+    #---------------------------
+    #row 5
+    button13 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button13.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button13.place(x=80, y=340) # x-y|
+    text13 = canvas.create_text( 140, 350, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[4][0]
+
+    button14 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button14.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button14.place(x=300, y=340) # x-y|
+    text14 = canvas.create_text(370, 350, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[5][0]
+
+    button15 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button15.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button15.place(x=530, y=340)  # x-y|
+    text15 = canvas.create_text(600, 350, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+
+    #---------------------------
+    #row 6
+    button16 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button16.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button16.place(x=80, y=410) # x-y|
+    text16 = canvas.create_text( 140, 420, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[4][0]
+
+    button17 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button17.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button17.place(x=300, y=410) # x-y|
+    text17 = canvas.create_text(370, 420, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[5][0]
+
+    button18 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button18.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button18.place(x=530, y=410)  # x-y|
+    text18 = canvas.create_text(600, 420, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+
+
+    #---------------------------
+    #row 7
+    button19 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button19.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button19.place(x=80, y=480) # x-y|
+    text19 = canvas.create_text( 140, 490, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[4][0]
+
+    button20 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button20.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button20.place(x=300, y=480) # x-y|
+    text20 = canvas.create_text(370, 490, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[5][0]
+
+    button21 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button21.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button21.place(x=530, y=480)  # x-y|
+    text21 = canvas.create_text(600, 490, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+
+
+    #---------------------------
+    #row 8
+    button22 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button22.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button22.place(x=80, y=550) # x-y|
+    text22 = canvas.create_text( 140, 560, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[4][0]
+
+    button23 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button23.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button23.place(x=300, y=550) # x-y|
+    text23 = canvas.create_text(370, 560, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[5][0]
+
+    button24 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button24.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button24.place(x=530, y=550)  # x-y|
+    text24 = canvas.create_text(600, 560, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+
+    #-------------------------------------------
+    #at the top
+    button1btn = Button(w, text="Quit", command=quit, anchor=W)
+    button1btn.configure(width=20, activebackground="#33B5E5", relief=FLAT)
+    button1btn.place(x=620, y=30) # x-y|
+
+    canvas.create_text(350, 20, fill="darkblue", font="Times 18 italic bold",
+        text=f"Create the Astrology Wheel for Magi") #nameImgs[2][0] # x-y|
+
+    #MAKING TEXT clickable
+    canvas.tag_bind(text1, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text2, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text3, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text4, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text5, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text6, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text7, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text8, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text9, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text10, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text11, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text12, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text13, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text14, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text15, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text16, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text17, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text18, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text19, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text20, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text21, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text22, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text23, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text24, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+
+    # you add everything onto the canvas, and then you call the mainloop()
+    # which starts it
+    w.mainloop()  # the ws from the beginning - the window sizes
+
+
+
+
+# import GuiAPPs as a
+# a.pdnaBankGallery2() # photo gallery layout
+#
+# make images buttons or links
+#
+# 6 Clickable Images with Filenames # a photo gallery layout # buttons that do things
+# 3 across, 3 down, 9 total per page
+def pdnaBankGallery2():
+    import listAllFILES as f
+    nameImgs = f.returnNameImgs()
+    print(f"\n--nameImgs ({len(nameImgs)}): {nameImgs}")
+    # nameImgs[0][0]=name ... nameImgs[0][1]=thumbnail
+
+    from PIL import ImageTk, Image
+    # from tkinter import *
+    w = Tk()  # the window - attributes
+    w.title('pdnaBank Gallery')
+    w.geometry('850x700')  # window width and height
+    w.config(bg='#345')  # window background color
+
+    # THE CANVAS (ws) - is tied in below with the passed 'ws' var:
+    canvas = Canvas(  # this is what you can draw on - a canvas square
+        w,
+        height=650,  # it's a square area, w-h
+        width=700,
+        bg="#fff"  # canvas background color
+    )
+
+    #canvas.pack()  # maybe it gets it ready for you to draw on it
+    canvas.pack(side = TOP, anchor = NW, padx = 70, pady = 20)  # maybe it gets it ready for you to draw on it
+
+    """
+    canvas.create_rectangle(  # you can draw a box - onto the canvas
+        30, 30, 180, 120,  # xy, xy - of the 200px-w-h canvas - where do we draw a box?
+        outline="#fb0",  # outline color - 1px
+        fill="#345")  # the fill color - inside the box
+    # orange = #fb0 #inside the rectangle
+    """
+    #imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\grass.gif'
+    #img = ImageTk.PhotoImage(Image.open(imagePath)) #img = PhotoImage(file=imagePath)
+
+    # nameImgs[0][0]=name ... nameImgs[0][1]=thumbnail
+
+    img1 = ImageTk.PhotoImage(Image.open(nameImgs[0][1]))  # img = PhotoImage(file=imagePath)
+    img2 = ImageTk.PhotoImage(Image.open(nameImgs[1][1]))  # img = PhotoImage(file=imagePath)
+    img3 = ImageTk.PhotoImage(Image.open(nameImgs[2][1]))  # img = PhotoImage(file=imagePath)
+    img4 = ImageTk.PhotoImage(Image.open(nameImgs[3][1]))  # img = PhotoImage(file=imagePath)
+    img5 = ImageTk.PhotoImage(Image.open(nameImgs[4][1]))  # img = PhotoImage(file=imagePath)
+    img6 = ImageTk.PhotoImage(Image.open(nameImgs[5][1]))  # img = PhotoImage(file=imagePath)
+
+    # -------------------
+    showBtns = True
+    #-------------------
+
+
+    #---------------------------
+    #row 1
+    button1 = Button(w, image=img1, command=quit)#.pack() #make the image clickable
+    button1.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button1.place(x=80, y=68) # x-y|
+    text1 = canvas.create_text( 140, 68, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[0][0] # x-y|
+
+    button2 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button2.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button2.place(x=300, y=68) # x-y|
+    text2 = canvas.create_text( 370, 68, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[1][0]
+
+    button3 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button3.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button3.place(x=530, y=68)  # x-y|
+    text3 = canvas.create_text(600, 68, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+    #---------------------------
+    # row 2
+    button4 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button4.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button4.place(x=80, y=130) # x-y|
+    text4 = canvas.create_text( 140, 130, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+    button5 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button5.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button5.place(x=300, y=130) # x-y|
+    text5 = canvas.create_text( 370, 130, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[3][0]
+
+    button6 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button6.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button6.place(x=530, y=130)  # x-y|
+    text6 = canvas.create_text(600, 130, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+
+    #---------------------------
+    #row 3
+    button7 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button7.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button7.place(x=80, y=200) # x-y|
+    text7 = canvas.create_text( 140, 210, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[4][0]
+
+    button8 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button8.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button8.place(x=300, y=200) # x-y|
+    text8 = canvas.create_text(370, 210, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[5][0]
+
+    button9 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button9.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button9.place(x=530, y=200)  # x-y|
+    text9 = canvas.create_text(600, 210, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+    #---------------------------
+    #row 4
+    button10 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button10.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button10.place(x=80, y=270) # x-y|
+    text10 = canvas.create_text( 140, 280, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[4][0]
+
+    button11 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button11.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button11.place(x=300, y=270) # x-y|
+    text11 = canvas.create_text(370, 280, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[5][0]
+
+    button12 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button12.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button12.place(x=530, y=270)  # x-y|
+    text12 = canvas.create_text(600, 280, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+
+    #---------------------------
+    #row 5
+    button13 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button13.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button13.place(x=80, y=340) # x-y|
+    text13 = canvas.create_text( 140, 350, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[4][0]
+
+    button14 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button14.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button14.place(x=300, y=340) # x-y|
+    text14 = canvas.create_text(370, 350, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[5][0]
+
+    button15 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button15.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button15.place(x=530, y=340)  # x-y|
+    text15 = canvas.create_text(600, 350, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+
+    #---------------------------
+    #row 6
+    button16 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button16.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button16.place(x=80, y=410) # x-y|
+    text16 = canvas.create_text( 140, 420, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[4][0]
+
+    button17 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button17.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button17.place(x=300, y=410) # x-y|
+    text17 = canvas.create_text(370, 420, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[5][0]
+
+    button18 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button18.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button18.place(x=530, y=410)  # x-y|
+    text18 = canvas.create_text(600, 420, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+
+
+    #---------------------------
+    #row 7
+    button19 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button19.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button19.place(x=80, y=480) # x-y|
+    text19 = canvas.create_text( 140, 490, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[4][0]
+
+    button20 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button20.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button20.place(x=300, y=480) # x-y|
+    text20 = canvas.create_text(370, 490, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[5][0]
+
+    button21 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button21.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button21.place(x=530, y=480)  # x-y|
+    text21 = canvas.create_text(600, 490, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+
+
+    #---------------------------
+    #row 8
+    button22 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button22.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button22.place(x=80, y=550) # x-y|
+    text22 = canvas.create_text( 140, 560, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[4][0]
+
+    button23 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button23.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button23.place(x=300, y=550) # x-y|
+    text23 = canvas.create_text(370, 560, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[5][0]
+
+    button24 = Button(w, image=img1, command=quit)  # .pack() #make the image clickable
+    button24.configure(width=50, height=50, activebackground="#33B5E5", relief=FLAT)
+    button24.place(x=530, y=550)  # x-y|
+    text24 = canvas.create_text(600, 560, fill="darkblue", font="Times 10 italic bold",
+        text="Person's Name Here") #nameImgs[2][0]
+
+
+    #-------------------------------------------
+    #at the top
+    button1btn = Button(w, text="Quit", command=quit, anchor=W)
+    button1btn.configure(width=20, activebackground="#33B5E5", relief=FLAT)
+    button1btn.place(x=620, y=30) # x-y|
+
+    canvas.create_text(350, 20, fill="darkblue", font="Times 18 italic bold",
+        text=f"Your PDNABank ({len(nameImgs)})") #nameImgs[2][0] # x-y|
+
+    #MAKING TEXT clickable
+    canvas.tag_bind(text1, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text2, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text3, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text4, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text5, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text6, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text7, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text8, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text9, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text10, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text11, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text12, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text13, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text14, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text15, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text16, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text17, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text18, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text19, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text20, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text21, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text22, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text23, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+    canvas.tag_bind(text24, "<Button-1>", quit)  ## when the square is clicked runs function "clicked".
+
+    # you add everything onto the canvas, and then you call the mainloop()
+    # which starts it
+    w.mainloop()  # the ws from the beginning - the window sizes
+
+
+
+
+
+
+# import GuiAPPs as a
+# a.pdnaBankGallery1() # photo gallery layout
+#
+# make images buttons or links
+#
+# 6 Clickable Images with Filenames # a photo gallery layout # buttons that do things
+def pdnaBankGallery1():
+    import listAllFILES as f
+    nameImgs = f.returnNameImgs()
+    print(f"\n--nameImgs ({len(nameImgs)}): {nameImgs}")
+    # nameImgs[0][0]=name ... nameImgs[0][1]=thumbnail
+
+    from PIL import ImageTk, Image
+    # from tkinter import *
+    w = Tk()  # the window - attributes
+    w.title('pdnaBank Gallery')
+    w.geometry('800x700')  # window width and height
+    w.config(bg='#345')  # window background color
+
+    # THE CANVAS (ws) - is tied in below with the passed 'ws' var:
+    canvas = Canvas(  # this is what you can draw on - a canvas square
+        w,
+        height=650,  # it's a square area, w-h
+        width=650,
+        bg="#fff"  # canvas background color
+    )
+
+    #canvas.pack()  # maybe it gets it ready for you to draw on it
+    canvas.pack(side = TOP, anchor = NW, padx = 70, pady = 20)  # maybe it gets it ready for you to draw on it
+
+    """
+    canvas.create_rectangle(  # you can draw a box - onto the canvas
+        30, 30, 180, 120,  # xy, xy - of the 200px-w-h canvas - where do we draw a box?
+        outline="#fb0",  # outline color - 1px
+        fill="#345")  # the fill color - inside the box
+    # orange = #fb0 #inside the rectangle
+    """
+    imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\grass.gif'
+    #img = ImageTk.PhotoImage(Image.open(imagePath)) #img = PhotoImage(file=imagePath)
+
+    # nameImgs[0][0]=name ... nameImgs[0][1]=thumbnail
+
+    img1 = ImageTk.PhotoImage(Image.open(nameImgs[0][1]))  # img = PhotoImage(file=imagePath)
+    img2 = ImageTk.PhotoImage(Image.open(nameImgs[1][1]))  # img = PhotoImage(file=imagePath)
+    img3 = ImageTk.PhotoImage(Image.open(nameImgs[2][1]))  # img = PhotoImage(file=imagePath)
+    img4 = ImageTk.PhotoImage(Image.open(nameImgs[3][1]))  # img = PhotoImage(file=imagePath)
+    img5 = ImageTk.PhotoImage(Image.open(nameImgs[4][1]))  # img = PhotoImage(file=imagePath)
+    img6 = ImageTk.PhotoImage(Image.open(nameImgs[5][1]))  # img = PhotoImage(file=imagePath)
+
+    # -------------------
+    showBtns = True
+    showImgs = False
+    #-------------------
+
+    #row 1
+    if showImgs == True:
+        canvas.create_image(
+            20,
+            10,
+            anchor=NW,
+            image=img1
+        )
+    if showBtns==True:
+        button1 = Button(w, image=img1, command=quit)#.pack() #make the image clickable
+        button1.configure(width=240, height=150, activebackground="#33B5E5", relief=FLAT)
+        button1.place(x=120, y=68)
+    if showImgs==True:
+        canvas.create_image(
+            290,
+            10,
+            anchor=NW,
+            image=img2
+        )
+    canvas.create_text(
+        130,
+        220,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text=nameImgs[0][0]
+    )
+    if showBtns==True:
+        button2 = Button(w, image=img2, command=quit)  # .pack() #make the image clickable
+        button2.configure(width=240, height=150, activebackground="#33B5E5", relief=FLAT)
+        button2.place(x=390, y=68)
+    canvas.create_text(
+        400,
+        220,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text=nameImgs[1][0]
+    )
+    # row 2
+    if showImgs==True:
+        canvas.create_image(
+            20,
+            200,
+            anchor=NW,
+            image=img3
+        )
+    if showBtns==True:
+        button3 = Button(w, image=img3, command=quit)  # .pack() #make the image clickable
+        button3.configure(width=240, height=150, activebackground="#33B5E5", relief=FLAT)
+        button3.place(x=120, y=258)
+    canvas.create_text(
+        140,
+        400,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text=nameImgs[2][0]
+    )
+    if showImgs==True:
+        canvas.create_image(
+            290,
+            200,
+            anchor=NW,
+            image=img4
+        )
+    if showBtns==True:
+        button4 = Button(w, image=img4, command=quit)  # .pack() #make the image clickable
+        button4.configure(width=240, height=150, activebackground="#33B5E5", relief=FLAT)
+        button4.place(x=390, y=258)
+    canvas.create_text(
+        400,
+        400,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text=nameImgs[3][0]
+    )
+    #row 3
+    if showImgs==True:
+        canvas.create_image(
+            20,
+            380,
+            anchor=NW,
+            image=img5
+        )
+    if showBtns==True:
+        button5 = Button(w, image=img5, command=quit)  # .pack() #make the image clickable
+        button5.configure(width=240, height=150, activebackground="#33B5E5", relief=FLAT)
+        button5.place(x=120, y=435)
+    canvas.create_text(
+        140,
+        590,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text=nameImgs[4][0]
+    )
+    if showImgs==True:
+        canvas.create_image(
+            290,
+            380,
+            anchor=NW,
+            image=img6
+        )
+    if showBtns==True:
+        button6 = Button(w, image=img6, command=quit)  # .pack() #make the image clickable
+        button6.configure(width=240, height=150, activebackground="#33B5E5", relief=FLAT)
+        button6.place(x=390, y=435)
+    canvas.create_text(
+        400,
+        590,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text=nameImgs[5][0]
+    )
+    #at the top
+    button1 = Button(w, text="Quit", command=quit, anchor=W)
+    button1.configure(width=20, activebackground="#33B5E5", relief=FLAT)
+    button1.place(x=320, y=30)
+
+    # you add everything onto the canvas, and then you call the mainloop()
+    # which starts it
+    w.mainloop()  # the ws from the beginning - the window sizes
+
+
+
+
+
+
+
+
+""" TKINTER CANVAS:
+The Canvas widget can support the following standard items −
+
+arc − Creates an arc item, which can be a chord, a pieslice or a simple arc.
+
+coord = 10, 50, 240, 210
+arc = canvas.create_arc(coord, start=0, extent=150, fill="blue")
+image − Creates an image item, which can be an instance of either the BitmapImage or the PhotoImage classes.
+
+filename = PhotoImage(file = "sunshine.gif")
+image = canvas.create_image(50, 50, anchor=NE, image=filename)
+line − Creates a line item.
+
+line = canvas.create_line(x0, y0, x1, y1, ..., xn, yn, options)
+oval − Creates a circle or an ellipse at the given coordinates. It takes two pairs of coordinates; the top left and bottom right corners of the bounding rectangle for the oval.
+
+oval = canvas.create_oval(x0, y0, x1, y1, options)
+polygon − Creates a polygon item that must have at least three vertices.
+
+oval = canvas.create_polygon(x0, y0, x1, y1,...xn, yn, options)
+"""
+
+#--------------------------------
+
+
+# import GuiAPPs as apps
+# apps.wholeImageIsAButton()
+
+def wholeImageIsAButton():
+    def do():
+        print("Hello World")
+
+    # from tkinter import *
+
+    ws = Tk()
+    ws.title('Image Is A Button - click it')
+    imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\grass.gif'
+    img = PhotoImage(file=imagePath)
+    Button(
+        ws,
+        image=img,
+        command=do
+    ).pack()
+
+    ws.mainloop()
+
+
+#-----------------------------
+
+
+# import GuiAPPs as apps
+# apps.photoWithCaption()
+def photoWithCaption():
+    # from tkinter import *
+    from PIL import ImageTk, Image
+
+    ws = Tk()
+    ws.title('View Image with Caption')
+    ws.geometry('500x500')
+
+    canvas = Canvas(
+        ws,
+        width=500,
+        height=400
+    )
+    canvas.pack()
+    imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\will-turner-GTPT_fNFQiE-unsplash.jpg'
+    img = ImageTk.PhotoImage(Image.open(imagePath))
+
+    canvas.create_image(
+        10,
+        10,
+        anchor=NW,
+        image=img
+    )
+    Label(
+        ws,
+        text=f'width: {img.width()} height: {img.height()}'
+    ).pack()
+
+    ws.mainloop()
+
+
+#---------------------------
+
+
+# combine parseBirthchartHTML with tkinter - read it to the screen, going down
+# see if you can read it in one text command with \n
+
+# import GuiAPPs as a
+# a.seeBirthchartSigns()
+
+def seeBirthchartSigns(): #as text
+    import ASTROLOGYfunctions as aa
+    import FUNCTIONS as f
+    import OPENsomething as o
+    me = aa.me()
+    planets = me['planets']['360']
+
+    print(f"planets: {planets}")
+    # combine it all to a string with /n's
+    string = "My Birthchart:\n\n"
+    for planet in planets:
+        string += planet + "\n"
+
+    print(f"string: {string}")
+    # -----------------------------
+    """
+    #add it into a GUI - show the whole string
+    import GuiAPPs as a
+    a.photoWithBigCaption(string=string)
+    """
+
+    # Import Module
+    import tkinter as tk
+
+    # Create Object
+    ws = tk.Tk()
+    ws.title('View Birthchart Signs')
+    ws.geometry('300x300')
+
+    # Create Label and add some text
+    the_label = tk.Label(ws, text="Some Birchart Data for a Person, Birthday, Lat & Long")
+    # using place method we can set the position of label # x-y|
+    the_label.place(relx=.02, rely=0.05, anchor='nw')
+    # Create Label and add some text
+    the_label2 = tk.Label(ws, text=string)
+    # using place method we can set the position of label # x-y|
+    the_label2.place(relx=.25, rely=0.2, anchor='nw')
+    # Execute Tkinter
+    ws.mainloop()
+
+
+
+
+
+# import GuiAPPs as a
+# a.photoWithBigCaption(string="")
+def photoWithBigCaption(string=""):
+    # from tkinter import *
+    from PIL import ImageTk, Image
+
+    ws = Tk()
+    ws.title('View Image with Caption')
+    ws.geometry('500x500')
+
+    canvas = Canvas(
+        ws,
+        width=500,
+        height=400
+    )
+    canvas.pack()
+    imagePath = 'C:\\Users\\myvor\\PycharmProjects\\pythonProject\\z-IMAGES_1\\grassy_hills.jpg'
+    img = ImageTk.PhotoImage(Image.open(imagePath))
+
+    canvas.create_image(
+        10,
+        10,
+        anchor=NW,
+        image=img
+    )
+    textLabel = Label(
+        ws,
+        text=f'width: {img.width()} height: {img.height()}\n\n{string}'
+    ).pack()
+    textLabel.place(relx=0.5, #x-y|
+                       rely=0.5,
+                       anchor='center')
+    ws.mainloop()
+
+
+#--------------------------------
+
+# import GuiAPPs as apps
+# apps.simpleWindow1()
+
+def simpleWindow1():
+    import PySimpleGUI as sg
+    sg.Window(title="Hello World", layout=[[]], margins=(100, 50)).read()
+
+
+
+# import GuiAPPs as apps
+# apps.simpleWindow2()
+
+def simpleWindow2():
+    import PySimpleGUI as sg
+
+    layout = [[sg.Text("Hello from PySimpleGUI")], [sg.Button("OK")]]
+
+    # Create the window
+    window = sg.Window("Demo", layout)
+
+    # Create an event loop
+    while True:
+        event, values = window.read()
+        # End program if user closes window or
+        # presses the OK button
+        if event == "OK" or event == sg.WIN_CLOSED:
+            break
+
+    window.close()
+
+
+#---------------------------
+
+
+
+
+
+
+
+# import GuiAPPs as apps
+# imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\will-turner-GTPT_fNFQiE-unsplash.jpg'
+# apps.openImage1(imagePath)
+
+#opens as a background in tkinter
+
+#using LABELS:
+def openImage1(imagePath="c:/path/to.jpg"):
+    import tkinter
+    #from tkinter import *
+    from PIL import Image, ImageTk
+
+    root = Tk()
+
+    # Create a photoimage object of the image in the path
+    #imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\will-turner-GTPT_fNFQiE-unsplash.jpg'
+    image1 = Image.open(imagePath)
+    test = ImageTk.PhotoImage(image1)
+
+    label1 = tkinter.Label(image=test)
+    label1.image = test
+
+    # Position image
+    label1.place(x=10, y=10) #label1.place(x=<x_coordinate>, y=<y_coordinate>)
+    root.mainloop()
+
+
+
+
+# import GuiAPPs as apps
+# imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\will-turner-GTPT_fNFQiE-unsplash.jpg'
+# apps.open1PngGif(imagePath)
+
+# opens pngs and gifs - tkinter - #it goes full screen for large images
+# USES LABELS
+def open1PngGif(imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\png.png'):
+    # from tkinter import *
+    ws = Tk()
+    ws.title('Image Viewer')
+    #imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\png.png'
+    img = PhotoImage(file=imagePath)
+    Label(
+        ws,
+        image=img
+    ).pack()
+
+    ws.mainloop()
+
+
+
+
+
+# import GuiAPPs as apps
+# imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\will-turner-GTPT_fNFQiE-unsplash.jpg'
+# apps.openImage2(imagePath,500,500) # w and h
+
+#opens as a background in tkinter
+#using LABELS:
+def openImage2(imagePath="c:/path/to.jpg",width=500, height=500):
+    #from tkinter import *
+    from PIL import ImageTk, Image
+    root = Tk()
+    canvas = Canvas(root, width=width, height=height)
+    canvas.pack()
+    #imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\will-turner-GTPT_fNFQiE-unsplash.jpg'
+    img = ImageTk.PhotoImage(Image.open(imagePath))
+    canvas.create_image(20, 20, anchor=NW, image=img)
+    root.mainloop()
+
+
+
+
+# import GuiAPPs as apps
+# imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\grass.gif'
+# apps.openImage3Canvas(imagePath,500,500) # w and h
+#uses canvas and photomethod
+def openImage3Canvas(imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\grass.gif',width=500,height=500):
+    #from tkinter import *
+    ws = Tk()
+    ws.title('View an Image')
+    ws.geometry(f'{width}x{height}')
+
+    canvas = Canvas(
+        ws,
+        width = width,
+        height = height
+        )
+    canvas.pack()
+    #imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\png.png'
+    #imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\grass.gif'
+    img = PhotoImage(file=imagePath)
+    #img = ImageTk.PhotoImage(Image.open(imagePath))
+    canvas.create_image(
+        10,
+        10,
+        anchor=NW,
+        image=img
+        )
+    ws.mainloop()
+
+
+
+# import GuiAPPs as apps
+# imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\grass.gif'
+# apps.openImage4Canvas(imagePath,500,500) # w and h
+#uses canvas and PhotoImage - ACCEPTS MORE FILETYPES - JPG
+def openImage4Canvas(imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\grass.gif',width=500,height=500):
+    #from tkinter import *
+    from PIL import ImageTk, Image
+
+    ws = Tk()
+    ws.title('View an Image')
+    ws.geometry(f'{width}x{height}')
+
+    canvas = Canvas(
+        ws,
+        width = width,
+        height = height
+    )
+
+    canvas.pack()
+    img = ImageTk.PhotoImage(Image.open(imagePath))
+    #img = PhotoImage(file=imagePath)
+    canvas.create_image(
+        10,
+        10,
+        anchor=NW,
+        image=img
+    )
+    ws.mainloop()
+
+
+
+
+
+# import GuiAPPs as apps
+# imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\grass.gif'
+# apps.openGIF(imagePath)
+
+#tkinter #shows a GIF image
+def openGIF(imagePath=""):
+    # has to be a GIF - to show using just tkinter
+    #from tkinter import *
+    root = Tk()
+    canvas = Canvas(root, width = 300, height = 300)
+    canvas.pack()
+    #imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\grass.gif'
+    img = PhotoImage(file=imagePath)
+    canvas.create_image(20,20, anchor=NW, image=img)
+    mainloop()
+
+
+
+
+
+# import GuiAPPs as a
+# a.photoGallery1() # photo gallery layout
+#
+# make images buttons or links
+#
+# 6 Clickable Images with Filenames # a photo gallery layout # buttons that do things
+def photoGallery1():
+    from PIL import ImageTk, Image
+    # from tkinter import *
+    w = Tk()  # the window - attributes
+    w.title('6 Clickable Images with Filenames')
+    w.geometry('800x700')  # window width and height
+    w.config(bg='#345')  # window background color
+
+    # THE CANVAS (ws) - is tied in below with the passed 'ws' var:
+    canvas = Canvas(  # this is what you can draw on - a canvas square
+        w,
+        height=650,  # it's a square area, w-h
+        width=650,
+        bg="#fff"  # canvas background color
+    )
+
+    #canvas.pack()  # maybe it gets it ready for you to draw on it
+    canvas.pack(side = TOP, anchor = NW, padx = 70, pady = 20)  # maybe it gets it ready for you to draw on it
+
+    """
+    canvas.create_rectangle(  # you can draw a box - onto the canvas
+        30, 30, 180, 120,  # xy, xy - of the 200px-w-h canvas - where do we draw a box?
+        outline="#fb0",  # outline color - 1px
+        fill="#345")  # the fill color - inside the box
+    # orange = #fb0 #inside the rectangle
+    """
+    imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\grass.gif'
+    #img = ImageTk.PhotoImage(Image.open(imagePath)) #img = PhotoImage(file=imagePath)
+
+    import listAllFILES as filelist
+    folder_path = "z-IMAGES_1/0.cool/!new1/sunrise_waterfront"
+    filenamesThumbs = filelist.listAllThumbnails(folder_path)
+    counter=0
+    th=[] #thumbImagePath
+    # filenamesThumbs[0]-filenamesThumbs[6]
+    for thumbImagePath in filenamesThumbs:
+        print(f"thumbImagePath {counter}): {thumbImagePath}")
+        th.append(thumbImagePath)
+        if counter==7:
+            break
+        counter += 1
+    img1 = ImageTk.PhotoImage(Image.open(th[0]))  # img = PhotoImage(file=imagePath)
+    img2 = ImageTk.PhotoImage(Image.open(th[1]))  # img = PhotoImage(file=imagePath)
+    img3 = ImageTk.PhotoImage(Image.open(th[2]))  # img = PhotoImage(file=imagePath)
+    img4 = ImageTk.PhotoImage(Image.open(th[3]))  # img = PhotoImage(file=imagePath)
+    img5 = ImageTk.PhotoImage(Image.open(th[4]))  # img = PhotoImage(file=imagePath)
+    img6 = ImageTk.PhotoImage(Image.open(th[5]))  # img = PhotoImage(file=imagePath)
+
+    # -------------------
+    showBtns = True
+    showImgs = False
+    #-------------------
+
+    #row 1
+    if showImgs == True:
+        canvas.create_image(
+            20,
+            10,
+            anchor=NW,
+            image=img1
+        )
+    if showBtns==True:
+        button1 = Button(w, image=img1, command=quit)#.pack() #make the image clickable
+        button1.configure(width=240, height=150, activebackground="#33B5E5", relief=FLAT)
+        button1.place(x=120, y=68)
+    if showImgs==True:
+        canvas.create_image(
+            290,
+            10,
+            anchor=NW,
+            image=img2
+        )
+    canvas.create_text(
+        130,
+        220,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text="image_name_that_is_long_1.jpg"
+    )
+    if showBtns==True:
+        button2 = Button(w, image=img2, command=quit)  # .pack() #make the image clickable
+        button2.configure(width=240, height=150, activebackground="#33B5E5", relief=FLAT)
+        button2.place(x=390, y=68)
+    canvas.create_text(
+        400,
+        220,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text="image_name_that_is_long_2.jpg"
+    )
+    # row 2
+    if showImgs==True:
+        canvas.create_image(
+            20,
+            200,
+            anchor=NW,
+            image=img3
+        )
+    if showBtns==True:
+        button3 = Button(w, image=img3, command=quit)  # .pack() #make the image clickable
+        button3.configure(width=240, height=150, activebackground="#33B5E5", relief=FLAT)
+        button3.place(x=120, y=258)
+    canvas.create_text(
+        140,
+        400,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text="image_name_that_is_long_3.jpg"
+    )
+    if showImgs==True:
+        canvas.create_image(
+            290,
+            200,
+            anchor=NW,
+            image=img4
+        )
+    if showBtns==True:
+        button4 = Button(w, image=img4, command=quit)  # .pack() #make the image clickable
+        button4.configure(width=240, height=150, activebackground="#33B5E5", relief=FLAT)
+        button4.place(x=390, y=258)
+    canvas.create_text(
+        400,
+        400,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text="image_name_that_is_long_4.jpg"
+    )
+    #row 3
+    if showImgs==True:
+        canvas.create_image(
+            20,
+            380,
+            anchor=NW,
+            image=img5
+        )
+    if showBtns==True:
+        button5 = Button(w, image=img5, command=quit)  # .pack() #make the image clickable
+        button5.configure(width=240, height=150, activebackground="#33B5E5", relief=FLAT)
+        button5.place(x=120, y=435)
+    canvas.create_text(
+        140,
+        590,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text="image_name_that_is_long_5.jpg"
+    )
+    if showImgs==True:
+        canvas.create_image(
+            290,
+            380,
+            anchor=NW,
+            image=img6
+        )
+    if showBtns==True:
+        button6 = Button(w, image=img6, command=quit)  # .pack() #make the image clickable
+        button6.configure(width=240, height=150, activebackground="#33B5E5", relief=FLAT)
+        button6.place(x=390, y=435)
+    canvas.create_text(
+        400,
+        590,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text="image_name_that_is_long_6.jpg"
+    )
+    #at the top
+    button1 = Button(w, text="Quit", command=quit, anchor=W)
+    button1.configure(width=20, activebackground="#33B5E5", relief=FLAT)
+    button1.place(x=320, y=30)
+
+    # you add everything onto the canvas, and then you call the mainloop()
+    # which starts it
+    w.mainloop()  # the ws from the beginning - the window sizes
+
+
+
+
+
+
+
+# import GuiAPPs as a
+# a.basicCanvasDrawing3() # LEARNING - tkinter canvas - drawing
+#
+# 6 images with Filenames # a photo gallery layout # buttons that do things
+def basicCanvasDrawing3():
+    from PIL import ImageTk, Image
+    # from tkinter import *
+    w = Tk()  # the window - attributes
+    w.title('6 images with Filenames')
+    w.geometry('600x600')  # window width and height
+    w.config(bg='#345')  # window background color
+
+    # THE CANVAS (ws) - is tied in below with the passed 'ws' var:
+    canvas = Canvas(  # this is what you can draw on - a canvas square
+        w,
+        height=550,  # it's a square area, w-h
+        width=550,
+        bg="#fff"  # canvas background color
+    )
+
+    #canvas.pack()  # maybe it gets it ready for you to draw on it
+    canvas.pack(side = TOP, anchor = NW, padx = 20, pady = 20)  # maybe it gets it ready for you to draw on it
+
+    """
+    canvas.create_rectangle(  # you can draw a box - onto the canvas
+        30, 30, 180, 120,  # xy, xy - of the 200px-w-h canvas - where do we draw a box?
+        outline="#fb0",  # outline color - 1px
+        fill="#345")  # the fill color - inside the box
+    # orange = #fb0 #inside the rectangle
+    """
+    imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\grass.gif'
+    img = ImageTk.PhotoImage(Image.open(imagePath)) #img = PhotoImage(file=imagePath)
+
+    #row 1
+
+    canvas.create_image(
+        20,
+        10,
+        anchor=NW,
+        image=img
+    )
+    canvas.create_text(
+        130,
+        160,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text="image_name_that_is_long_1.jpg"
+    )
+    canvas.create_image(
+        290,
+        10,
+        anchor=NW,
+        image=img
+    )
+    canvas.create_text(
+        400,
+        160,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text="image_name_that_is_long_2.jpg"
+    )
+    # row 2
+    canvas.create_image(
+        20,
+        200,
+        anchor=NW,
+        image=img
+    )
+    canvas.create_text(
+        140,
+        350,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text="image_name_that_is_long_3.jpg"
+    )
+    canvas.create_image(
+        290,
+        200,
+        anchor=NW,
+        image=img
+    )
+    canvas.create_text(
+        400,
+        350,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text="image_name_that_is_long_4.jpg"
+    )
+    #row 3
+    canvas.create_image(
+        20,
+        380,
+        anchor=NW,
+        image=img
+    )
+    canvas.create_text(
+        140,
+        530,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text="image_name_that_is_long_4.jpg"
+    )
+    canvas.create_image(
+        290,
+        380,
+        anchor=NW,
+        image=img
+    )
+
+    canvas.create_text(
+        400,
+        530,
+        fill="darkblue",
+        font="Times 10 italic bold",
+        text="image_name_that_is_long_4.jpg"
+    )
+    button1 = Button(w, text="Quit", command=quit, anchor=W)
+    button1.configure(width=20, activebackground="#33B5E5", relief=FLAT)
+    button1.place(x=220, y=30)
+
+    # you add everything onto the canvas, and then you call the mainloop()
+    # which starts it
+    w.mainloop()  # the ws from the beginning - the window sizes
+
+
+
+
+
+
+# import GuiAPPs as apps
+# apps.basicCanvasDrawing2() # LEARNING - tkinter canvas - drawing
+
+def basicCanvasDrawing2():
+    from PIL import ImageTk, Image
+    # from tkinter import *
+    w = Tk()  # the window - attributes
+    w.title('Add 2 images in')
+    w.geometry('400x300')  # window width and height
+    w.config(bg='#345')  # window background color
+
+    # THE CANVAS (ws) - is tied in below with the passed 'ws' var:
+    canvas = Canvas(  # this is what you can draw on - a canvas square
+        w,
+        height=200,  # it's a square area, w-h
+        width=200,
+        bg="#fff"  # canvas background color
+    )
+
+    canvas.pack()  # maybe it gets it ready for you to draw on it
+
+    canvas.create_rectangle(  # you can draw a box - onto the canvas
+        30, 30, 180, 120,  # xy, xy - of the 200px-w-h canvas - where do we draw a box?
+        outline="#fb0",  # outline color - 1px
+        fill="#345")  # the fill color - inside the box
+    # orange = #fb0 #inside the rectangle
+
+    imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\grass.gif'
+    img = ImageTk.PhotoImage(Image.open(imagePath)) #img = PhotoImage(file=imagePath)
+    canvas.create_image(
+        10,
+        10,
+        anchor=NW,
+        image=img
+    )
+    canvas.create_image(
+        100,
+        100,
+        anchor=NW,
+        image=img
+    )
+
+
+    # you add everything onto the canvas, and then you call the mainloop()
+    # which starts it
+    w.mainloop()  # the ws from the beginning - the window sizes
+
+
+#--------------------------------
+
+
+
+#--------------------------------
+
+# import GuiAPPs as apps
+# apps.basicCanvasDrawing1() # LEARNING - tkinter canvas - drawing
+
+def basicCanvasDrawing1():
+    # from tkinter import *
+    w = Tk()  # the window - attributes
+    w.title('Draw a Square in Python')
+    w.geometry('400x300')  # window width and height
+    w.config(bg='#345')  # window background color
+
+    # THE CANVAS (ws) - is tied in below with the passed 'ws' var:
+    canvas = Canvas(  # this is what you can draw on - a canvas square
+        w,
+        height=200,  # it's a square area, w-h
+        width=200,
+        bg="#fff"  # canvas background color
+    )
+
+    canvas.pack()  # maybe it gets it ready for you to draw on it
+
+    canvas.create_rectangle(  # you can draw a box - onto the canvas
+        30, 30, 180, 120,  # xy, xy - of the 200px-w-h canvas - where do we draw a box?
+        outline="#fb0",  # outline color - 1px
+        fill="#345")  # the fill color - inside the box
+    # orange = #fb0 #inside the rectangle
+
+    # you add everything onto the canvas, and then you call the mainloop()
+    # which starts it
+    w.mainloop()  # the ws from the beginning - the window sizes
+
+#--------------------------------
+
+
+
+# I tested it with opening an image in paint, and choosing a large brush size
+# if it changes, like using live matplotlib, you can load the new image and see it change
+
+# import GuiAPPs as apps
+# imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\will-turner-GTPT_fNFQiE-unsplash.jpg'
+# apps.refreshLoadImageEveryHalfSec(imagePath)
+
+# refreshes the image in tkinter - every .5 seconds
+def refreshLoadImageEveryHalfSec(imagePath):
+    from PIL import Image, ImageTk
+    import tkinter as tk
+
+    # ------------------------------------------------------------------------------
+    # Code to simulate background process periodically updating the image file.
+    # Note:
+    #   It's important that this code *not* interact directly with tkinter
+    #   stuff in the main process since it doesn't support multi-threading.
+    import itertools
+    import os
+    import shutil
+    import threading
+    import time
+
+    def update_image_file(dst):
+        """ Overwrite (or create) destination file by copying successive image
+            files to the destination path. Runs indefinitely.
+        """
+        TEST_IMAGES = 'test_image1.png', 'test_image2.png', 'test_image3.png'
+
+        for src in itertools.cycle(TEST_IMAGES):
+            shutil.copy(src, dst)
+            time.sleep(.5)  # pause between updates
+
+    # ------------------------------------------------------------------------------
+
+    def refresh_image(canvas, img, imagePath, image_id):
+        try:
+            pil_img = Image.open(imagePath).resize((400, 400), Image.ANTIALIAS)
+            img = ImageTk.PhotoImage(pil_img)
+            canvas.itemconfigure(image_id, image=img)
+        except IOError:  # missing or corrupt image file
+            img = None
+        # repeat every half sec
+        canvas.after(500, refresh_image, canvas, img, imagePath, image_id)
+
+    root = tk.Tk()
+    # imagePath = 'C:\\Users\\myvor\\Desktop\\Backgrounds\\will-turner-GTPT_fNFQiE-unsplash.jpg'
+
+    # ------------------------------------------------------------------------------
+    # More code to simulate background process periodically updating the image file.
+    th = threading.Thread(target=update_image_file, args=(imagePath,))
+    th.daemon = True  # terminates whenever main thread does
+    th.start()
+    while not os.path.exists(imagePath):  # let it run until image file exists
+        time.sleep(.1)
+    # ------------------------------------------------------------------------------
+
+    canvas = tk.Canvas(root, height=400, width=400)
+    img = None  # initially only need a canvas image place-holder
+    image_id = canvas.create_image(200, 200, image=img)
+    canvas.pack()
+
+    refresh_image(canvas, img, imagePath, image_id)
+    root.mainloop()
+
+
+#---------------------------
+
+
+# import GuiAPPs as apps
+# apps.fileListWithOpen2()
+
+def fileListWithOpen2(folder_path = "z-IMAGES_1/0.cool/!new1/sunrise_waterfront", width=50, height=20):
+    # from tkinter import *
+    import tkinter.messagebox as box
+
+    window = Tk()
+    window.title('<title>')
+
+    frame = Frame(window)
+    import listAllFILES as filelist
+    #folder_path = "z-IMAGES_1/0.cool/!new1/sunrise_waterfront"
+    picsNames = filelist.listFilenameOnly(folder_path)
+
+    listbox = Listbox(frame)
+    for name in picsNames:
+        listbox.insert('end', name)
+    """listbox.insert(1, '<filename>')
+    listbox.insert(2, '<filename>')
+    listbox.insert(3, '<filename>')
+    """
+    listbox.config(width=width, height=height)
+
+
+    def dialog():
+        box.showinfo('Selection', 'Your Choice: ' + \
+                     listbox.get(listbox.curselection()))
+
+    btn = Button(frame, text='View Info', command=dialog)
+
+    btn.pack(side=RIGHT, padx=5)
+    listbox.pack(side=LEFT)
+    frame.pack(padx=30, pady=30)
+
+    window.mainloop()
+
+
+
+
+
+# import GuiAPPs as apps
+# apps.fileListWithOpen1()
+
+def fileListWithOpen1(width=50, height=20):
+    # from tkinter import *
+    import tkinter.messagebox as box
+
+    window = Tk()
+    window.title('<title>')
+
+    frame = Frame(window)
+    listbox = Listbox(frame)
+    listbox.insert(1, '<filename>')
+    listbox.insert(2, '<filename>')
+    listbox.insert(3, '<filename>')
+
+    listbox.config(width=width, height=height)
+
+
+    def dialog():
+        box.showinfo('Selection', 'Your Choice: ' + \
+                     listbox.get(listbox.curselection()))
+
+    btn = Button(frame, text='View Info', command=dialog)
+
+    btn.pack(side=RIGHT, padx=5)
+    listbox.pack(side=LEFT)
+    frame.pack(padx=30, pady=30)
+
+    window.mainloop()
+
+
+#--------------------------
+
+
+
+# NEEDS the ICO and the TEXT FILE - to work - without errors
+# it has a start page, and 2 other pages - with buttons
+# it plots the graph, but it is not live
+
+# import GuiAPPs as apps
+# apps.threeButtons3Pages1Graph()
+def threeButtons3Pages1Graph():
+    # The code for changing pages was derived from: http://stackoverflow.com/questions/7546050/switch-between-two-frames-in-tkinter
+    # License: http://creativecommons.org/licenses/by-sa/3.0/
+
+    import matplotlib # UPDATE: pip install --update matplotlib
+    matplotlib.use("TkAgg")
+    from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+    from matplotlib.figure import Figure
+    import matplotlib.animation as animation
+    from matplotlib import style
+
+    import tkinter as tk
+    from tkinter import ttk
+
+
+    LARGE_FONT= ("Verdana", 12)
+    style.use("ggplot")
+
+    f = Figure(figsize=(5 ,5), dpi=100)
+    a = f.add_subplot(111)
+
+
+    def animate(i):
+        pullData = open("other-5gb/plot-sample-points.txt", "r").read()
+        dataList = pullData.split('\n')
+        xList = []
+        yList = []
+        for eachLine in dataList:
+            if len(eachLine) > 1:
+                x, y = eachLine.split(',')
+                xList.append(int(x))
+                yList.append(int(y))
+
+        a.clear()
+        a.plot(xList, yList)
+
+
+
+
+    class SeaofBTCapp(tk.Tk):
+
+        def __init__(self, *args, **kwargs):
+
+            tk.Tk.__init__(self, *args, **kwargs)
+
+            tk.Tk.iconbitmap(self, default="other-5gb/files/icon.ico")
+            tk.Tk.wm_title(self, "Sea of BTC client")
+
+
+            container = tk.Frame(self)
+            container.pack(side="top", fill="both", expand = True)
+            container.grid_rowconfigure(0, weight=1)
+            container.grid_columnconfigure(0, weight=1)
+
+            self.frames = {}
+
+            for F in (StartPage, PageOne, PageTwo, PageThree):
+
+                frame = F(container, self)
+
+                self.frames[F] = frame
+
+                frame.grid(row=0, column=0, sticky="nsew")
+
+            self.show_frame(StartPage)
+
+        def show_frame(self, cont):
+
+            frame = self.frames[cont]
+            frame.tkraise()
+
+
+    class StartPage(tk.Frame):
+
+        def __init__(self, parent, controller):
+            tk.Frame.__init__(self ,parent)
+            label = tk.Label(self, text="Start Page", font=LARGE_FONT)
+            label.pack(pady=10 ,padx=10)
+
+            button = ttk.Button(self, text="Visit Page 1",
+                                command=lambda: controller.show_frame(PageOne))
+            button.pack()
+
+            button2 = ttk.Button(self, text="Visit Page 2",
+                                 command=lambda: controller.show_frame(PageTwo))
+            button2.pack()
+
+            button3 = ttk.Button(self, text="Graph Page",
+                                 command=lambda: controller.show_frame(PageThree))
+            button3.pack()
+
+
+    class PageOne(tk.Frame):
+
+        def __init__(self, parent, controller):
+            tk.Frame.__init__(self, parent)
+            label = tk.Label(self, text="Page One!!!", font=LARGE_FONT)
+            label.pack(pady=10 ,padx=10)
+
+            button1 = ttk.Button(self, text="Back to Home",
+                                 command=lambda: controller.show_frame(StartPage))
+            button1.pack()
+
+            button2 = ttk.Button(self, text="Page Two",
+                                 command=lambda: controller.show_frame(PageTwo))
+            button2.pack()
+
+
+    class PageTwo(tk.Frame):
+
+        def __init__(self, parent, controller):
+            tk.Frame.__init__(self, parent)
+            label = tk.Label(self, text="Page Two!!!", font=LARGE_FONT)
+            label.pack(pady=10 ,padx=10)
+
+            button1 = ttk.Button(self, text="Back to Home",
+                                 command=lambda: controller.show_frame(StartPage))
+            button1.pack()
+
+            button2 = ttk.Button(self, text="Page One",
+                                 command=lambda: controller.show_frame(PageOne))
+            button2.pack()
+
+
+    class PageThree(tk.Frame):
+
+        def __init__(self, parent, controller):
+            tk.Frame.__init__(self, parent)
+            label = tk.Label(self, text="Graph Page!", font=LARGE_FONT)
+            label.pack(pady=10 ,padx=10)
+
+            button1 = ttk.Button(self, text="Back to Home",
+                                 command=lambda: controller.show_frame(StartPage))
+            button1.pack()
+
+
+
+
+
+            canvas = FigureCanvasTkAgg(f, self)
+            canvas.draw() #canvas.show()
+            canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+
+            toolbar = NavigationToolbar2Tk(canvas, self)
+            toolbar.update()
+            canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+
+    app = SeaofBTCapp()
+    ani = animation.FuncAnimation(f, animate, interval=1000)
+    app.mainloop()
+
+
+
+#--------------------------------------
+
+
+
+# import GuiAPPs as apps
+# apps.fileListGui()
+def fileListGui():
+    import PySimpleGUI as sg
+
+    # set the theme for the screen/window
+    sg.theme('SandyBeach')
+    # define layout
+    layout = [[sg.Text('File Browser', size=(20, 1), font='Lucida', justification='left')],
+              [sg.Text('List of Files:', size=(30, 1), font='Lucida', justification='left')],
+              [sg.Listbox(values=['File1.jpg', 'File2.jpg', 'File3.jpg', 'File4.jpg', 'File5.jpg', 'File6.jpg', 'File7.jpg', 'File8.jpg', 'File9.jpg', 'File10.jpg', 'File11.jpg', 'File12.jpg', 'File13.jpg', 'File14.jpg', 'File15.jpg'],
+                           select_mode='extended', key='fac', size=(30, 12))],
+              [sg.Button('SAVE', font=('Times New Roman', 12)), sg.Button('CANCEL', font=('Times New Roman', 12))]]
+    # Define Window
+    win = sg.Window('Browse Files', layout)
+    # Read  values entered by user
+    e, v = win.read()
+    # close first window
+    win.close()
+    # access the selected value in the list box and add them to a string
+    strx = ""
+    for val in v['fac']: # you can select more than one
+        strx = strx + " " + val + ","
+
+    # display string in a popup
+    #sg.popup()
+    sg.popup('Thank you', ' You picked the file: ' + strx[1:len(strx) - 1])
+
+
+
+
+
+#--------------------------
+#
+# import GuiAPPs as apps
+# apps.note("Hello World")
+
+def note(title="Hello World", message=""):
+    notificationMESSAGE(title=title, message=message)
+
+#--------------------------
+
+
+"""
+import GuiAPPs as guiApps
+title="-- Quick Reminder --"
+message=" *** This is what you wanted to be reminded of *** "
+guiApps.notificationMESSAGE(title=title, message=message)
+"""
+
 # import GuiAPPs as guiApps
-# guiApps.guiBGchangeShow()
-# guiApps.guiAppShow()
-# guiApps.guiBallMovePlay()
-# guiApps.guiCalcShow()
-# guiApps.guiColorsShow()
-# guiApps.GuiCOMMISSIONshow()
-# guiApps.GuiCOOLdesignShow()
-# guiApps.guiDateShow()
-# guiApps.guiPhotoGalleryShow() # "z-IMAGES_1\0.cool\"
-# guiApps.HTMLlikeDesignShow()
-# guiApps.GuiMACLauncherShow()
-# guiApps.GuiSplashSCREENshow()
-# guiApps.GuiTIMERshow()
-# guiApps.GuiWEATHERshow()
-# import GuiAPPs as guiApps
-# guiApps.GuiWindowLAYOUTSshow() #cycles thru them as you close them
-# guiApps.GuiWithImageBUTTONSshow()
-# guiApps.GUIphotosViewerBroke()
+# title="Notification Title"
+# message="This is the notification message"
+# guiApps.notificationMESSAGE(title=title, message=message)
+
+#appears near the clock - on the task bar
+def notificationMESSAGE(title="Hello World", message=""):
+    import PySimpleGUI as sg
+    import SOUND as sound
+    sound.beep()
+    #title = 'Notification Title'
+    #message = 'This is the notification message'
+    if message=="":
+        message = title
+    sg.SystemTray.notify(title, message)
+
+
+# import GuiAPPs as apps
+# apps.onBrowseItHasIconsForFilesFolders()
+
+# there is folder and file ICONS
+def onBrowseItHasIconsForFilesFolders():
+    from pathlib import Path
+    import PySimpleGUI as sg
+
+    def popup_paths(path=Path.home(), width=60):
+
+        def short(file, width):
+            return file[:width // 2 - 3] + '...' + file[-width // 2:] if len(file) > width else file
+
+        def create_win(path):
+            files = sorted(sorted(Path(path).iterdir()), key=lambda x: Path(x).is_file())
+            treedata = sg.TreeData()
+            for i, file in enumerate(files):
+                f = str(file)
+                treedata.insert("", i, short(f, width - 8), [f], icon=folder_icon if Path(f).is_dir() else file_icon)
+            layout = [
+                [sg.Tree(data=treedata, headings=['Notes', ], pad=(0, 0),
+                         show_expanded=True, col0_width=width, auto_size_columns=False,
+                         visible_column_map=[False, ], select_mode=sg.TABLE_SELECT_MODE_EXTENDED,
+                         num_rows=15, row_height=16, font=('Courier New', 10), key="TREE")],
+                [sg.Button('OK'), sg.Button('Cancel'), sg.Button('UP')],
+            ]
+            window = sg.Window("Select files or directories", layout, modal=True, finalize=True)
+            tree = window['TREE']
+            tree.Widget.configure(show='tree')  # Hide Tree Header
+            tree.bind("<Double-1>", "_DOUBLE_CLICK")
+            while True:
+                event, values = window.read()
+                if event == 'TREE_DOUBLE_CLICK':
+                    if values['TREE'] != []:
+                        value = values['TREE'][0]
+                        path = treedata.tree_dict[value].values[0]
+                        if Path(path).is_dir():
+                            result = path
+                            break
+                    continue
+                elif event in (sg.WINDOW_CLOSED, 'Cancel'):
+                    result = []
+                elif event == 'OK':
+                    result = [treedata.tree_dict[i].values[0] for i in values['TREE']]
+                elif event == 'UP':
+                    result = str(Path(path).parent)
+                break
+            window.close()
+            return result
+
+        while True:
+            result = create_win(path)
+            if isinstance(result, str):
+                path = result
+            else:
+                break
+        return result
+
+    folder_icon = b'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAABnUlEQVQ4y8WSv2rUQRSFv7vZgJFFsQg2EkWb4AvEJ8hqKVilSmFn3iNvIAp21oIW9haihBRKiqwElMVsIJjNrprsOr/5dyzml3UhEQIWHhjmcpn7zblw4B9lJ8Xag9mlmQb3AJzX3tOX8Tngzg349q7t5xcfzpKGhOFHnjx+9qLTzW8wsmFTL2Gzk7Y2O/k9kCbtwUZbV+Zvo8Md3PALrjoiqsKSR9ljpAJpwOsNtlfXfRvoNU8Arr/NsVo0ry5z4dZN5hoGqEzYDChBOoKwS/vSq0XW3y5NAI/uN1cvLqzQur4MCpBGEEd1PQDfQ74HYR+LfeQOAOYAmgAmbly+dgfid5CHPIKqC74L8RDyGPIYy7+QQjFWa7ICsQ8SpB/IfcJSDVMAJUwJkYDMNOEPIBxA/gnuMyYPijXAI3lMse7FGnIKsIuqrxgRSeXOoYZUCI8pIKW/OHA7kD2YYcpAKgM5ABXk4qSsdJaDOMCsgTIYAlL5TQFTyUIZDmev0N/bnwqnylEBQS45UKnHx/lUlFvA3fo+jwR8ALb47/oNma38cuqiJ9AAAAAASUVORK5CYII='
+    file_icon = b'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAABU0lEQVQ4y52TzStEURiHn/ecc6XG54JSdlMkNhYWsiILS0lsJaUsLW2Mv8CfIDtr2VtbY4GUEvmIZnKbZsY977Uwt2HcyW1+dTZvt6fn9557BGB+aaNQKBR2ifkbgWR+cX13ubO1svz++niVTA1ArDHDg91UahHFsMxbKWycYsjze4muTsP64vT43v7hSf/A0FgdjQPQWAmco68nB+T+SFSqNUQgcIbN1bn8Z3RwvL22MAvcu8TACFgrpMVZ4aUYcn77BMDkxGgemAGOHIBXxRjBWZMKoCPA2h6qEUSRR2MF6GxUUMUaIUgBCNTnAcm3H2G5YQfgvccYIXAtDH7FoKq/AaqKlbrBj2trFVXfBPAea4SOIIsBeN9kkCwxsNkAqRWy7+B7Z00G3xVc2wZeMSI4S7sVYkSk5Z/4PyBWROqvox3A28PN2cjUwinQC9QyckKALxj4kv2auK0xAAAAAElFTkSuQmCC'
+
+    sg.theme('DarkBlue3')
+    sg.set_options(font=("Courier New", 12))
+
+    layout = [[sg.Button("Browse")]]
+
+    window = sg.Window('title', layout)
+
+    while True:
+        event, values = window.Read()
+        if event == sg.WINDOW_CLOSED:
+            break
+        elif event == 'Browse':
+            files = popup_paths(path='C:/', width=80)
+            print(files)
+
+    window.close()
+
 
 
 
@@ -27,38 +2242,34 @@ def changeBGs_cool_only():
     # Change the background automatically
     import listAllFILES as lfs
     folder_path = "z-IMAGES_1/0.cool"  # folder_path="z-IMAGES_1/0.cool"
-    array = lfs.listAllFILES(folder_path)
+    array = lfs.listAllImages(folder_path)
     length = array[0]
     pics = array[1]
 
     # keep it in the same folder of images - so it feels consistent
-    import BackgroundChooseRANDOM as bgcrand
+    import BackgroundCHOOSE as bgcrand
     bgcrand.BackgroundChooseRANDOM(array)
 
 
 def changeBGs():
     # Change the background automatically
     import listAllFILES as lfs
-    folder_path = "z-IMAGES_1/0.cool/premium_wallpapers_rock_stacks"  # folder_path="z-IMAGES_1/0.cool"
-    array = lfs.listAllFILES(folder_path)
-    length = array[0]
-    pics = array[1]
+    folder_path = "z-IMAGES_1/0.cool"  # folder_path="z-IMAGES_1/0.cool/premium_wallpapers_rock_stacks"
+    array = lfs.listAllImages(folder_path)
 
     # keep it in the same folder of images - so it feels consistent
-    import BackgroundChooseRANDOM as bgcrand
-    bgcrand.BackgroundChooseRANDOM(array)
+    import BackgroundCHOOSE as b
+    b.BackgroundChooseRANDOM(array)
 
 
 def changeBGs_mountain():
     # Change the background automatically
     import listAllFILES as lfs
     folder_path = "z-IMAGES_1/0.cool/beautiful wallpapers mountains snow landscape"  # folder_path="z-IMAGES_1/0.cool"
-    array = lfs.listAllFILES(folder_path)
-    length = array[0]
-    pics = array[1]
+    array = lfs.listAllImages(folder_path)
 
     # keep it in the same folder of images - so it feels consistent
-    import BackgroundChooseRANDOM as bgcrand
+    import BackgroundCHOOSE as bgcrand
     bgcrand.BackgroundChooseRANDOM(array)
 
 
@@ -66,12 +2277,10 @@ def changeBGs_sunset():
     # Change the background automatically
     import listAllFILES as lfs
     folder_path = "z-IMAGES_1/0.cool/beautiful wallpapers mountains sunset"  # folder_path="z-IMAGES_1/0.cool"
-    array = lfs.listAllFILES(folder_path)
-    length = array[0]
-    pics = array[1]
+    array = lfs.listAllImages(folder_path)
 
     # keep it in the same folder of images - so it feels consistent
-    import BackgroundChooseRANDOM as bgcrand
+    import BackgroundCHOOSE as bgcrand
     bgcrand.BackgroundChooseRANDOM(array)
 
 
@@ -140,10 +2349,10 @@ def guiBGchangeShow():
                 changeBGs()
             elif event == 'Mountain Snow':
                 print("Mountain Snow - button clicked")
-                changeBGs_mountain()
+                changeBGs() # changeBGs_mountain()
             elif event == 'Sunset':
                 print("Sunset - button clicked")
-                changeBGs_sunset()
+                changeBGs() # changeBGs_sunset()
 
             elif event == 'Rock Stack':
                 print("Change Bkng - button clicked")
@@ -152,8 +2361,7 @@ def guiBGchangeShow():
                 #window['-GIF-'].metadata = 0
             elif event == 'Cool Image':
                 print("Cool Image - button clicked")
-                changeBGs()
-                changeBGs_cool_only()
+                changeBGs() # changeBGs_cool_only()
                 #sg.popup_no_titlebar('This is where you would do', 'the upgrade window code',
                                      #background_color='black',
                                      #text_color='white')
@@ -1008,7 +3216,7 @@ def guiDateShow():
 # v1
 
 # import GuiAPPs as guiApps
-# guiApps.GuiDirectoryOfFILESshow()
+# a.GuiDirectoryOfFILESshow()
 
 # you can change settings - with the right click menu
 # you can save the location for next time you open it
@@ -1094,7 +3302,7 @@ def guiPhotoGalleryShow(folder_name="last_folder_thing_name"):
     IMAGE_SIZE = (800, 800)
     THUMBNAIL_PAD = (1, 1)
     root_top_folder = "z-IMAGES_1\\0.cool"
-    folder_name = "premium wallpapers modern smart house"
+    folder_name = "beautiful wallpapers mountains sunset"
     ROOT_FOLDER = r"C:\Users\myvor\PycharmProjects\pythonProject"+"\\"+root_top_folder+"\\"+folder_name+"\\"  # r'c:\your\images'
     #print("ROOT_FOLDER")
     #print(ROOT_FOLDER)
